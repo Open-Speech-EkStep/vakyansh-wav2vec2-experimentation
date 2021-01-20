@@ -1,4 +1,4 @@
-# wav2vec 
+# wav2vec-old repo 
 ## Installation (requires wav2letter as well) 
 ```
 conda create --name fairseq python=3.7
