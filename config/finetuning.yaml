@@ -1,0 +1,47 @@
+
+distributed_port : -1 
+
+post_process : letter 
+valid_subset : valid
+
+num_workers : 6
+max_update : 320000
+max_tokens : 1000000 
+task : audio_pretraining 
+
+mask:
+  selection : static  
+  other : 0 
+  length : 10  
+  prob : 0.5
+  channel_selection : static 
+  channel_other : 0
+  channel_length : 64 
+  channel_prob : 0.5 
+
+best_checkpoint_metric: wer
+arch : wav2vec_ctc
+labels : ltr
+layerdrop : 0.1 
+feature_grad_mult : 0.0 
+freeze_finetune_updates : 2000 
+validate_after_updates : 1000
+optimizer : adam 
+adam_betas : '(0.9, 0.98)'
+adam_eps : 1e-08
+lr : 2e-05 
+lr_scheduler : tri_stage 
+warmup_steps : 8000 
+hold_steps : 32000 
+decay_steps : 40000 
+final_lr_scale : 0.05
+final_dropout : 0.0 
+dropout : 0.0 
+activation_dropout : 0.1 
+criterion : ctc 
+attention_dropout : 0.0 
+seed : 2337  
+log_format : json 
+log_interval : 1 
+ddp_backend : no_c10d
+ 
