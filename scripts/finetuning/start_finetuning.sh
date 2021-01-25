@@ -4,8 +4,8 @@
 ### Values to change - start ###
 
 config_name='finetuning.yaml'
-gpus=4
-run_in_nohup=0  #0 for no, 1 for yes
+gpus=1
+run_in_nohup=1  #0 for no, 1 for yes
 ### Values to change - end ###
 
 dir=$PWD/
@@ -20,8 +20,10 @@ log_path=${parentdir}'/logs/finetuning'
 tensorboard_path=${log_path}'/tensorboard'
 petrained_model_path=${parentdir}'/checkpoints/pretraining/checkpoint_best.pt'
 update_freq=$((24/${gpus}))
+base_wav2vec_repo_path=${parentdir}'/../fairseq/'
 
-printf "\n** Config path is: $config_path/$config_name.yaml"
+printf "\n** $base_wav2vec_repo_path"
+printf "\n** Config path is: $config_path"
 printf "\n** Data path is: $data_path"
 printf "\n** Checkpoint will be saved at: $checkpoints_path"
 printf "\n** Logs will be saved at: ${log_path}"
@@ -45,10 +47,10 @@ if [ "${run_in_nohup}" = 1 ]; then
     printf "\n** Tensorboard logs path: ${tensorboard_path}"
     printf "\n"
 
-    nohup python train.py --distributed-world-size ${gpus} --distributed-port ${distributed_port} $data_path \
+    nohup python ${base_wav2vec_repo_path}train.py --distributed-world-size ${gpus} --distributed-port ${distributed_port} $data_path \
     --save-dir ${checkpoints_path} --fp16  --post-process ${post_process}\
     --valid-subset ${valid_subset} --no-epoch-checkpoints --best-checkpoint-metric ${best_checkpoint_metric} --num-workers ${num_workers} \
-    --max-update ${max_update} --sentence-avg --task ${task} --arch ${arch} \ 
+    --max-update ${max_update} --sentence-avg --task ${task} --arch ${arch} \
     --w2v-path ${petrained_model_path}   --labels ${labels} \
     --apply-mask --mask-selection ${mask_selection} --mask-other ${mask_other} --mask-length ${mask_length} --mask-prob ${mask_prob} \
     --layerdrop ${layerdrop}  --mask-channel-selection ${mask_channel_selection} --mask-channel-other ${mask_channel_other} --mask-channel-length ${mask_channel_length} \
@@ -58,14 +60,14 @@ if [ "${run_in_nohup}" = 1 ]; then
     --final-lr-scale ${final_lr_scale} --final-dropout ${final_dropout} --dropout ${dropout} --activation-dropout ${activation_dropout} --criterion ${criterion} \
     --attention-dropout ${attention_dropout} --max-tokens ${max_tokens} --seed ${seed}  --log-format ${log_format} --log-interval ${log_interval} \
     --ddp-backend ${ddp_backend} --update-freq ${update_freq} \
-    --tensorboard-logdir ${tensorboard_path}  &> ${log_path}/${local_timestamp}.out & 
+    --tensorboard-logdir ${tensorboard_path}  &> ${log_path}/${local_timestamp}.out &
 
-     
+
 else
-    python train.py --distributed-world-size ${gpus} --distributed-port ${distributed_port} $data_path \
+    python ${base_wav2vec_repo_path}train.py --distributed-world-size ${gpus} --distributed-port ${distributed_port} $data_path \
     --save-dir ${checkpoints_path} --fp16  --post-process ${post_process}\
     --valid-subset ${valid_subset} --no-epoch-checkpoints --best-checkpoint-metric ${best_checkpoint_metric} --num-workers ${num_workers} \
-    --max-update ${max_update} --sentence-avg --task ${task} --arch ${arch} \ 
+    --max-update ${max_update} --sentence-avg --task ${task} --arch ${arch} \
     --w2v-path ${petrained_model_path}   --labels ${labels} \
     --apply-mask --mask-selection ${mask_selection} --mask-other ${mask_other} --mask-length ${mask_length} --mask-prob ${mask_prob} \
     --layerdrop ${layerdrop}  --mask-channel-selection ${mask_channel_selection} --mask-channel-other ${mask_channel_other} --mask-channel-length ${mask_channel_length} \
@@ -75,7 +77,7 @@ else
     --final-lr-scale ${final_lr_scale} --final-dropout ${final_dropout} --dropout ${dropout} --activation-dropout ${activation_dropout} --criterion ${criterion} \
     --attention-dropout ${attention_dropout} --max-tokens ${max_tokens} --seed ${seed}  --log-format ${log_format} --log-interval ${log_interval} \
     --ddp-backend ${ddp_backend} --update-freq ${update_freq} \
-    --tensorboard-logdir ${tensorboard_path}  
+    --tensorboard-logdir ${tensorboard_path}
 
 
 fi

@@ -2,7 +2,7 @@
 ### Values to change -start ###
 
 prep_scripts="/home/harveen.chadha/common_scripts/prep_scripts"
-data_path="/home/jupyter/"
+data_path="/home/jupyter/IITM_NPTEL_clean_english_data/test"
 valid_percentage=0.04
 
 ### Values to change end ###
