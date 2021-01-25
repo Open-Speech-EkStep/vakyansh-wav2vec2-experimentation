@@ -22,8 +22,8 @@ sudo apt install build-essential cmake libboost-system-dev libboost-thread-dev l
 git clone https://github.com/kpu/kenlm.git
 cd kenlm
 mkdir -p build && cd build
-cmake .. -DCMAKE_BUILD_TYPE=Release -DKENLM_MAX_ORDER=20 -DCMAKE_POSITION_INDEPENDENT_CODE=ON
-make -j16
+cmake .. 
+make -j 16
 cd ..
 export KENLM_ROOT_DIR=$PWD
 export USE_CUDA=0 ## for cpu
