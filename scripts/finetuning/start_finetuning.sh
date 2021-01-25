@@ -20,9 +20,9 @@ log_path=${parentdir}'/logs/finetuning'
 tensorboard_path=${log_path}'/tensorboard'
 petrained_model_path=${parentdir}'/checkpoints/pretraining/checkpoint_best.pt'
 update_freq=$((24/${gpus}))
-base_wav2vec_repo_path=${parentdir}'/../fairseq/'
+wav2vec_repo_path=${parentdir}'/../fairseq/'
 
-printf "\n** $base_wav2vec_repo_path"
+printf "\n** $wav2vec_repo_path"
 printf "\n** Config path is: $config_path"
 printf "\n** Data path is: $data_path"
 printf "\n** Checkpoint will be saved at: $checkpoints_path"
@@ -47,7 +47,7 @@ if [ "${run_in_nohup}" = 1 ]; then
     printf "\n** Tensorboard logs path: ${tensorboard_path}"
     printf "\n"
 
-    nohup python ${base_wav2vec_repo_path}train.py --distributed-world-size ${gpus} --distributed-port ${distributed_port} $data_path \
+    nohup python ${wav2vec_repo_path}train.py --distributed-world-size ${gpus} --distributed-port ${distributed_port} $data_path \
     --save-dir ${checkpoints_path} --fp16  --post-process ${post_process}\
     --valid-subset ${valid_subset} --no-epoch-checkpoints --best-checkpoint-metric ${best_checkpoint_metric} --num-workers ${num_workers} \
     --max-update ${max_update} --sentence-avg --task ${task} --arch ${arch} \
@@ -64,7 +64,7 @@ if [ "${run_in_nohup}" = 1 ]; then
 
 
 else
-    python ${base_wav2vec_repo_path}train.py --distributed-world-size ${gpus} --distributed-port ${distributed_port} $data_path \
+    python ${wav2vec_repo_path}train.py --distributed-world-size ${gpus} --distributed-port ${distributed_port} $data_path \
     --save-dir ${checkpoints_path} --fp16  --post-process ${post_process}\
     --valid-subset ${valid_subset} --no-epoch-checkpoints --best-checkpoint-metric ${best_checkpoint_metric} --num-workers ${num_workers} \
     --max-update ${max_update} --sentence-avg --task ${task} --arch ${arch} \
