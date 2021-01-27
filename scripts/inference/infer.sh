@@ -8,8 +8,8 @@ w2l_decoder_viterbi=1 # 1 for viterbi, 0 for kenlm
 data_path=${parentdir}'/data/inference/'
 result_path=${parentdir}'/results'
 # FOR LM MODEL
-lm_model_path='lm.binary'
-lexicon_lst_path='lexicon.lst'
+lm_model_path=${parentdir}'/lm/lm.binary'
+lexicon_lst_path=${parentdir}'/lm/lexicon.lst'
 ### Values to change end ###
 
 wav2vec_repo_path=${parentdir}'/../fairseq/'
