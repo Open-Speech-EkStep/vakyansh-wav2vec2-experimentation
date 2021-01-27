@@ -15,10 +15,11 @@ printf "** Directory to code is: $parentdir"
 
 config_path=${parentdir}'/config/'${config_name}
 data_path=${parentdir}'/data/finetuning'
-checkpoints_path=${parentdir}'/checkpoints/finetuning'
+checkpoints_path=${parentdir}'/checkpoints/'
 log_path=${parentdir}'/logs/finetuning'
 tensorboard_path=${log_path}'/tensorboard'
-petrained_model_path=${parentdir}'/checkpoints/pretraining/checkpoint_best.pt'
+pretrained_model_path=${parentdir}'/checkpoints/pretraining/checkpoint_best.pt'
+#pretrained_model_path='/home/priyanshi.shah/testing_cps/hindi_pretrain_4200_checkpoints_Nov2_Nov3/checkpoint_best_5967.pt'
 update_freq=$((24/${gpus}))
 wav2vec_repo_path=${parentdir}'/../fairseq/'
 
@@ -51,7 +52,7 @@ if [ "${run_in_nohup}" = 1 ]; then
     --save-dir ${checkpoints_path} --fp16  --post-process ${post_process}\
     --valid-subset ${valid_subset} --no-epoch-checkpoints --best-checkpoint-metric ${best_checkpoint_metric} --num-workers ${num_workers} \
     --max-update ${max_update} --sentence-avg --task ${task} --arch ${arch} \
-    --w2v-path ${petrained_model_path}   --labels ${labels} \
+    --w2v-path ${pretrained_model_path}   --labels ${labels} \
     --apply-mask --mask-selection ${mask_selection} --mask-other ${mask_other} --mask-length ${mask_length} --mask-prob ${mask_prob} \
     --layerdrop ${layerdrop}  --mask-channel-selection ${mask_channel_selection} --mask-channel-other ${mask_channel_other} --mask-channel-length ${mask_channel_length} \
     --mask-channel-prob ${mask_channel_prob} --zero-infinity  --feature-grad-mult ${feature_grad_mult} --freeze-finetune-updates ${freeze_finetune_updates} \
@@ -61,6 +62,8 @@ if [ "${run_in_nohup}" = 1 ]; then
     --attention-dropout ${attention_dropout} --max-tokens ${max_tokens} --seed ${seed}  --log-format ${log_format} --log-interval ${log_interval} \
     --ddp-backend ${ddp_backend} --update-freq ${update_freq} \
     --tensorboard-logdir ${tensorboard_path}  &> ${log_path}/${local_timestamp}.out &
+    
+    nohup tensorboard --logdir ${tensorboard_path} --bind_all &> /dev/null &
 
 
 else
@@ -68,7 +71,7 @@ else
     --save-dir ${checkpoints_path} --fp16  --post-process ${post_process}\
     --valid-subset ${valid_subset} --no-epoch-checkpoints --best-checkpoint-metric ${best_checkpoint_metric} --num-workers ${num_workers} \
     --max-update ${max_update} --sentence-avg --task ${task} --arch ${arch} \
-    --w2v-path ${petrained_model_path}   --labels ${labels} \
+    --w2v-path ${pretrained_model_path}   --labels ${labels} \
     --apply-mask --mask-selection ${mask_selection} --mask-other ${mask_other} --mask-length ${mask_length} --mask-prob ${mask_prob} \
     --layerdrop ${layerdrop}  --mask-channel-selection ${mask_channel_selection} --mask-channel-other ${mask_channel_other} --mask-channel-length ${mask_channel_length} \
     --mask-channel-prob ${mask_channel_prob} --zero-infinity  --feature-grad-mult ${feature_grad_mult} --freeze-finetune-updates ${freeze_finetune_updates} \
