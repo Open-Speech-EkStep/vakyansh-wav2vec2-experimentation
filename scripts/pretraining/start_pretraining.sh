@@ -25,9 +25,10 @@ wav2vec_repo_path=${parentdir}'/../fairseq/'
 
 # importing parse_yaml.sh file
 . ${parentdir}'/scripts/'parse_yaml.sh
-eval $(parse_yaml $config_path)
+eval $(parse_yaml ${config_path}'/'${config_name}.yaml)
 
-update_freq=$((${gpus_to_simulate}/${gpus})) #you can simulate 64/128 GPUs by using k GPUs in base/large models respectively
+update_freq=$(($gpus_to_simulate/$gpus)) 
+#you can simulate 64/128 GPUs by using k GPUs in base/large models respectively
 
 printf "\n** Config path is: $config_path/$config_name.yaml"
 printf "\n** Data path is: $data_path"
@@ -51,7 +52,7 @@ if [ "${run_in_nohup}" = 1 ]; then
 
 	nohup python ${wav2vec_repo_path}train.py --distributed-world-size ${gpus} --distributed-port $PORT ${data_path} \
     --save-dir ${checkpoints_path} --fp16 --num-workers ${num_workers} --task audio_pretraining --criterion wav2vec --arch wav2vec2 \
-    --log-keys ${log_keys} --quantize-targets --extractor-mode default \
+    --log-keys '["prob_perplexity","code_perplexity","temp"]' --quantize-targets --extractor-mode default \
     --conv-feature-layers ${conv_feature_layers} --final-dim ${final_dim} --latent-vars ${latent_vars} \
     --latent-groups ${latent_groups} --latent-temp ${latent_temp} --infonce --optimizer ${optimizer} \
     --adam-betas ${adam_betas} --adam-eps ${adam_eps} --lr-scheduler ${lr_scheduler} --total-num-update ${total_num_update} \
@@ -65,7 +66,7 @@ if [ "${run_in_nohup}" = 1 ]; then
 else
 	python ${wav2vec_repo_path}train.py --distributed-world-size ${gpus} --distributed-port $PORT ${data_path} \
     --save-dir ${checkpoints_path} --fp16 --num-workers ${num_workers} --task audio_pretraining --criterion wav2vec --arch wav2vec2 \
-    --log-keys ${log_keys} --quantize-targets --extractor-mode default \
+    --log-keys '["prob_perplexity","code_perplexity","temp"]' --quantize-targets --extractor-mode default \
     --conv-feature-layers ${conv_feature_layers} --final-dim ${final_dim} --latent-vars ${latent_vars} \
     --latent-groups ${latent_groups} --latent-temp ${latent_temp} --infonce --optimizer ${optimizer} \
     --adam-betas ${adam_betas} --adam-eps ${adam_eps} --lr-scheduler ${lr_scheduler} --total-num-update ${total_num_update} \
