@@ -5,7 +5,7 @@
 
 config_name='pretraining_base' 
 gpus=1
-run_in_nohup=0  #0 for no, 1 for yes
+run_in_nohup=1  #0 for no, 1 for yes
  
 ### Variables to change - end ###
 
@@ -62,6 +62,8 @@ if [ "${run_in_nohup}" = 1 ]; then
     --max-sample-size ${max_sample_size} --min-sample-size ${min_sample_size} --dropout ${dropout} --attention-dropout ${attention_dropout} --weight-decay ${weight_decay} \
     --max-tokens ${max_tokens} --max-update ${max_update} --skip-invalid-size-inputs-valid-test --ddp-backend ${ddp_backend} --update-freq ${update_freq} \
     --tensorboard-logdir ${tensorboard_path}  &> ${log_path}/${local_timestamp}.out & 
+
+	nohup tensorboard --logdir ${tensorboard_path} --bind_all &> /dev/null &
     
 else
 	python ${wav2vec_repo_path}train.py --distributed-world-size ${gpus} --distributed-port $PORT ${data_path} \
