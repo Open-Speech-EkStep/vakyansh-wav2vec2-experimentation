@@ -13,7 +13,7 @@ lexicon_lst_path=${parentdir}'/lm/lexicon.lst'
 ### Values to change end ###
 
 wav2vec_repo_path=${parentdir}'/../fairseq/'
-checkpoint_path=${parentdir}'/checkpoints/finetuning/checkpoint_best.pt'
+checkpoint_path=${parentdir}'/checkpoints/checkpoint_best.pt'
 subset='test'
 
 if [ "${w2l_decoder_viterbi}" = 1 ]; then
