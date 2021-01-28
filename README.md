@@ -48,10 +48,11 @@ Edit the path to data in the scripts/pretraining/prepare_data.sh file.To prepare
 cd scripts/pretraining/
 bash prepare_data.sh
 ```
-Edit the config/pretraining_base.yaml or config/pretraining_large.yaml for different parameter configurations.Check the required paths and values in start_pretraining.sh.To start run:
+Edit the config/pretraining_base.yaml or config/pretraining_large.yaml for different parameter configurations.Check the required paths and values in start_pretraining_base.sh or start_pretraining_large.sh.To start run:
 ```bash
-bash start_pretraining.sh
+bash start_pretraining_base.sh
 ```
+
 ## For Finetuning
 Edit the path to data in the scripts/finetuning/prepare_data.sh file.To prepare the data:
 ```bash
@@ -61,6 +62,17 @@ bash prepare_data.sh
 Edit the config/finetuning.yaml for different parameter configurations.Check the required paths and values in start_pretraining.sh.To start run:
 ```bash
 bash start_pretraining.sh
+```
+
+## For Inference
+Edit the path to data in the scripts/finetuning/prepare_data.sh file. To prepare the test data run:
+```bash
+cd scripts/inference/
+bash prepare_data.sh
+```
+Edit the infer.sh file for required paths. To start inference run:
+```bash
+bash infer.sh
 ```
 
 ## License
