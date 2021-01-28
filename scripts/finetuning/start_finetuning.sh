@@ -5,7 +5,7 @@
 
 config_name='finetuning.yaml'
 gpus=1
-run_in_nohup=1  #0 for no, 1 for yes
+run_in_nohup=0  #0 for no, 1 for yes
 ### Values to change - end ###
 
 dir=$PWD/
@@ -15,7 +15,7 @@ printf "** Directory to code is: $parentdir"
 
 config_path=${parentdir}'/config/'${config_name}
 data_path=${parentdir}'/data/finetuning'
-checkpoints_path=${parentdir}'/checkpoints/'
+checkpoints_path=${parentdir}'/checkpoints/finetuning'
 log_path=${parentdir}'/logs/finetuning'
 tensorboard_path=${log_path}'/tensorboard'
 pretrained_model_path=${parentdir}'/checkpoints/pretraining/checkpoint_best.pt'
@@ -79,8 +79,7 @@ else
     --lr ${lr} --lr-scheduler ${lr_scheduler} --warmup-steps ${warmup_steps} --hold-steps ${hold_steps} --decay-steps ${decay_steps} \
     --final-lr-scale ${final_lr_scale} --final-dropout ${final_dropout} --dropout ${dropout} --activation-dropout ${activation_dropout} --criterion ${criterion} \
     --attention-dropout ${attention_dropout} --max-tokens ${max_tokens} --seed ${seed}  --log-format ${log_format} --log-interval ${log_interval} \
-    --ddp-backend ${ddp_backend} --update-freq ${update_freq} \
-    --tensorboard-logdir ${tensorboard_path}
+    --ddp-backend ${ddp_backend} --update-freq ${update_freq}
 
 
 fi
