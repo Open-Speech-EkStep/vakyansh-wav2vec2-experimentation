@@ -1,12 +1,15 @@
 # wav2vec-old repo 
-## Installation (requires wav2letter as well) 
+## Installation and Setup (requires wav2letter as well) 
 ```
-conda create --name fairseq python=3.7
-conda activate fairseq
+git clone https://github.com/Open-Speech-EkStep/wav2vec-old.git
 
-### For fairseq setup
+conda create --name <env_name> python=3.7
+conda activate <env_name>
 
-git clone https://github.com/Open-Speech-EkStep/wav2vec.git
+### For fairseq setup(fairseq should be installed outside wav2vec-old repo)
+cd ..
+git clone https://github.com/pytorch/fairseq.git
+git checkout cd2bba4419629ffc17eb83c669e88b0bd3af6eb9
 cd wav2vec
 pip install -e .
 
@@ -28,8 +31,6 @@ cd ..
 export KENLM_ROOT_DIR=$PWD
 export USE_CUDA=0 ## for cpu
 
-
-
 ### Packages
 pip install packaging soundfile
 
@@ -39,6 +40,7 @@ pip install packaging soundfile
 git clone https://github.com/Open-Speech-EkStep/wav2letter.git 
 cd wav2letter/bindings/python
 pip install -e .
+
 ```
 # Usage
 
