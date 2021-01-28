@@ -40,25 +40,27 @@ git clone https://github.com/Open-Speech-EkStep/wav2letter.git
 cd wav2letter/bindings/python
 pip install -e .
 ```
-## Usage
+# Usage
 
-# For Pretraining
+## For Pretraining
 Edit the path to data in the scripts/pretraining/prepare_data.sh file.To prepare the data:
 ```bash
-bash scripts/pretraining/prepare_data.sh
+cd scripts/pretraining/
+bash prepare_data.sh
 ```
 Edit the config/pretraining_base.yaml or config/pretraining_large.yaml for different parameter configurations.Check the required paths and values in scripts/pretraining/start_pretraining.sh.To start run:
 ```bash
-bash scripts/pretraining/start_pretraining.sh
+bash start_pretraining.sh
 ```
-# For Finetuning
+## For Finetuning
 Edit the path to data in the scripts/finetuning/prepare_data.sh file.To prepare the data:
 ```bash
-bash scripts/finetuning/prepare_data.sh
+cd scripts/finetuning/
+bash prepare_data.sh
 ```
 Edit the config/finetuning.yaml for different parameter configurations.Check the required paths and values in scripts/finetuning/start_pretraining.sh.To start run:
 ```bash
-bash scripts/finetuning/start_pretraining.sh
+bash start_pretraining.sh
 ```
 
 ## License
