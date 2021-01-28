@@ -1,0 +1,1 @@
+python wav2vec_inference_new.py -m "/home/priyanshi.shah/wav2vec-old/checkpoints/final_model.pt" -d "/home/priyanshi.shah/wav2vec-old/data/finetuning/dict.ltr.txt" -w "/home/jupyter/dev_english/dev_IITM/kol_134_long_219_eng-010000-013808-2-1.wav" -c True -D "viterbi"
