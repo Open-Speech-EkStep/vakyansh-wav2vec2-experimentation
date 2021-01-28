@@ -41,21 +41,16 @@ cd wav2letter/bindings/python
 pip install -e .
 ```
 ## Usage
-Making the manifest .tsv file
-```bash
-python manifest.py <path to wav files> --dest <path to destination tsv> --ext wav --train-name train.tsv --valid-percent 0 --jobs -1
-```
 
-Making the .wrd, .ltr file
+# For Pretraining
+Edit the path to data in the scripts/pretraining/prepare_data.sh file.To prepare the data:
 ```bash
-python labels.py --jobs 64 --tsv <path to train.tsv>train.tsv --output-dir <destination dir> --output-name test --txt-dir
+bash scripts/pretraining/prepare_data.sh
 ```
-
-Making the lexicon.lst and dict.ltr.txt file
+Edit the config/pretraining_base.yaml or config/pretraining_large.yaml for different parameter configurations.Check the required paths and values in scripts/pretraining/start_pretraining.sh.To start run:
 ```bash
-python dict_and_lexicon_maker.py --wrd <path to train.wrd>train.wrd --lexicon <destnation path>/lexicon.lst --dict <destnation path>/dict.ltr.txt
+bash scripts/pretraining/start_pretraining.sh
 ```
-
 
 
 ## License
