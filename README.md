@@ -51,7 +51,15 @@ Edit the config/pretraining_base.yaml or config/pretraining_large.yaml for diffe
 ```bash
 bash scripts/pretraining/start_pretraining.sh
 ```
-
+# For Finetuning
+Edit the path to data in the scripts/finetuning/prepare_data.sh file.To prepare the data:
+```bash
+bash scripts/finetuning/prepare_data.sh
+```
+Edit the config/finetuning.yaml for different parameter configurations.Check the required paths and values in scripts/finetuning/start_pretraining.sh.To start run:
+```bash
+bash scripts/finetuning/start_pretraining.sh
+```
 
 ## License
 
