@@ -74,6 +74,16 @@ Edit the infer.sh file for required paths. To start inference run:
 ```bash
 bash infer.sh
 ```
+## For Single File Inference
+To generate custom model, run: 
+```bash
+cd scripts/inference/
+bash generate_model.sh
+```
+To infer for single file, change path in single_file_inference.sh.Then run:
+```bash
+bash single_file_inference.sh
+```
 
 ## License
 
