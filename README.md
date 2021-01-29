@@ -7,10 +7,10 @@ conda create --name <env_name> python=3.7
 conda activate <env_name>
 
 ### For fairseq setup(fairseq should be installed outside wav2vec-old repo)
-cd ..
-git clone https://github.com/pytorch/fairseq.git
+
+git clone https://github.com/Open-Speech-EkStep/fairseq.git
+cd fairseq
 git checkout cd2bba4419629ffc17eb83c669e88b0bd3af6eb9
-cd wav2vec
 pip install -e .
 
 ### install other libraries
@@ -82,11 +82,17 @@ To generate custom model, run:
 cd scripts/inference/
 bash generate_model.sh
 ```
-To infer for single file, change path in single_file_inference.sh.Then run:
+To infer for single file, change path in single_file_inference.sh. Then run:
 ```bash
 bash single_file_inference.sh
 ```
+## For generating LM
+Edit the run_lm_pipeline.sh variables as required, then run:
+```
+cd scripts/lm/
+bash run_lm_pipeline.sh
 
+```
 ## License
 
 fairseq(-py) is MIT-licensed. The license applies to the pre-trained models as well.
