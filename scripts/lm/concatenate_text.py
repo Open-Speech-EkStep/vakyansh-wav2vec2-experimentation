@@ -11,7 +11,7 @@ def concatenate_text(txt_files_dir, combined_txt_file_save_path):
         with open(file) as f:
             txt_list.append(f.read())
 
-    txt_str = '\n'.join(txt_list)
+    txt_str = ''.join(txt_list)
     with open(combined_txt_file_save_path, 'w+') as f:
         f.write(txt_str)
 
