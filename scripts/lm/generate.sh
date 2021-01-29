@@ -5,8 +5,8 @@ parentdir="$(dirname "$parentdir")"
 ### Values to change,in any - start ###
 
 #for text file generation
-txt_files_dir = "/home/jupyter/IITM_NPTEL_clean_english_data/test"
-combined_txt_file_save_path = ${parentdir}"/lm/all_text.txt"
+txt_files_dir="/home/jupyter/IITM_NPTEL_clean_english_data/test"
+combined_txt_file_save_path=${parentdir}"/lm/all_text.txt"
 
 #For kenlm
 input_txt_path=${combined_txt_file_save_path}
