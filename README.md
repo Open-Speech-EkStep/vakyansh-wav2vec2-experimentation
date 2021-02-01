@@ -1,4 +1,4 @@
-# wav2vec-old repo 
+# wav2vec-template-v1 repo 
 ## Installation and Setup (requires wav2letter as well) 
 ```
 git clone https://github.com/Open-Speech-EkStep/wav2vec-old.git
