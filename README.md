@@ -1,16 +1,15 @@
 # wav2vec-template-v1 repo 
 ## Installation and Setup (requires wav2letter as well) 
 ```
-git clone https://github.com/Open-Speech-EkStep/wav2vec-old.git
+git clone https://github.com/Open-Speech-EkStep/wav2vec-template-v1.git
 
 conda create --name <env_name> python=3.7
 conda activate <env_name>
 
 ### For fairseq setup(fairseq should be installed outside wav2vec-old repo)
 
-git clone https://github.com/Open-Speech-EkStep/fairseq.git
+git clone -b ekstep-wav2vec2 https://github.com/Open-Speech-EkStep/fairseq.git
 cd fairseq
-git checkout cd2bba4419629ffc17eb83c669e88b0bd3af6eb9
 pip install -e .
 
 ### install other libraries
