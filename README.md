@@ -39,7 +39,7 @@ pip install packaging soundfile
 git clone https://github.com/facebookresearch/wav2letter.git
 cd wav2letter
 git checkout b1d1f89f586120a978a4666cffd45c55f0a2e564
-cd /bindings/python
+cd bindings/python
 pip install -e .
 
 ```
