@@ -5,9 +5,9 @@ parentdir="$(dirname "$parentdir")"
 ### Values to change -start ###
 
 valid_percentage=0.04
-prep_scripts="/home/harveen.chadha/common_scripts/prep_scripts"
+prep_scripts="../../common_scripts/prep_scripts"
 destination_path=$parentdir'/data/finetuning'
-wav_path="/home/jupyter/IITM_NPTEL_clean_english_data/test"
+wav_path="/wav_dir_path"
 txt_path=${wav_path}
 
 ### Values to change end ###

@@ -1,5 +1,3 @@
-
-distributed_port : -1 
 valid_subset : valid
 num_workers : 6
 max_update : 320000
