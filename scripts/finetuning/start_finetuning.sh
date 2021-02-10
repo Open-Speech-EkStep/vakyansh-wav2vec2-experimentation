@@ -6,6 +6,7 @@
 config_name='finetuning.yaml'
 gpus=1
 run_in_nohup=0  #0 for no, 1 for yes
+
 ### Values to change - end ###
 
 dir=$PWD/
@@ -19,7 +20,6 @@ checkpoints_path=${parentdir}'/checkpoints/finetuning'
 log_path=${parentdir}'/logs/finetuning'
 tensorboard_path=${log_path}'/tensorboard'
 pretrained_model_path=${parentdir}'/checkpoints/pretraining/checkpoint_best.pt'
-#pretrained_model_path='/home/priyanshi.shah/testing_cps/hindi_pretrain_4200_checkpoints_Nov2_Nov3/checkpoint_best_5967.pt'
 update_freq=$((24/${gpus}))
 wav2vec_repo_path=${parentdir}'/../fairseq/'
 
@@ -48,38 +48,38 @@ if [ "${run_in_nohup}" = 1 ]; then
     printf "\n** Tensorboard logs path: ${tensorboard_path}"
     printf "\n"
 
-    nohup python ${wav2vec_repo_path}train.py --distributed-world-size ${gpus} --distributed-port ${distributed_port} $data_path \
-    --save-dir ${checkpoints_path} --fp16  --post-process ${post_process}\
-    --valid-subset ${valid_subset} --no-epoch-checkpoints --best-checkpoint-metric ${best_checkpoint_metric} --num-workers ${num_workers} \
-    --max-update ${max_update} --sentence-avg --task ${task} --arch ${arch} \
-    --w2v-path ${pretrained_model_path}   --labels ${labels} \
-    --apply-mask --mask-selection ${mask_selection} --mask-other ${mask_other} --mask-length ${mask_length} --mask-prob ${mask_prob} \
-    --layerdrop ${layerdrop}  --mask-channel-selection ${mask_channel_selection} --mask-channel-other ${mask_channel_other} --mask-channel-length ${mask_channel_length} \
-    --mask-channel-prob ${mask_channel_prob} --zero-infinity  --feature-grad-mult ${feature_grad_mult} --freeze-finetune-updates ${freeze_finetune_updates} \
-    --validate-after-updates ${validate_after_updates} --optimizer ${optimizer} --adam-betas ${adam_betas} --adam-eps ${adam_eps} \
-    --lr ${lr} --lr-scheduler ${lr_scheduler} --warmup-steps ${warmup_steps} --hold-steps ${hold_steps} --decay-steps ${decay_steps} \
-    --final-lr-scale ${final_lr_scale} --final-dropout ${final_dropout} --dropout ${dropout} --activation-dropout ${activation_dropout} --criterion ${criterion} \
-    --attention-dropout ${attention_dropout} --max-tokens ${max_tokens} --seed ${seed}  --log-format ${log_format} --log-interval ${log_interval} \
-    --ddp-backend ${ddp_backend} --update-freq ${update_freq} \
+    nohup python ${wav2vec_repo_path}train.py --distributed-world-size ${gpus} --distributed-port -1 $data_path \
+    --save-dir ${checkpoints_path} --fp16  --post-process letter \
+    --valid-subset ${valid_subset} --no-epoch-checkpoints --best-checkpoint-metric wer --num-workers ${num_workers} \
+    --max-update ${max_update} --sentence-avg --task audio_pretraining --arch wav2vec_ctc \
+    --w2v-path ${pretrained_model_path}   --labels ltr \
+    --apply-mask --mask-selection static --mask-other 0 --mask-length 10 --mask-prob 0.5 \
+    --layerdrop 0.1 --mask-channel-selection static --mask-channel-other 0 --mask-channel-length 64 \
+    --mask-channel-prob 0.5 --zero-infinity  feature-grad-mult 0.0 --freeze-finetune-updates 500 \
+    --validate-after-updates 1000 --optimizer adam --adam-betas '(0.9, 0.98)' --adam-eps 1e-08 \
+    --lr 2e-05 --lr-scheduler tri_stage --warmup-steps 8000 --hold-steps 32000 --decay-steps 40000
+    --final-lr-scale 0.05 --final-dropout 0.0 --dropout 0.0 --activation-dropout 0.1 --criterion ctc \
+    --attention-dropout 0.0 --max-tokens ${max_tokens} --seed 2337  --log-format json --log-interval 1 \
+    --ddp-backend no_c10d --update-freq ${update_freq} \
     --tensorboard-logdir ${tensorboard_path}  &> ${log_path}/${local_timestamp}.out &
-    
+
     nohup tensorboard --logdir ${tensorboard_path} --bind_all &> /dev/null &
 
 
 else
-    python ${wav2vec_repo_path}train.py --distributed-world-size ${gpus} --distributed-port ${distributed_port} $data_path \
-    --save-dir ${checkpoints_path} --fp16  --post-process ${post_process}\
-    --valid-subset ${valid_subset} --no-epoch-checkpoints --best-checkpoint-metric ${best_checkpoint_metric} --num-workers ${num_workers} \
-    --max-update ${max_update} --sentence-avg --task ${task} --arch ${arch} \
-    --w2v-path ${pretrained_model_path}   --labels ${labels} \
-    --apply-mask --mask-selection ${mask_selection} --mask-other ${mask_other} --mask-length ${mask_length} --mask-prob ${mask_prob} \
-    --layerdrop ${layerdrop}  --mask-channel-selection ${mask_channel_selection} --mask-channel-other ${mask_channel_other} --mask-channel-length ${mask_channel_length} \
-    --mask-channel-prob ${mask_channel_prob} --zero-infinity  --feature-grad-mult ${feature_grad_mult} --freeze-finetune-updates ${freeze_finetune_updates} \
-    --validate-after-updates ${validate_after_updates} --optimizer ${optimizer} --adam-betas ${adam_betas} --adam-eps ${adam_eps} \
-    --lr ${lr} --lr-scheduler ${lr_scheduler} --warmup-steps ${warmup_steps} --hold-steps ${hold_steps} --decay-steps ${decay_steps} \
-    --final-lr-scale ${final_lr_scale} --final-dropout ${final_dropout} --dropout ${dropout} --activation-dropout ${activation_dropout} --criterion ${criterion} \
-    --attention-dropout ${attention_dropout} --max-tokens ${max_tokens} --seed ${seed}  --log-format ${log_format} --log-interval ${log_interval} \
-    --ddp-backend ${ddp_backend} --update-freq ${update_freq}
+    python ${wav2vec_repo_path}train.py --distributed-world-size ${gpus} --distributed-port -1 $data_path \
+    --save-dir ${checkpoints_path} --fp16  --post-process letter \
+    --valid-subset ${valid_subset} --no-epoch-checkpoints --best-checkpoint-metric wer --num-workers ${num_workers} \
+    --max-update ${max_update} --sentence-avg --task audio_pretraining --arch wav2vec_ctc \
+    --w2v-path ${pretrained_model_path}   --labels ltr \
+    --apply-mask --mask-selection static --mask-other 0 --mask-length 10 --mask-prob 0.5 \
+    --layerdrop 0.1 --mask-channel-selection static --mask-channel-other 0 --mask-channel-length 64 \
+    --mask-channel-prob 0.5 --zero-infinity  feature-grad-mult 0.0 --freeze-finetune-updates 500 \
+    --validate-after-updates 1000 --optimizer adam --adam-betas '(0.9, 0.98)' --adam-eps 1e-08 \
+    --lr 2e-05 --lr-scheduler tri_stage --warmup-steps 8000 --hold-steps 32000 --decay-steps 40000
+    --final-lr-scale 0.05 --final-dropout 0.0 --dropout 0.0 --activation-dropout 0.1 --criterion ctc \
+    --attention-dropout 0.0 --max-tokens ${max_tokens} --seed 2337  --log-format json --log-interval 1 \
+    --ddp-backend no_c10d --update-freq ${update_freq} 
 
 
 fi
