@@ -53,29 +53,29 @@ if [ "${run_in_nohup}" = 1 ]; then
 	nohup python ${wav2vec_repo_path}train.py --distributed-world-size ${gpus} --distributed-port $PORT ${data_path} \
     --save-dir ${checkpoints_path} --fp16 --num-workers ${num_workers} --task audio_pretraining --criterion wav2vec --arch wav2vec2 \
     --log-keys '["prob_perplexity","code_perplexity","temp"]' --quantize-targets --extractor-mode default \
-    --conv-feature-layers ${conv_feature_layers} --final-dim ${final_dim} --latent-vars ${latent_vars} \
-    --latent-groups ${latent_groups} --latent-temp ${latent_temp} --infonce --optimizer ${optimizer} \
-    --adam-betas ${adam_betas} --adam-eps ${adam_eps} --lr-scheduler ${lr_scheduler} --total-num-update ${total_num_update} \
-    --lr ${lr} --warmup-updates ${warmup_updates} --mask-length ${mask_length} --mask-prob ${mask_prob} --mask-selection ${mask_selection} --mask-other ${mask_other} \
-    --encoder-layerdrop ${encoder_layerdrop} --dropout-input ${dropout_input} --dropout-features ${dropout_features} --feature-grad-mult ${feature_grad_mult} \
-    --loss-weights ${loss_weights} --conv-pos ${conv_pos} --conv-pos-groups ${conv_pos_groups} --num-negatives ${num_negatives} --cross-sample-negatives ${cross_sample_negatives} \
-    --max-sample-size ${max_sample_size} --min-sample-size ${min_sample_size} --dropout ${dropout} --attention-dropout ${attention_dropout} --weight-decay ${weight_decay} \
-    --max-tokens ${max_tokens} --max-update ${max_update} --skip-invalid-size-inputs-valid-test --ddp-backend ${ddp_backend} --update-freq ${update_freq} \
+    --conv-feature-layers '[(512, 10, 5)] + [(512, 3, 2)] * 4 + [(512,2,2)] * 2'  --final-dim 256 --latent-vars 320 \
+    --latent-groups 2 --latent-temp '(2,0.5,0.999995)' --infonce --optimizer adam \
+    --adam-betas '(0.9,0.98)' --adam-eps 1e-06 --lr-scheduler polynomial_decay --total-num-update 400000 \
+    --lr 0.0005 --warmup-updates 32000 --mask-length 10 --mask-prob 0.65 --mask-selection static --mask-other 0 \
+    --encoder-layerdrop 0.05 --dropout-input 0.1 --dropout-features 0.1 --feature-grad-mult 0.1 \
+    --loss-weights '[0.1, 10]' --conv-pos 128 --conv-pos-groups 16 --num-negatives 100 --cross-sample-negatives 0 \
+    --max-sample-size ${max_sample_size} --min-sample-size ${min_sample_size} --dropout 0.1 --attention-dropout 0.1 --weight-decay 0.01 \
+    --max-tokens ${max_tokens} --max-update ${max_update} --skip-invalid-size-inputs-valid-test --ddp-backend no_c10d --update-freq ${update_freq} \
     --tensorboard-logdir ${tensorboard_path}  &> ${log_path}/${local_timestamp}.out & 
 
 	nohup tensorboard --logdir ${tensorboard_path} --bind_all &> /dev/null &
     
 else
+
 	python ${wav2vec_repo_path}train.py --distributed-world-size ${gpus} --distributed-port $PORT ${data_path} \
     --save-dir ${checkpoints_path} --fp16 --num-workers ${num_workers} --task audio_pretraining --criterion wav2vec --arch wav2vec2 \
     --log-keys '["prob_perplexity","code_perplexity","temp"]' --quantize-targets --extractor-mode default \
-    --conv-feature-layers ${conv_feature_layers} --final-dim ${final_dim} --latent-vars ${latent_vars} \
-    --latent-groups ${latent_groups} --latent-temp ${latent_temp} --infonce --optimizer ${optimizer} \
-    --adam-betas ${adam_betas} --adam-eps ${adam_eps} --lr-scheduler ${lr_scheduler} --total-num-update ${total_num_update} \
-    --lr ${lr} --warmup-updates ${warmup_updates} --mask-length ${mask_length} --mask-prob ${mask_prob} --mask-selection ${mask_selection} --mask-other ${mask_other} \
-    --encoder-layerdrop ${encoder_layerdrop} --dropout-input ${dropout_input} --dropout-features ${dropout_features} --feature-grad-mult ${feature_grad_mult} \
-    --loss-weights ${loss_weights} --conv-pos ${conv_pos} --conv-pos-groups ${conv_pos_groups} --num-negatives ${num_negatives} --cross-sample-negatives ${cross_sample_negatives} \
-    --max-sample-size ${max_sample_size} --min-sample-size ${min_sample_size} --dropout ${dropout} --attention-dropout ${attention_dropout} --weight-decay ${weight_decay} \
-    --max-tokens ${max_tokens} --max-update ${max_update} --skip-invalid-size-inputs-valid-test --ddp-backend ${ddp_backend} --update-freq ${update_freq}
-
+    --conv-feature-layers '[(512, 10, 5)] + [(512, 3, 2)] * 4 + [(512,2,2)] * 2'  --final-dim 256 --latent-vars 320 \
+    --latent-groups 2 --latent-temp '(2,0.5,0.999995)' --infonce --optimizer adam \
+    --adam-betas '(0.9,0.98)' --adam-eps 1e-06 --lr-scheduler polynomial_decay --total-num-update 400000 \
+    --lr 0.0005 --warmup-updates 32000 --mask-length 10 --mask-prob 0.65 --mask-selection static --mask-other 0 \
+    --encoder-layerdrop 0.05 --dropout-input 0.1 --dropout-features 0.1 --feature-grad-mult 0.1 \
+    --loss-weights '[0.1, 10]' --conv-pos 128 --conv-pos-groups 16 --num-negatives 100 --cross-sample-negatives 0 \
+    --max-sample-size ${max_sample_size} --min-sample-size ${min_sample_size} --dropout 0.1 --attention-dropout 0.1 --weight-decay 0.01 \
+    --max-tokens ${max_tokens} --max-update ${max_update} --skip-invalid-size-inputs-valid-test --ddp-backend no_c10d --update-freq ${update_freq} \
 fi
