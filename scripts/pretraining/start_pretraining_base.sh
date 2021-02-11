@@ -51,7 +51,7 @@ if [ "${run_in_nohup}" = 1 ]; then
 	printf "\n"
 
 	nohup python ${wav2vec_repo_path}train.py --distributed-world-size ${gpus} --distributed-port $PORT ${data_path} \
-    --save-dir ${checkpoints_path} --fp16 --num-workers ${num_workers} --task audio_pretraining --criterion wav2vec --arch wav2vec2 \
+    --save-dir ${checkpoints_path} --fp16 --no-epoch-checkpoints --num-workers ${num_workers} --task audio_pretraining --criterion wav2vec --arch wav2vec2 \
     --log-keys '["prob_perplexity","code_perplexity","temp"]' --quantize-targets --extractor-mode default \
     --conv-feature-layers '[(512, 10, 5)] + [(512, 3, 2)] * 4 + [(512,2,2)] * 2'  --final-dim 256 --latent-vars 320 \
     --latent-groups 2 --latent-temp '(2,0.5,0.999995)' --infonce --optimizer adam \
@@ -68,7 +68,7 @@ if [ "${run_in_nohup}" = 1 ]; then
 else
 
 	python ${wav2vec_repo_path}train.py --distributed-world-size ${gpus} --distributed-port $PORT ${data_path} \
-    --save-dir ${checkpoints_path} --fp16 --num-workers ${num_workers} --task audio_pretraining --criterion wav2vec --arch wav2vec2 \
+    --save-dir ${checkpoints_path} --fp16 --no-epoch-checkpoints --num-workers ${num_workers} --task audio_pretraining --criterion wav2vec --arch wav2vec2 \
     --log-keys '["prob_perplexity","code_perplexity","temp"]' --quantize-targets --extractor-mode default \
     --conv-feature-layers '[(512, 10, 5)] + [(512, 3, 2)] * 4 + [(512,2,2)] * 2'  --final-dim 256 --latent-vars 320 \
     --latent-groups 2 --latent-temp '(2,0.5,0.999995)' --infonce --optimizer adam \
