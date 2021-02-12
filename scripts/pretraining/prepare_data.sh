@@ -5,7 +5,7 @@ parentdir="$(dirname "$parentdir")"
 ### Values to change -start ###
 
 valid_percentage=0.04
-prep_scripts="../../common_scripts/prep_scripts"
+prep_scripts="../../utils/prep_scripts"
 destination_path=$parentdir'/data/pretraining'
 wav_path="wav_dir_path"
 

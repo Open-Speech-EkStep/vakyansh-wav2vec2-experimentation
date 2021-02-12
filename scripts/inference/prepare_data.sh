@@ -4,7 +4,7 @@ parentdir="$(dirname "$dir")"
 parentdir="$(dirname "$parentdir")"
 ### Values to change -start ###
 
-prep_scripts="../../common_scripts/prep_scripts"
+prep_scripts="../../utils/prep_scripts"
 destination_path=$parentdir'/data/inference'
 wav_path="/wav_dir_path/"
 txt_path=${wav_path}
