@@ -1,0 +1,12 @@
+wav2letter.egg==info
+SoundFile==0.10.3.post1
+joblib==1.0.0
+tqdm==4.56.0
+fairseq.egg==info
+numpy==1.20.0
+pandas==1.2.2
+torch==1.7.1+cu101
+fairseq==0.10.2
+progressbar33==2.4
+python_Levenshtein==0.12.2
+swifter==1.0.7
