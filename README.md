@@ -36,8 +36,8 @@ pip install packaging soundfile
 
 ### wav2letter
 
-git clone https://github.com/facebookresearch/wav2letter.git
-cd wav2letter
+git clone -b v0.2 https://github.com/Open-Speech-EkStep/wav2letter-1.git
+cd wav2letter-1
 git checkout b1d1f89f586120a978a4666cffd45c55f0a2e564
 cd bindings/python
 pip install -e .
