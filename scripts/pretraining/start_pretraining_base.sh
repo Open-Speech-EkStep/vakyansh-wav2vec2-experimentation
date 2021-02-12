@@ -5,7 +5,7 @@
 
 config_name='pretraining_base' 
 gpus=1
-run_in_nohup=1  #0 for no, 1 for yes
+run_in_nohup=0  #0 for no, 1 for yes
  
 ### Variables to change - end ###
 
@@ -77,5 +77,5 @@ else
     --encoder-layerdrop 0.05 --dropout-input 0.1 --dropout-features 0.1 --feature-grad-mult 0.1 \
     --loss-weights '[0.1, 10]' --conv-pos 128 --conv-pos-groups 16 --num-negatives 100 --cross-sample-negatives 0 \
     --max-sample-size ${max_sample_size} --min-sample-size ${min_sample_size} --dropout 0.1 --attention-dropout 0.1 --weight-decay 0.01 \
-    --max-tokens ${max_tokens} --max-update ${max_update} --skip-invalid-size-inputs-valid-test --ddp-backend no_c10d --update-freq ${update_freq} \
+    --max-tokens ${max_tokens} --max-update ${max_update} --skip-invalid-size-inputs-valid-test --ddp-backend no_c10d --update-freq ${update_freq}
 fi
