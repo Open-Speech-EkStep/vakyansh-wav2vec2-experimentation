@@ -5,7 +5,7 @@ parentdir="$(dirname "$parentdir")"
 ### Values to change, if any ###
 custom_model_path=$parentdir'/checkpoints/custom_model/final_model.pt'
 dictionary=$parentdir'/data/finetuning/dict.ltr.txt'
-wav_file_path="/home/jupyter/dev_english/dev_IITM/kol_134_long_219_eng-010000-013808-2-1.wav"
+wav_file_path="" # path to single wav file
 decoder="viterbi"
 cuda=True
 

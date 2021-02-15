@@ -5,14 +5,14 @@ parentdir="$(dirname "$parentdir")"
 ### Values to change,if any - start ###
 
 #for text file generation
-txt_files_dir="/home/jupyter/IITM_NPTEL_clean_english_data/test"
+txt_files_dir="" #path to text file dir
 combined_txt_file_save_path=${parentdir}"/lm/all_text.txt"
 
 #For kenlm
 top_k=500000
 input_txt_path=${combined_txt_file_save_path}
 output_path=${parentdir}"/lm/"
-kenlm_bins="/home/priyanshi.shah/kenlm/build/bin"
+kenlm_bins="path_to_kenlm/build/bin"
 
 #For lexicon 
 vocab_txt_file=${output_path}"/vocab-"${top_k}".txt"

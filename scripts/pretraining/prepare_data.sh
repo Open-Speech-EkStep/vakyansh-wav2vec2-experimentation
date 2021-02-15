@@ -9,7 +9,7 @@ utils="../../utils"
 prep_scripts=$utils"/prep_scripts/"
 analysis_scripts=$utils"/analysis/"
 destination_path=$parentdir"/data/pretraining"
-wav_path="/home/jupyter/dev_english/dev_IITM/"
+wav_path="path_to_data"
 train_name="train"
 ### Values to change end ###
 
