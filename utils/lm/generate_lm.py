@@ -1,3 +1,5 @@
+#This code has been taken from https://github.com/mozilla/DeepSpeech/blob/master/data/lm/generate_lm.py
+
 import argparse
 import gzip
 import io
