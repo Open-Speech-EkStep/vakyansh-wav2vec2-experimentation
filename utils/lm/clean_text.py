@@ -1,3 +1,5 @@
+## Usage: python clean_text.py --inp_text_file /path/to/input/text/file --out_text_file /path/to/clean/text/file
+
 import re
 import argparse
 
