@@ -49,6 +49,8 @@ def read_file(fname, args, dir_path):
     if args.path_must_contain and args.path_must_contain not in file_path:
         pass
 
+    assert soundfile.info(fname).samplerate == 16000
+
     frames = soundfile.info(fname).frames
     if frames > 0 and frames <= 480000: ## Added to remove any audio greater than 30 seconds
         ret_val = "{}\t{}\n".format(os.path.relpath(file_path, dir_path), frames)
