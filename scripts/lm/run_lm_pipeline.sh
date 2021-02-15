@@ -27,13 +27,13 @@ run_make_lexicon_lst=1 # 0 for skipping, 1 for running
 
 if [ "$run_concatenate_text" == 1 ]; then
 	printf "** Generating Combined Text file **\n"
-	python concatenate_text.py --txt-files-dir ${txt_files_dir} --final-txt-file-save-path ${combined_txt_file_save_path}
+	python ../../utils/lm/concatenate_text.py --txt-files-dir ${txt_files_dir} --final-txt-file-save-path ${combined_txt_file_save_path}
 	printf "*:File generated at: "${combined_txt_file_save_path}
 fi
 
 if [ "$run_generate_lm_vocab" == 1 ]; then
 	printf "\n** Generating kenlm **\n"
-	python generate_lm.py --input_txt ${input_txt_path} --output_dir ${output_path} \
+	python ../../utils/lm/generate_lm.py --input_txt ${input_txt_path} --output_dir ${output_path} \
 		--top_k ${top_k} --kenlm_bins ${kenlm_bins} \
 		--arpa_order 5 --max_arpa_memory "85%" --arpa_prune "0|0|1" \
 		--binary_a_bits 255 --binary_q_bits 8 --binary_type trie
@@ -42,6 +42,6 @@ fi
 
 if [ "$run_make_lexicon_lst" == 1 ]; then
 	printf "\n** Generating Lexicon from Combined Text File **\n"
-	python make_lexicon_lst.py --txt-file ${vocab_txt_file} --path-to-save-lexicon ${path_to_save_lexicon}
+	python ../../utils/lm/make_lexicon_lst.py --txt-file ${vocab_txt_file} --path-to-save-lexicon ${path_to_save_lexicon}
 	printf "*:File generated at: "${path_to_save_lexicon}
 fi

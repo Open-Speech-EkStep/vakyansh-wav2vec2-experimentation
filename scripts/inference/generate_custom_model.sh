@@ -10,5 +10,5 @@ dictionary=$parentdir'/data/finetuning/dict.ltr.txt'
 
 ### Values to change end ###
 printf "Generating Custom Model"
-python generate_custom_model.py -f ${finetuned_model_path} -d ${dictionary} -o $custom_model_path
+python ../../utils/inference/generate_custom_model.py -f ${finetuned_model_path} -d ${dictionary} -o $custom_model_path
 printf "\nModel saved at :"${custom_model_path}"\n"
