@@ -46,29 +46,34 @@ pip install -e .
 # Usage
 
 ## For Pretraining
-Edit the path to data in the scripts/pretraining/prepare_data.sh file.To prepare the data:
+Edit the path to data in the scripts/pretraining/prepare_data.sh file. To prepare the data:
 ```bash
 cd scripts/pretraining/
 bash prepare_data.sh
 ```
-Edit the config/pretraining_base.yaml or config/pretraining_large.yaml for different parameter configurations.Check the required paths and values in start_pretraining_base.sh or start_pretraining_large.sh.To start run:
+Edit the config/pretraining_base.yaml or config/pretraining_large.yaml for different parameter configurations.Check the required paths and values in start_pretraining_base.sh or start_pretraining_large.sh. Refer to [config README](config/README.md)
+To start run:
 ```bash
 bash start_pretraining_base.sh
 ```
+Refer [this](scripts/pretraining/README.md) for pretraining parameters.
 
 ## For Finetuning
-Edit the path to data in the scripts/finetuning/prepare_data.sh file.To prepare the data:
+Edit the path to data in the scripts/finetuning/prepare_data.sh file. To prepare the data:
 ```bash
 cd scripts/finetuning/
 bash prepare_data.sh
 ```
-Edit the config/finetuning.yaml for different parameter configurations.Check the required paths and values in start_pretraining.sh.To start run:
+Edit the config/finetuning.yaml for different parameter configurations.Check the required paths and values in start_pretraining.sh. Refer to [config README](config/README.md)
+To start run:
 ```bash
-bash start_pretraining.sh
+bash start_finetuning.sh
 ```
 
+Refer [this](scripts/finetuning/README.md) for finetuning parameters.
+
 ## For Inference
-Edit the path to data in the scripts/finetuning/prepare_data.sh file. To prepare the test data run:
+Edit the path to data in the scripts/inference/prepare_data.sh file. To prepare the test data run:
 ```bash
 cd scripts/inference/
 bash prepare_data.sh
@@ -77,6 +82,8 @@ Edit the infer.sh file for required paths. To start inference run:
 ```bash
 bash infer.sh
 ```
+Refer [this](scripts/inference/README.md) for inference parameters.
+
 ## For Single File Inference
 To generate custom model, run: 
 ```bash
@@ -92,8 +99,9 @@ Edit the run_lm_pipeline.sh variables as required, then run:
 ```
 cd scripts/lm/
 bash run_lm_pipeline.sh
-
 ```
+Refer [this](scripts/lm/README.md) for LM pipeline.
+
 ## License
 
 fairseq(-py) is MIT-licensed. The license applies to the pre-trained models as well.
