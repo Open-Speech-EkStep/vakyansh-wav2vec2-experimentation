@@ -23,8 +23,8 @@ conda activate <env_name>
 cd vakyansh-wav2vec2-experimentation
 pip install -r requirements.txt
 
-### For fairseq setup(fairseq should be installed outside wav2vec-old repo)
-
+### For fairseq setup(fairseq should be installed outside vakyansh-wav2vec2-experimentation repo)
+cd ..
 git clone -b ekstep-wav2vec2 https://github.com/Open-Speech-EkStep/fairseq.git
 cd fairseq
 pip install -e .
