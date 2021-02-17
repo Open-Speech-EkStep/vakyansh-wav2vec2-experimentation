@@ -208,11 +208,10 @@ Refer [this](scripts/inference/README.md) for inference parameters.
 To generate custom model, run: 
 ```
 $ cd scripts/inference
-$ bash generate_model.sh
+$ bash generate_custom_model.sh
 ```
 To infer for single file, change path in single_file_inference.sh. Then run:
 ```
-$ cd scripts/lm
 $ bash single_file_inference.sh
 ```
 
