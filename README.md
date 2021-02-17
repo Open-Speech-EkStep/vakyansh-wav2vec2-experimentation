@@ -16,10 +16,12 @@
 
 ## Installation and Setup 
 ```
-git clone https://github.com/Open-Speech-EkStep/wav2vec-template-v1.git
+git clone https://github.com/Open-Speech-EkStep/vakyansh-wav2vec2-experimentation.git
 
 conda create --name <env_name> python=3.7
 conda activate <env_name>
+cd vakyansh-wav2vec2-experimentation
+pip install -r requirements.txt
 
 ### For fairseq setup(fairseq should be installed outside wav2vec-old repo)
 
