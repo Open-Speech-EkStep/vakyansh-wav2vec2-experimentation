@@ -22,6 +22,7 @@ conda create --name <env_name> python=3.7
 conda activate <env_name>
 cd vakyansh-wav2vec2-experimentation
 pip install -r requirements.txt
+pip install torch==1.7.1+cu101 torchvision==0.8.2+cu101 torchaudio==0.7.2 -f https://download.pytorch.org/whl/torch_stable.html
 
 ### For fairseq setup(fairseq should be installed outside vakyansh-wav2vec2-experimentation repo)
 cd ..
