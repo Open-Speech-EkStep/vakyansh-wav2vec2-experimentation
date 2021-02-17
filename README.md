@@ -44,10 +44,12 @@ make -j 16
 cd ..
 export KENLM_ROOT_DIR=$PWD
 export USE_CUDA=0 ## for cpu
+cd ..
 
+### Packages
+pip install packaging soundfile
 
 ### wav2letter
-
 git clone -b v0.2 https://github.com/facebookresearch/wav2letter.git
 cd wav2letter
 git checkout b1d1f89f586120a978a4666cffd45c55f0a2e564
