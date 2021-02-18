@@ -6,7 +6,7 @@ parentdir="$(dirname "$parentdir")"
 
 prep_scripts="../../utils/prep_scripts"
 destination_path=$parentdir'/data/inference'
-wav_path="/wav_dir_path/"
+wav_path="path_to_data/"
 txt_path=${wav_path}
 ### Values to change end ###
 

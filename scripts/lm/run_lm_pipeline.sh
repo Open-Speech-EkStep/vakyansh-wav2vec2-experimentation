@@ -11,7 +11,7 @@ combined_txt_file_save_path=${parentdir}"/lm/all_text.txt"
 #For kenlm
 top_k=500000
 input_txt_path=${combined_txt_file_save_path}
-output_path=${parentdir}"/lm/"
+output_path=${parentdir}"/lm"
 kenlm_bins="path_to_kenlm/build/bin"
 
 #For lexicon 
