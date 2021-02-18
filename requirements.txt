@@ -2,10 +2,7 @@ joblib==1.0.0
 tqdm==4.56.0
 numpy==1.20.0
 pandas==1.2.2
-torch==1.7.1+cu101
 progressbar33==2.4
 python_Levenshtein==0.12.2
 editdistance==0.3.1
 omegaconf==2.0.6
-swifter==1.0.7
-
