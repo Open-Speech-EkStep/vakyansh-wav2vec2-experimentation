@@ -15,6 +15,9 @@ train_name="train"
 
 python ${prep_scripts}/manifest.py ${wav_path} --dest ${destination_path} --ext wav --train-name ${train_name} --valid-percent ${valid_percentage} --jobs -1
 echo "Manifest Creation Done"
-echo "Starting analysis..."
+
+echo "Starting analysis of train tsv..."
 python ${analysis_scripts}/generate_wav_report_from_tsv.py --tsv ${destination_path}/${train_name}.tsv
+echo "Starting analysis of valid tsv..."
+python ${analysis_scripts}/generate_wav_report_from_tsv.py --tsv ${destination_path}/${valid_name}.tsv
 echo "Analysis done."
