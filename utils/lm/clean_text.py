@@ -1,5 +1,5 @@
-## Usage: python clean_text.py --inp_text_file /path/to/input/text/file --out_text_file /path/to/clean/text/file
-
+## Usage: python clean_text.py --inp-text-file /path/to/input/text/file --out-text-file /path/to/clean/text/file
+from tqdm import tqdm
 import re
 import argparse
 
@@ -9,7 +9,7 @@ def clean_text(args):
     '''
     with open(args.inp_text_file, mode='r', encoding='UTF-8') as inp_file, open(args.out_text_file, mode='w+', encoding='UTF-8') as out_file:
         lines = [line.strip() for line in inp_file.readlines()]
-        for line in lines:
+        for line in tqdm(lines):
             line = re.sub(r'[^\w\s]','',line, re.UNICODE) #replace punctuation words with ''
             if not re.search('[^ A-Za-z]+',line): # true for sentences contains only english alphabets
                 print(line.upper(), file=out_file)
