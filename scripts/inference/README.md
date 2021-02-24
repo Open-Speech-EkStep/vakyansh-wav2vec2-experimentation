@@ -26,6 +26,8 @@ Wav files and its corresponding text files should be present in the same folder 
 
 **lexicon_lst_path:** Lexicon file made using the vocab file generated while building language model
 
+**validation_dataset:** Name of the validation folder to be stored in the results 
+
 #### For single_file_inference
 
 **custom_model_path:** Single custom_model generated using generate_custom_model.sh, this doesn't require pretraining checkpoint
