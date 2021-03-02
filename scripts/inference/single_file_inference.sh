@@ -10,8 +10,9 @@ decoder="viterbi" # viterbi or kenlm
 cuda=True
 
 #If kenlm
-lexicon_lst_path=${parentdir}'/lm/lexicon.lst'
-lm_model_path=${parentdir}'/lm/lm.binary'
+lm_name=''
+lm_model_path=${parentdir}'/lm/'${lm_name}'/lm.binary'
+lexicon_lst_path=${parentdir}'/lm/'${lm_name}'/lexicon.lst'
 
 ### Values to change end ###
 

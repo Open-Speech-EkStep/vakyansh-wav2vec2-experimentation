@@ -5,18 +5,19 @@ parentdir="$(dirname "$parentdir")"
 ### Values to change,if any - start ###
 
 #for text file generation
-txt_files_dir="" #path to text file dir
-combined_txt_file_save_path=${parentdir}"/lm/all_text.txt"
+txt_files_dir="" #path to text files dir
+lm_name=""
+combined_txt_file_save_path=${parentdir}"/lm/"${lm_name}"/all_text.txt"
 
 #For kenlm
 top_k=500000
-input_txt_path=${combined_txt_file_save_path}
-output_path=${parentdir}"/lm"
-kenlm_bins="path_to_kenlm/build/bin"
+input_txt_file_path=${combined_txt_file_save_path}
+output_path=${parentdir}"/lm/"${lm_name}
+kenlm_bins=${parentdir}"../kenlm/build/bin"
 
 #For lexicon 
 vocab_txt_file=${output_path}"/vocab-"${top_k}".txt"
-path_to_save_lexicon=${parentdir}"/lm/lexicon.lst"
+path_to_save_lexicon=${output_path}"/lexicon.lst"
 
 # flags
 run_concatenate_text=1 # 0 for skipping, 1 for runnning
@@ -34,7 +35,7 @@ fi
 if [ "$run_generate_lm_vocab" == 1 ]; then
 	printf "\n** Generating kenlm **\n"
 	python ../../utils/lm/generate_lm.py --input_txt ${input_txt_path} --output_dir ${output_path} \
-		--top_k ${top_k} --kenlm_bins ${kenlm_bins} \
+		--top_k ${top_k} --kenlm_bins ${kenlm_bins}file_ \
 		--arpa_order 5 --max_arpa_memory "85%" --arpa_prune "0|0|1" \
 		--binary_a_bits 255 --binary_q_bits 8 --binary_type trie
 	printf "**Kenlm Generated at : "${output_path}
