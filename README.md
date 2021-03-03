@@ -151,7 +151,7 @@ root-directory
     * Bit Rate [kbit/s] = 256
     * Precision [bits] = 16
     * Audio length should be less than 30 seconds otherwise it will be ignored during data preparation
-    * After scripts/finetuning/prepare_data.sh is run, analysis will be generated which can be used to min/max_sample_size
+    * After scripts/finetuning/prepare_data.sh is run, analysis will be generated which can be used to tune min/max_sample_size in the config files
 * For Text Files
     * Corresponding text file of each audio file must be on the same directory as its audio
     * Text file should not contain any punctuation characters
