@@ -25,6 +25,7 @@ run_generate_lm_vocab=1 # 0 for skipping, 1 for running
 run_make_lexicon_lst=1 # 0 for skipping, 1 for running
 
 ### Values to change - end ###
+sudo mkdir ${output_path}
 
 if [ "$run_concatenate_text" == 1 ]; then
 	printf "** Generating Combined Text file **\n"
