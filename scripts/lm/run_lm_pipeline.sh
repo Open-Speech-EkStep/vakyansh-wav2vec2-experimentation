@@ -13,7 +13,7 @@ combined_txt_file_save_path=${parentdir}"/lm/"${lm_name}"/all_text.txt"
 top_k=500000
 input_txt_file_path=${combined_txt_file_save_path}
 output_path=${parentdir}"/lm/"${lm_name}
-kenlm_bins=${parentdir}"../kenlm/build/bin"
+kenlm_bins=${parentdir}"/../kenlm/build/bin"
 
 #For lexicon 
 vocab_txt_file=${output_path}"/vocab-"${top_k}".txt"
@@ -34,8 +34,8 @@ fi
 
 if [ "$run_generate_lm_vocab" == 1 ]; then
 	printf "\n** Generating kenlm **\n"
-	python ../../utils/lm/generate_lm.py --input_txt ${input_txt_path} --output_dir ${output_path} \
-		--top_k ${top_k} --kenlm_bins ${kenlm_bins}file_ \
+	python ../../utils/lm/generate_lm.py --input_txt ${input_txt_file_path} --output_dir ${output_path} \
+		--top_k ${top_k} --kenlm_bins ${kenlm_bins} \
 		--arpa_order 5 --max_arpa_memory "85%" --arpa_prune "0|0|1" \
 		--binary_a_bits 255 --binary_q_bits 8 --binary_type trie
 	printf "**Kenlm Generated at : "${output_path}
