@@ -55,7 +55,7 @@ if [ "${run_in_nohup}" = 1 ]; then
     --w2v-path ${pretrained_model_path}   --labels ltr \
     --apply-mask --mask-selection static --mask-other 0 --mask-length 10 --mask-prob 0.5 \
     --layerdrop 0.1 --mask-channel-selection static --mask-channel-other 0 --mask-channel-length 64 \
-    --mask-channel-prob 0.5 --zero-infinity  --feature-grad-mult 0.0 --freeze-finetune-updates 500 \
+    --mask-channel-prob 0.5 --zero-infinity  --feature-grad-mult 0.0 --freeze-finetune-updates ${freeze_finetune_updates} \
     --validate-after-updates 1000 --optimizer adam --adam-betas '(0.9, 0.98)' --adam-eps 1e-08 \
     --lr 2e-05 --lr-scheduler tri_stage --warmup-steps 8000 --hold-steps 32000 --decay-steps 40000 \
     --final-lr-scale 0.05 --final-dropout 0.0 --dropout 0.0 --activation-dropout 0.1 --criterion ctc \
@@ -74,7 +74,7 @@ else
     --w2v-path ${pretrained_model_path} --labels ltr \
     --apply-mask --mask-selection static --mask-other 0 --mask-length 10 --mask-prob 0.5 \
     --layerdrop 0.1 --mask-channel-selection static --mask-channel-other 0 --mask-channel-length 64 \
-    --mask-channel-prob 0.5 --zero-infinity --feature-grad-mult 0.0 --freeze-finetune-updates 500 \
+    --mask-channel-prob 0.5 --zero-infinity --feature-grad-mult 0.0 --freeze-finetune-updates ${freeze_finetune_updates} \
     --validate-after-updates 1000 --optimizer adam --adam-betas '(0.9, 0.98)' --adam-eps 1e-08 \
     --lr 2e-05 --lr-scheduler tri_stage --warmup-steps 8000 --hold-steps 32000 --decay-steps 40000 \
     --final-lr-scale 0.05 --final-dropout 0.0 --dropout 0.0 --activation-dropout 0.1 --criterion ctc \

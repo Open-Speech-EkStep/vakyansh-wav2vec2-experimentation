@@ -4,14 +4,14 @@ parentdir="$(dirname "$parentdir")"
 
 ### Values to change,if any - start ###
 
+lm_name=""
 #for text file generation
 txt_files_dir="" #path to text files dir
-lm_name=""
 combined_txt_file_save_path=${parentdir}"/lm/"${lm_name}"/all_text.txt"
 
 #For kenlm
 top_k=500000
-input_txt_file_path=${combined_txt_file_save_path}
+input_txt_file_path= ${parentdir}"/finetuning/train.wrd" 
 output_path=${parentdir}"/lm/"${lm_name}
 kenlm_bins=${parentdir}"/../kenlm/build/bin"
 
@@ -20,12 +20,12 @@ vocab_txt_file=${output_path}"/vocab-"${top_k}".txt"
 path_to_save_lexicon=${output_path}"/lexicon.lst"
 
 # flags
-run_concatenate_text=1 # 0 for skipping, 1 for runnning
+run_concatenate_text=0 # 0 for skipping, 1 for runnning
 run_generate_lm_vocab=1 # 0 for skipping, 1 for running
 run_make_lexicon_lst=1 # 0 for skipping, 1 for running
 
 ### Values to change - end ###
-sudo mkdir ${output_path}
+mkdir ${output_path}
 
 if [ "$run_concatenate_text" == 1 ]; then
 	printf "** Generating Combined Text file **\n"
