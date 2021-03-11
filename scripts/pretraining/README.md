@@ -1,18 +1,16 @@
-### Input Parameters description
+## Input Parameters description
 
 ---
 
-#### For prepare_data
+### For prepare_data
 
 **wav_path:** Directory where your data(wav files) is present, if wav files are present in multiple folders put them under one parent directory
 
-**prep_scripts:** Path for utility scripts
-
 **valid_percentage:** Percentage of data to be used for validation purpose. eg - 0.04 if 4%
 
-#### For start_pretraining_[base/large]
+### For start_pretraining_[base/large]
 
-**config_file:** This file contains configurable parameters for pretraining
+**config_name:** This file contains configurable parameters for pretraining
 
 **gpus:** Number of gpus to use
 

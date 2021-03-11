@@ -1,23 +1,24 @@
-### Input Parameters description
+## Input Parameters description
 
 ---
 
-#### For prepare_data
+### For prepare_data
 
 Wav files and its corresponding text files should be present in the same folder with same name. eg - audio_id/audio.wav, audio_id/audio.txt
 
-**wav_path:** Directory where your data(wav files) is present, if wav files are present in multiple folders put them under one parent directory
+**make_valid_from_train** : If valid set is already present in different folder make this 0 else make it 1 to extract valid percentage from train data 
 
-**txt_path:** Directory where your data(text files) is present, if text files are present in multiple folders put them under one parent directory
+**train_wav_path:** Directory where your train data(wav files) is present, if wav files are present in multiple folders put them under one parent directory
+
+**valid_wav_path:** Used only when 'make_valid_from_train' is 0; directory where your valid data(wav files) is present, if wav files are present in multiple folders put them under one parent directory
+
+**valid_percentage:** Used only when 'make_valid_from_train' is 1; percentage of data to be used for validation purpose. eg - 0.04 if 4%
 
 **prep_scripts:** Path for utility scripts
 
-**valid_percentage:** Percentage of data to be used for validation purpose. eg - 0.04 if 4%
+### For start_finetuning
 
-
-#### For start_finetuning
-
-**config_file:** This file contains configurable parameters for finetuning
+**config_name:** This file contains configurable parameters for finetuning
 
 **gpus:** Number of gpus to use
 

@@ -1,22 +1,29 @@
-### Input Parameters description
+## Input Parameters description
 
 ---
 
-#### For prepare_data
+### For prepare_data
 
 Wav files and its corresponding text files should be present in the same folder with same name. eg - audio_id/audio.wav, audio_id/audio.txt
 
-**wav_path:** Directory where your data(wav files) is present, if wav files are present in multiple folders put them under one parent directory
+**inference_data_name:** Name of the folder where results of prepare_data.sh will be saved
 
-**txt_path:** Directory where your data(text files) is present, if text files are present in multiple folders put them under one parent directory
+**wav_path:** Directory where your data(wav files) is present, if wav files are present in multiple folders put them under one parent directory
 
 **prep_scripts:** Path for utility scripts
 
 **valid_percentage:** Percentage of data to be used for validation purpose. eg - 0.04 if 4%
 
-#### For batch infer
+### For batch infer
 
-**w2l_decoder_viterbi:** Switch decoding method 1 for viterbi, 0 for kenlm(if you have language model)
+**w2l_decoder_viterbi:** Switch decoding method to 1 for viterbi, 0 for kenlm(for decoding with LM)
+
+**inference_data_name:** Name of the folder where results of prepare_data.sh were saved.
+A folder with the same name will be created in the results directory as well containing predictions.
+
+**beam:** Set beam according to need for decoding(viterbi/kenlm).
+
+**lm_name:** Name of the folder containing the lm files(eg: lm.binary etc)
 
 **data_path:** Path where tsv is present after running prepare_data.sh
 
@@ -28,7 +35,7 @@ Wav files and its corresponding text files should be present in the same folder 
 
 **validation_dataset:** Name of the validation folder to be stored in the results 
 
-#### For single_file_inference
+### For single_file_inference
 
 **custom_model_path:** Single custom_model generated using generate_custom_model.sh, this doesn't require pretraining checkpoint
 
