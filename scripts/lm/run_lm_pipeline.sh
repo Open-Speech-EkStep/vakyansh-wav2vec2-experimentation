@@ -3,10 +3,10 @@ parentdir="$(dirname "$dir")"
 parentdir="$(dirname "$parentdir")"
 
 ### Values to change,if any - start ###
-lm_name = ""
+lm_name=""
 #for text file generation
 txt_files_dir="" #path to text file dir
-combined_txt_file_save_path=""
+combined_txt_file_save_path=${parentdir}"/lm/"${lm_name}"/all_text.txt"
 
 #For kenlm
 top_k=500000
