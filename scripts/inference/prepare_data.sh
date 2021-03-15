@@ -11,6 +11,7 @@ destination_path=$parentdir'/data/inference/'${inference_data_name}
 
 finetuning_dict=$parentdir'/data/finetuning/dict.ltr.txt'
 txt_path=${wav_path}
+analysis_scripts="../../utils/analysis"
 
 mkdir ${destination_path}
 
