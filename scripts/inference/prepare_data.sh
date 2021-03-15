@@ -12,6 +12,8 @@ destination_path=$parentdir'/data/inference/'${inference_data_name}
 finetuning_dict=$parentdir'/data/finetuning/dict.ltr.txt'
 txt_path=${wav_path}
 
+mkdir ${destination_path}
+
 python ${prep_scripts}/manifest.py ${wav_path} --dest ${destination_path} --ext wav --train-name test --valid-percent 0 --jobs -1
 echo "Manifest Creation Done"
 
