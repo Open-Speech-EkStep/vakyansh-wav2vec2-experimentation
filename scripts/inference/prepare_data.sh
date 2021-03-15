@@ -23,10 +23,16 @@ echo "Word file generated"
 python ${prep_scripts}/dict_and_lexicon_maker.py --wrd ${destination_path}/test.wrd --lexicon ${destination_path}/lexicon.lst --dict ${destination_path}/dict.ltr.txt
 echo "Dict file generated"
 
+echo "Starting dictionary analysis of inference dictionary from "${destination_path}/dict.ltr.txt" for any punctuation marks"
+python ${analysis_scripts}/generate_dict_analysis.py --dict ${destination_path}/dict.ltr.txt
 # echo "Renaming dict.ltr.txt made from ", ${txt_path}, "to: test_dict.ltr.txt"
 # mv dict.ltr.txt test_dict.ltr.txt
 
 echo "Copying ",${finetuning_dict}," used for training to ", ${destination_path}
 cp ${finetuning_dict} ${destination_path}
+
+echo "Starting dictionary analysis of finetuning dictionary "${destination_path}/dict.ltr.txt" for any punctuation marks"
+python ${analysis_scripts}/generate_dict_analysis.py --dict ${destination_path}/dict.ltr.txt
+
 
 

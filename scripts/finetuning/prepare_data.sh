@@ -45,9 +45,12 @@ fi
 python ${prep_scripts}/dict_and_lexicon_maker.py --wrd ${destination_path}/${train_name}.wrd --lexicon ${destination_path}/lexicon.lst --dict ${destination_path}/dict.ltr.txt
 echo "Dict file generated from train data"
 
+echo "Starting dictionary analysis from "${destination_path}/dict.ltr.txt" for any punctuation marks"
+python ${analysis_scripts}/generate_dict_analysis.py --dict ${destination_path}/dict.ltr.txt
+
 echo "Starting analysis of train tsv..."
 python ${analysis_scripts}/generate_wav_report_from_tsv.py --tsv ${destination_path}/${train_name}.tsv
+
 echo "Starting analysis of valid tsv..."
 python ${analysis_scripts}/generate_wav_report_from_tsv.py --tsv ${destination_path}/${valid_name}.tsv
 echo "Analysis done."
-
