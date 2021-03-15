@@ -3,15 +3,14 @@ parentdir="$(dirname "$dir")"
 parentdir="$(dirname "$parentdir")"
 
 ### Values to change,if any - start ###
-
-lm_name=""
+lm_name = ""
 #for text file generation
-txt_files_dir="" #path to text files dir
-combined_txt_file_save_path=${parentdir}"/lm/"${lm_name}"/all_text.txt"
+txt_files_dir="" #path to text file dir
+combined_txt_file_save_path=""
 
 #For kenlm
 top_k=500000
-input_txt_file_path= ${parentdir}"/data/finetuning/train.wrd" 
+input_txt_file_path=${parentdir}"/data/finetuning/train.wrd"
 output_path=${parentdir}"/lm/"${lm_name}
 kenlm_bins=${parentdir}"/../kenlm/build/bin"
 
@@ -25,7 +24,7 @@ run_generate_lm_vocab=1 # 0 for skipping, 1 for running
 run_make_lexicon_lst=1 # 0 for skipping, 1 for running
 
 ### Values to change - end ###
-mkdir ${output_path}
+mkdir ${output_path} 
 
 if [ "$run_concatenate_text" == 1 ]; then
 	printf "** Generating Combined Text file **\n"
@@ -38,7 +37,7 @@ if [ "$run_generate_lm_vocab" == 1 ]; then
 	python ../../utils/lm/generate_lm.py --input_txt ${input_txt_file_path} --output_dir ${output_path} \
 		--top_k ${top_k} --kenlm_bins ${kenlm_bins} \
 		--arpa_order 5 --max_arpa_memory "85%" --arpa_prune "0|0|1" \
-		--binary_a_bits 255 --binary_q_bits 8 --binary_type trie
+		--binary_a_bits 255 --binary_q_bits 8 --binary_type trie 
 	printf "**Kenlm Generated at : "${output_path}
 fi
 
