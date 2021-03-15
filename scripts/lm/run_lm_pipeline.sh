@@ -11,7 +11,7 @@ combined_txt_file_save_path=${parentdir}"/lm/"${lm_name}"/all_text.txt"
 
 #For kenlm
 top_k=500000
-input_txt_file_path= ${parentdir}"/finetuning/train.wrd" 
+input_txt_file_path= ${parentdir}"/data/finetuning/train.wrd" 
 output_path=${parentdir}"/lm/"${lm_name}
 kenlm_bins=${parentdir}"/../kenlm/build/bin"
 
