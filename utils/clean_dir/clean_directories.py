@@ -23,7 +23,7 @@ def remove_file(file):
         os.unlink(file)
         print('File removed: ', file)
     except Exception as e:
-            print('Failed to delete %s. Reason: %s' % (file, e))
+        print('Failed to delete %s. Reason: %s' % (file, e))
     
 def get_permission_and_dir_to_delete(folder):
     print('*'*50)
