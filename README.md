@@ -21,6 +21,8 @@ git clone https://github.com/Open-Speech-EkStep/vakyansh-wav2vec2-experimentatio
 conda create --name <env_name> python=3.7
 conda activate <env_name>
 cd vakyansh-wav2vec2-experimentation
+### Packages
+pip install packaging soundfile swifter
 pip install -r requirements.txt
 pip install torch==1.7.1+cu101 torchvision==0.8.2+cu101 torchaudio==0.7.2 -f https://download.pytorch.org/whl/torch_stable.html
 
@@ -49,8 +51,6 @@ export KENLM_ROOT_DIR=$PWD
 export USE_CUDA=0 ## for cpu
 cd ..
 
-### Packages
-pip install packaging soundfile
 
 ### wav2letter
 git clone -b v0.2 https://github.com/facebookresearch/wav2letter.git
