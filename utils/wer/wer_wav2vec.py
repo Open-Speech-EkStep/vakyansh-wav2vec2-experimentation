@@ -114,7 +114,7 @@ def merge_with_tsv(df, tsv):
     #print(tsv_file_2)
     #header = str(tsv_file_2.iloc[0,0]) + '/'#.split(' ')[0]
     header = tsv_file_2.columns[0] + '/'
-    print(header)
+    #print(header)
     tsv = tsv_file#.iloc[1:]
     #print(tsv)
     df['path'] = df['ix'].apply(lambda x: tsv.iloc[x,0])
