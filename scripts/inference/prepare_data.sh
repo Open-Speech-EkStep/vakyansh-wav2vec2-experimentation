@@ -3,8 +3,8 @@ parentdir="$(dirname "$dir")"
 parentdir="$(dirname "$parentdir")"
 
 ### Values to change -start ###
-inference_data_name=""
-wav_path="path_to_data/"
+inference_data_name="hindi"
+wav_path="/home/harveen.chadha/files/transcriptions/wav"
 prep_scripts="../../utils/prep_scripts"
 destination_path=$parentdir'/data/inference/'${inference_data_name}
 ### Values to change end ###
