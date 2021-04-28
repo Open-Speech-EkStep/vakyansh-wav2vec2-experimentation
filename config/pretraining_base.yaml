@@ -1,7 +1,0 @@
-gpus_to_simulate : 64 
-num_workers : 6
-max_tokens : 1400000 
-max_update : 400000 
-max_sample_size : 250000
-min_sample_size : 32000
-
