@@ -18,49 +18,46 @@ We are releasing pretrained models in various Indic Languages. Please head over 
 <!--te-->
 
 ## Installation and Setup 
-```
-git clone https://github.com/Open-Speech-EkStep/vakyansh-wav2vec2-experimentation.git
+### Create an Environment
 
+```
 conda create --name <env_name> python=3.7
 conda activate <env_name>
-cd vakyansh-wav2vec2-experimentation
-### Packages
-pip install packaging soundfile swifter
-pip install -r requirements.txt
-pip install torch==1.7.1+cu101 torchvision==0.8.2+cu101 torchaudio==0.7.2 -f https://download.pytorch.org/whl/torch_stable.html
 
-### For fairseq setup(fairseq should be installed outside vakyansh-wav2vec2-experimentation repo)
-cd ..
-git clone -b ekstep-wav2vec2 https://github.com/Open-Speech-EkStep/fairseq.git
-cd fairseq
-pip install -e .
-
-### install other libraries
-
-### For Kenlm, openblas
-
-cd ..
 sudo apt-get install liblzma-dev libbz2-dev libzstd-dev libsndfile1-dev libopenblas-dev libfftw3-dev libgflags-dev libgoogle-glog-dev
 sudo apt install build-essential cmake libboost-system-dev libboost-thread-dev libboost-program-options-dev libboost-test-dev libeigen3-dev zlib1g-dev libbz2-dev liblzma-dev
 
+pip install packaging
+```
 
+### Install fairseq
+```
+git clone https://github.com/pytorch/fairseq
+cd fairseq
+pip install -e .
+cd ..
+```
+
+### Install KenLM
+```
 git clone https://github.com/kpu/kenlm.git
 cd kenlm
 mkdir -p build && cd build
 cmake .. 
 make -j 16
 cd ..
-export KENLM_ROOT_DIR=$PWD
-export USE_CUDA=0 ## for cpu
+export KENLM_ROOT=$PWD
+# export USE_CUDA=0 ## for cpu
 cd ..
+```
 
-
-### wav2letter
-git clone -b v0.2 https://github.com/facebookresearch/wav2letter.git
-cd wav2letter
-git checkout b1d1f89f586120a978a4666cffd45c55f0a2e564
-cd bindings/python
-pip install -e .
+### Install Flashlight
+```
+git clone https://github.com/flashlight/flashlight.git
+cd flashlight/bindings/python
+export USE_MKL=0
+python setup.py install
+# python criterion_example.py  ## to test
 
 ```
 
