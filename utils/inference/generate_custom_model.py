@@ -54,11 +54,12 @@ def load_model(model_path, target_dict, pretrained_model):
     
     if w2v.get("args", None) is not None:
         args = convert_namespace_to_omegaconf(w2v["args"])["model"]
+        args['w2v_args']=None
     else:
         args = convert_namespace_to_omegaconf(w2v["cfg"]['model'])['model']
-        args['w2v_path'] = pretrained_model
+    args['w2v_path'] = pretrained_model
         
-        
+    #print(args)    
     model = Wav2VecCtc.build_model(args, target_dict)
     
     model.load_state_dict(w2v["model"], strict=True)
@@ -69,6 +70,7 @@ def load_model(model_path, target_dict, pretrained_model):
 def generate_custom_model(finetuned_path,pretrained_model, dictionary_path,final_model_path):
     target_dict = Dictionary.load(dictionary_path)
     model = load_model(finetuned_path, target_dict, pretrained_model)
+    #print(model)
     torch.save(model,final_model_path)
 
     
@@ -77,7 +79,7 @@ def generate_custom_model(finetuned_path,pretrained_model, dictionary_path,final
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Convert default models to combined model')
     parser.add_argument('-f', '--finetuned_model_path', type=str, help="Fine-tuned Model path")
-    parser.add_argument('-p', '--pretrained_model_path', type=str, help="Pre-tuned Model path")
+    parser.add_argument('-p', '--pretrained_model_path',required=False, type=str, help="Pre-tuned Model path")
     parser.add_argument('-d', '--dict', type=str, help="Dict path")
     parser.add_argument('-o', '--output_path', type=str, default='final_model.pt', help= "Final model path")
     args_local = parser.parse_args()

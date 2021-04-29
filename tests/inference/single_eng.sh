@@ -3,15 +3,15 @@ parentdir="$(dirname "$dir")"
 parentdir="$(dirname "$parentdir")"
 
 ### Values to change, if any ###
-custom_model_path=$parentdir'/checkpoints/custom_model/final_model.pt'
-dictionary=$parentdir'/data/finetuning/dict.ltr.txt'
-wav_file_path="" # path to single wav file
+custom_model_path=$parentdir'/checkpoints/custom_model_english/final_model.pt'
+dictionary=$parentdir'/checkpoints/custom_model_english/dict.ltr.txt'
+wav_file_path="/home/harveen.chadha/files/libri_test_clean/1089/134686/1089-134686-0010.wav" # path to single wav file
 decoder="viterbi" # viterbi or kenlm
 cuda=False
 half=True
 
 #If kenlm
-lm_name=''
+lm_name='english'
 lm_model_path=${parentdir}'/lm/'${lm_name}'/lm.binary'
 lexicon_lst_path=${parentdir}'/lm/'${lm_name}'/lexicon.lst'
 

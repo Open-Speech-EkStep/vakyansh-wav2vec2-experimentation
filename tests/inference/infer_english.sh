@@ -5,27 +5,28 @@ parentdir="$(dirname "$parentdir")"
 
 ### Values to change -start ###
 
-w2l_decoder_viterbi=1 # 1 for viterbi, 0 for kenlm
-inference_data_name=''
+w2l_decoder_viterbi=0 # 1 for viterbi, 0 for kenlm
+inference_data_name='english'
 beam=128 # 128 or 1024
 subset='test'
 
 # FOR LM MODEL
-lm_name=''
+lm_name='english'
 lm_model_path=${parentdir}'/lm/'${lm_name}'/lm.binary'
 lexicon_lst_path=${parentdir}'/lm/'${lm_name}'/lexicon.lst'
 
 # WARNING ONLY FOR OLD MODELS
 
-#pretrained_model_path=''
-pretrained_model_path=${parentdir}'/checkpoints/pretraining/checkpoint_best.pt'
+pretrained_model_path=''
+#pretrained_model_path=${parentdir}'/checkpoints/pretraining/wav2vec_small.pt'
 
 # WARNING END
 
 
 ### Values to change end ###
 
-checkpoint_path=${parentdir}'/checkpoints/finetuning/checkpoint_best.pt'
+wav2vec_repo_path='/opt/wav2vec/fairseq/'
+checkpoint_path=${parentdir}'/checkpoints/finetuning/wav2vec_small_960h.pt'
 result_path=${parentdir}'/results/'${inference_data_name}
 data_path=${parentdir}'/data/inference/'${inference_data_name}
 
@@ -41,8 +42,8 @@ if [ "${w2l_decoder_viterbi}" = 1 ]; then
   --lm-weight 2 --word-score -1 --sil-weight 0 --criterion ctc --labels ltr --max-tokens 4000000 \
   --post-process letter
 
-  python ../../utils/wer/wer_wav2vec.py -o ${result_path}/ref.word-checkpoint_best.pt-test.txt -p ${result_path}/hypo.word-checkpoint_best.pt-test.txt \
-  -t ${data_path}/${subset}.tsv -s save -n ${result_path}/sentence_wise_wer.csv
+  #python ../../utils/wer/wer_wav2vec.py -o ${result_path}/ref.word-checkpoint_best.pt-test.txt -p ${result_path}/hypo.word-checkpoint_best.pt-test.txt \
+  #-t ${data_path}/${subset}.tsv -s save -n ${result_path}/sentence_wise_wer.csv
 
 else
 
@@ -51,6 +52,6 @@ else
   --lm-weight 2 --word-score -1 --sil-weight 0 --criterion ctc --labels ltr --max-tokens 4000000 --lexicon ${lexicon_lst_path} \
   --post-process letter --beam ${beam}
 
-  python ../../utils/wer/wer_wav2vec.py -o ${result_path}_kenlm_${beam}/ref.word-checkpoint_best.pt-test.txt -p ${result_path}_kenlm_${beam}/hypo.word-checkpoint_best.pt-test.txt \
-  -t ${data_path}/${subset}.tsv -s save -n ${result_path}_kenlm_${beam}/sentence_wise_wer.csv
+  #python ../../utils/wer/wer_wav2vec.py -o ${result_path}_kenlm_${beam}/ref.word-checkpoint_best.pt-test.txt -p ${result_path}_kenlm_${beam}/hypo.word-checkpoint_best.pt-test.txt \
+  #-t ${data_path}/${subset}.tsv -s save -n ${result_path}_kenlm_${beam}/sentence_wise_wer.csv
 fi
