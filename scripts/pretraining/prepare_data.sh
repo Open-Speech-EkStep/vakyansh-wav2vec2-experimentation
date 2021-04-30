@@ -3,15 +3,16 @@ parentdir="$(dirname "$dir")"
 parentdir="$(dirname "$parentdir")"
 
 ### Values to change -start ###
-wav_path="path_to_data"
-valid_percentage=0.04
+wav_path="/home/harveen.chadha/files/transcriptions/wav"
+valid_percentage=0.1
+### Values to change -end ###
+
 utils="../../utils"
 prep_scripts=$utils"/prep_scripts/"
 analysis_scripts=$utils"/analysis/"
 destination_path=$parentdir"/data/pretraining"
 train_name="train"
 valid_name="valid"
-### Values to change end ###
 
 python ${prep_scripts}/manifest.py ${wav_path} --dest ${destination_path} --ext wav --train-name ${train_name} --valid-percent ${valid_percentage} --jobs -1
 echo "Manifest Creation Done"

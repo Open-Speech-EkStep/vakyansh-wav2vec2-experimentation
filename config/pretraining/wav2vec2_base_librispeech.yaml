@@ -3,12 +3,13 @@
 common:
   fp16: true
   log_format: json
-  log_interval: 200
+  log_interval: 1
 
 checkpoint:
   save_interval_updates: 25000
   keep_interval_updates: 1
   no_epoch_checkpoints: true
+  reset_optimizer: true
 
 task:
   _name: audio_pretraining

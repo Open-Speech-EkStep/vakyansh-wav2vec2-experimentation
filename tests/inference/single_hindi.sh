@@ -3,11 +3,11 @@ parentdir="$(dirname "$dir")"
 parentdir="$(dirname "$parentdir")"
 
 ### Values to change, if any ###
-custom_model_path=$parentdir'/checkpoints/custom_model_hindi/final_model.pt'
-dictionary=$parentdir'/checkpoints/custom_model_hindi/dict.ltr.txt'
+custom_model_path=$parentdir'/checkpoints/custom_model_hindi_new/final_model.pt'
+dictionary=$parentdir'/checkpoints/custom_model_hindi_new/dict.ltr.txt'
 wav_file_path="/home/harveen.chadha/files/code/004-M-23_001.wav" # path to single wav file
-decoder="kenlm" # viterbi or kenlm
-cuda=False
+decoder="viterbi" # viterbi or kenlm
+cuda=True
 half=True
 
 #If kenlm

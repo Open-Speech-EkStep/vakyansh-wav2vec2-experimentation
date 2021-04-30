@@ -49,15 +49,27 @@ class Wav2VecCtc(BaseFairseqModel):
         return x
 
 
+from argparse import Namespace
 def load_model(model_path, target_dict, pretrained_model):
     w2v = torch.load(model_path) #,map_location=torch.device("cpu"))
+    #args = w2v.get("args", None) or w2v["cfg"].model
     
     if w2v.get("args", None) is not None:
+        print('Here')
         args = convert_namespace_to_omegaconf(w2v["args"])["model"]
         args['w2v_args']=None
     else:
+        print('here2')
         args = convert_namespace_to_omegaconf(w2v["cfg"]['model'])['model']
-    args['w2v_path'] = pretrained_model
+        if not args:
+            print('here3')
+            args = w2v["cfg"]['model']
+            args['w2v_args']=None
+            args['w2v_path'] = pretrained_model
+            args = Namespace(**args)
+    
+    print(args)
+    #args['w2v_path'] = pretrained_model
         
     #print(args)    
     model = Wav2VecCtc.build_model(args, target_dict)

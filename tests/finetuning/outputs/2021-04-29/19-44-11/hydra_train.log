@@ -1,0 +1,280 @@
+[2021-04-29 19:44:19,825][fairseq_cli.train][INFO] - {'_name': None, 'common': {'_name': None, 'no_progress_bar': False, 'log_interval': 1, 'log_format': 'json', 'log_file': None, 'tensorboard_logdir': '/home/harveen.chadha/vakyansh-wav2vec2-experimentation/logs/finetuning/tensorboard', 'wandb_project': None, 'azureml_logging': False, 'seed': 1, 'cpu': False, 'tpu': False, 'bf16': False, 'memory_efficient_bf16': False, 'fp16': True, 'memory_efficient_fp16': False, 'fp16_no_flatten_grads': False, 'fp16_init_scale': 128, 'fp16_scale_window': None, 'fp16_scale_tolerance': 0.0, 'min_loss_scale': 0.0001, 'threshold_loss_scale': None, 'user_dir': None, 'empty_cache_freq': 0, 'all_gather_list_size': 16384, 'model_parallel_size': 1, 'quantization_config_path': None, 'profile': False, 'reset_logging': False, 'suppress_crashes': False, 'use_plasma_view': False, 'plasma_path': '/tmp/plasma'}, 'common_eval': {'_name': None, 'path': None, 'post_process': None, 'quiet': False, 'model_overrides': '{}', 'results_path': None}, 'distributed_training': {'_name': None, 'distributed_world_size': 4, 'distributed_rank': 0, 'distributed_backend': 'nccl', 'distributed_init_method': 'tcp://localhost:12032', 'distributed_port': -1, 'device_id': 0, 'distributed_no_spawn': False, 'ddp_backend': 'legacy_ddp', 'bucket_cap_mb': 25, 'fix_batches_to_gpus': False, 'find_unused_parameters': False, 'fast_stat_sync': False, 'heartbeat_timeout': -1, 'broadcast_buffers': False, 'slowmo_momentum': None, 'slowmo_algorithm': 'LocalSGD', 'localsgd_frequency': 3, 'nprocs_per_node': 4, 'pipeline_model_parallel': False, 'pipeline_balance': None, 'pipeline_devices': None, 'pipeline_chunks': 0, 'pipeline_encoder_balance': None, 'pipeline_encoder_devices': None, 'pipeline_decoder_balance': None, 'pipeline_decoder_devices': None, 'pipeline_checkpoint': 'never', 'zero_sharding': 'none', 'fp16': True, 'memory_efficient_fp16': False, 'tpu': False, 'no_reshard_after_forward': False, 'fp32_reduce_scatter': False, 'cpu_offload': False, 'distributed_num_procs': 4}, 'dataset': {'_name': None, 'num_workers': 4, 'skip_invalid_size_inputs_valid_test': True, 'max_tokens': 1000000, 'batch_size': None, 'required_batch_size_multiple': 8, 'required_seq_len_multiple': 1, 'dataset_impl': None, 'data_buffer_size': 10, 'train_subset': 'train', 'valid_subset': 'valid', 'validate_interval': 1, 'validate_interval_updates': 0, 'validate_after_updates': 0, 'fixed_validation_seed': None, 'disable_validation': False, 'max_tokens_valid': 1000000, 'batch_size_valid': None, 'max_valid_steps': None, 'curriculum': 0, 'gen_subset': 'test', 'num_shards': 1, 'shard_id': 0}, 'optimization': {'_name': None, 'max_epoch': 0, 'max_update': 20000, 'stop_time_hours': 0.0, 'clip_norm': 0.0, 'sentence_avg': True, 'update_freq': [6], 'lr': [5e-05], 'stop_min_lr': -1.0, 'use_bmuf': False}, 'checkpoint': {'_name': None, 'save_dir': '/home/harveen.chadha/vakyansh-wav2vec2-experimentation/checkpoints/finetuning', 'restore_file': '/home/harveen.chadha/vakyansh-wav2vec2-experimentation/checkpoints/finetuning/checkpoint_last.pt', 'finetune_from_model': None, 'reset_dataloader': False, 'reset_lr_scheduler': False, 'reset_meters': False, 'reset_optimizer': False, 'optimizer_overrides': '{}', 'save_interval': 1, 'save_interval_updates': 0, 'keep_interval_updates': -1, 'keep_interval_updates_pattern': -1, 'keep_last_epochs': -1, 'keep_best_checkpoints': -1, 'no_save': False, 'no_epoch_checkpoints': True, 'no_last_checkpoints': False, 'no_save_optimizer_state': False, 'best_checkpoint_metric': 'wer', 'maximize_best_checkpoint_metric': False, 'patience': -1, 'checkpoint_suffix': '', 'checkpoint_shard_count': 1, 'load_checkpoint_on_all_dp_ranks': False, 'write_checkpoints_asynchronously': False, 'model_parallel_size': 1}, 'bmuf': {'_name': None, 'block_lr': 1.0, 'block_momentum': 0.875, 'global_sync_iter': 50, 'warmup_iterations': 500, 'use_nbm': False, 'average_sync': False, 'distributed_world_size': 4}, 'generation': {'_name': None, 'beam': 5, 'nbest': 1, 'max_len_a': 0.0, 'max_len_b': 200, 'min_len': 1, 'match_source_len': False, 'unnormalized': False, 'no_early_stop': False, 'no_beamable_mm': False, 'lenpen': 1.0, 'unkpen': 0.0, 'replace_unk': None, 'sacrebleu': False, 'score_reference': False, 'prefix_size': 0, 'no_repeat_ngram_size': 0, 'sampling': False, 'sampling_topk': -1, 'sampling_topp': -1.0, 'constraints': None, 'temperature': 1.0, 'diverse_beam_groups': -1, 'diverse_beam_strength': 0.5, 'diversity_rate': -1.0, 'print_alignment': None, 'print_step': False, 'lm_path': None, 'lm_weight': 0.0, 'iter_decode_eos_penalty': 0.0, 'iter_decode_max_iter': 10, 'iter_decode_force_max_iter': False, 'iter_decode_with_beam': 1, 'iter_decode_with_external_reranker': False, 'retain_iter_history': False, 'retain_dropout': False, 'retain_dropout_modules': None, 'decoding_format': None, 'no_seed_provided': False}, 'eval_lm': {'_name': None, 'output_word_probs': False, 'output_word_stats': False, 'context_window': 0, 'softmax_batch': 9223372036854775807}, 'interactive': {'_name': None, 'buffer_size': 0, 'input': '-'}, 'model': {'_name': 'wav2vec_ctc', 'w2v_path': '/home/harveen.chadha/vakyansh-wav2vec2-experimentation/checkpoints/pretraining/checkpoint_best.pt', 'no_pretrained_weights': False, 'dropout_input': 0.0, 'final_dropout': 0.0, 'dropout': 0.0, 'attention_dropout': 0.0, 'activation_dropout': 0.1, 'apply_mask': True, 'mask_length': 10, 'mask_prob': 0.65, 'mask_selection': 'static', 'mask_other': 0.0, 'no_mask_overlap': False, 'mask_channel_length': 64, 'mask_channel_prob': 0.5, 'mask_channel_selection': 'static', 'mask_channel_other': 0.0, 'no_mask_channel_overlap': False, 'freeze_finetune_updates': 100, 'feature_grad_mult': 0.0, 'layerdrop': 0.05, 'normalize': False, 'data': '/home/harveen.chadha/vakyansh-wav2vec2-experimentation/data/finetuning', 'w2v_args': None, 'mask_min_space': 1, 'mask_channel_min_space': 1, 'conv_feature_layers': '[(512, 10, 5)] + [(512, 3, 2)] * 4 + [(512,2,2)] + [(512,2,2)]', 'encoder_embed_dim': 768}, 'task': {'_name': 'audio_pretraining', 'data': '/home/harveen.chadha/vakyansh-wav2vec2-experimentation/data/finetuning', 'labels': 'ltr', 'sample_rate': 16000, 'normalize': False, 'enable_padding': False, 'max_sample_size': None, 'min_sample_size': None, 'eval_wer': False, 'eval_wer_config': {'_name': None, 'beam': 5, 'nbest': 1, 'max_len_a': 0.0, 'max_len_b': 200, 'min_len': 1, 'match_source_len': False, 'unnormalized': False, 'no_early_stop': False, 'no_beamable_mm': False, 'lenpen': 1.0, 'unkpen': 0.0, 'replace_unk': None, 'sacrebleu': False, 'score_reference': False, 'prefix_size': 0, 'no_repeat_ngram_size': 0, 'sampling': False, 'sampling_topk': -1, 'sampling_topp': -1.0, 'constraints': None, 'temperature': 1.0, 'diverse_beam_groups': -1, 'diverse_beam_strength': 0.5, 'diversity_rate': -1.0, 'print_alignment': None, 'print_step': False, 'lm_path': None, 'lm_weight': 0.0, 'iter_decode_eos_penalty': 0.0, 'iter_decode_max_iter': 10, 'iter_decode_force_max_iter': False, 'iter_decode_with_beam': 1, 'iter_decode_with_external_reranker': False, 'retain_iter_history': False, 'retain_dropout': False, 'retain_dropout_modules': None, 'decoding_format': None, 'no_seed_provided': False}, 'eval_wer_tokenizer': None, 'eval_wer_post_process': 'letter', 'autoregressive': False, 'num_batch_buckets': 0, 'precompute_mask_indices': False, 'mask_length': 10, 'mask_prob': 0.65, 'mask_selection': 'static', 'mask_other': 0.0, 'no_mask_overlap': False, 'mask_min_space': 1, 'mask_channel_length': 64, 'mask_channel_prob': 0.5, 'mask_channel_selection': 'static', 'mask_channel_other': 0.0, 'no_mask_channel_overlap': False, 'mask_channel_min_space': 1, 'conv_feature_layers': '[(512, 10, 5)] + [(512, 3, 2)] * 4 + [(512,2,2)] + [(512,2,2)]', 'encoder_embed_dim': 768, 'tpu': False}, 'criterion': {'_name': 'ctc', 'zero_infinity': True, 'sentence_avg': True, 'post_process': 'letter', 'wer_kenlm_model': None, 'wer_lexicon': None, 'wer_lm_weight': 2.0, 'wer_word_score': -1.0, 'wer_args': None}, 'optimizer': {'_name': 'adam', 'adam_betas': '(0.9,0.98)', 'adam_eps': 1e-08, 'weight_decay': 0.0, 'use_old_adam': False, 'tpu': False, 'lr': [5e-05]}, 'lr_scheduler': {'_name': 'tri_stage', 'warmup_steps': 0, 'hold_steps': 0, 'decay_steps': 0, 'phase_ratio': [0.1, 0.4, 0.5], 'init_lr_scale': 0.01, 'final_lr_scale': 0.05, 'max_update': 20000, 'lr': [5e-05]}, 'scoring': None, 'bpe': None, 'tokenizer': None, 'job_logging_cfg': {'version': 1, 'formatters': {'simple': {'format': '[%(asctime)s][%(name)s][%(levelname)s] - %(message)s'}}, 'handlers': {'console': {'class': 'logging.StreamHandler', 'formatter': 'simple', 'stream': 'ext://sys.stdout'}, 'file': {'class': 'logging.FileHandler', 'formatter': 'simple', 'filename': 'hydra_train.log'}}, 'root': {'level': 'INFO', 'handlers': ['console', 'file']}, 'disable_existing_loggers': False}}
+[2021-04-29 19:44:22,824][fairseq_cli.train][INFO] - Wav2VecCtc(
+  (w2v_encoder): Wav2VecEncoder(
+    (w2v_model): Wav2Vec2Model(
+      (feature_extractor): ConvFeatureExtractionModel(
+        (conv_layers): ModuleList(
+          (0): Sequential(
+            (0): Conv1d(1, 512, kernel_size=(10,), stride=(5,), bias=False)
+            (1): Dropout(p=0.0, inplace=False)
+            (2): Fp32GroupNorm(512, 512, eps=1e-05, affine=True)
+            (3): GELU()
+          )
+          (1): Sequential(
+            (0): Conv1d(512, 512, kernel_size=(3,), stride=(2,), bias=False)
+            (1): Dropout(p=0.0, inplace=False)
+            (2): GELU()
+          )
+          (2): Sequential(
+            (0): Conv1d(512, 512, kernel_size=(3,), stride=(2,), bias=False)
+            (1): Dropout(p=0.0, inplace=False)
+            (2): GELU()
+          )
+          (3): Sequential(
+            (0): Conv1d(512, 512, kernel_size=(3,), stride=(2,), bias=False)
+            (1): Dropout(p=0.0, inplace=False)
+            (2): GELU()
+          )
+          (4): Sequential(
+            (0): Conv1d(512, 512, kernel_size=(3,), stride=(2,), bias=False)
+            (1): Dropout(p=0.0, inplace=False)
+            (2): GELU()
+          )
+          (5): Sequential(
+            (0): Conv1d(512, 512, kernel_size=(2,), stride=(2,), bias=False)
+            (1): Dropout(p=0.0, inplace=False)
+            (2): GELU()
+          )
+          (6): Sequential(
+            (0): Conv1d(512, 512, kernel_size=(2,), stride=(2,), bias=False)
+            (1): Dropout(p=0.0, inplace=False)
+            (2): GELU()
+          )
+        )
+      )
+      (post_extract_proj): Linear(in_features=512, out_features=768, bias=True)
+      (dropout_input): Dropout(p=0.0, inplace=False)
+      (dropout_features): Dropout(p=0.1, inplace=False)
+      (quantizer): None
+      (project_q): None
+      (encoder): TransformerEncoder(
+        (pos_conv): Sequential(
+          (0): Conv1d(768, 768, kernel_size=(128,), stride=(1,), padding=(64,), groups=16)
+          (1): SamePad()
+          (2): GELU()
+        )
+        (layers): ModuleList(
+          (0): TransformerSentenceEncoderLayer(
+            (self_attn): MultiheadAttention(
+              (dropout_module): FairseqDropout()
+              (k_proj): Linear(in_features=768, out_features=768, bias=True)
+              (v_proj): Linear(in_features=768, out_features=768, bias=True)
+              (q_proj): Linear(in_features=768, out_features=768, bias=True)
+              (out_proj): Linear(in_features=768, out_features=768, bias=True)
+            )
+            (dropout1): Dropout(p=0.0, inplace=False)
+            (dropout2): Dropout(p=0.1, inplace=False)
+            (dropout3): Dropout(p=0.0, inplace=False)
+            (self_attn_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+            (fc1): Linear(in_features=768, out_features=3072, bias=True)
+            (fc2): Linear(in_features=3072, out_features=768, bias=True)
+            (final_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): TransformerSentenceEncoderLayer(
+            (self_attn): MultiheadAttention(
+              (dropout_module): FairseqDropout()
+              (k_proj): Linear(in_features=768, out_features=768, bias=True)
+              (v_proj): Linear(in_features=768, out_features=768, bias=True)
+              (q_proj): Linear(in_features=768, out_features=768, bias=True)
+              (out_proj): Linear(in_features=768, out_features=768, bias=True)
+            )
+            (dropout1): Dropout(p=0.0, inplace=False)
+            (dropout2): Dropout(p=0.1, inplace=False)
+            (dropout3): Dropout(p=0.0, inplace=False)
+            (self_attn_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+            (fc1): Linear(in_features=768, out_features=3072, bias=True)
+            (fc2): Linear(in_features=3072, out_features=768, bias=True)
+            (final_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          )
+          (2): TransformerSentenceEncoderLayer(
+            (self_attn): MultiheadAttention(
+              (dropout_module): FairseqDropout()
+              (k_proj): Linear(in_features=768, out_features=768, bias=True)
+              (v_proj): Linear(in_features=768, out_features=768, bias=True)
+              (q_proj): Linear(in_features=768, out_features=768, bias=True)
+              (out_proj): Linear(in_features=768, out_features=768, bias=True)
+            )
+            (dropout1): Dropout(p=0.0, inplace=False)
+            (dropout2): Dropout(p=0.1, inplace=False)
+            (dropout3): Dropout(p=0.0, inplace=False)
+            (self_attn_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+            (fc1): Linear(in_features=768, out_features=3072, bias=True)
+            (fc2): Linear(in_features=3072, out_features=768, bias=True)
+            (final_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          )
+          (3): TransformerSentenceEncoderLayer(
+            (self_attn): MultiheadAttention(
+              (dropout_module): FairseqDropout()
+              (k_proj): Linear(in_features=768, out_features=768, bias=True)
+              (v_proj): Linear(in_features=768, out_features=768, bias=True)
+              (q_proj): Linear(in_features=768, out_features=768, bias=True)
+              (out_proj): Linear(in_features=768, out_features=768, bias=True)
+            )
+            (dropout1): Dropout(p=0.0, inplace=False)
+            (dropout2): Dropout(p=0.1, inplace=False)
+            (dropout3): Dropout(p=0.0, inplace=False)
+            (self_attn_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+            (fc1): Linear(in_features=768, out_features=3072, bias=True)
+            (fc2): Linear(in_features=3072, out_features=768, bias=True)
+            (final_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): TransformerSentenceEncoderLayer(
+            (self_attn): MultiheadAttention(
+              (dropout_module): FairseqDropout()
+              (k_proj): Linear(in_features=768, out_features=768, bias=True)
+              (v_proj): Linear(in_features=768, out_features=768, bias=True)
+              (q_proj): Linear(in_features=768, out_features=768, bias=True)
+              (out_proj): Linear(in_features=768, out_features=768, bias=True)
+            )
+            (dropout1): Dropout(p=0.0, inplace=False)
+            (dropout2): Dropout(p=0.1, inplace=False)
+            (dropout3): Dropout(p=0.0, inplace=False)
+            (self_attn_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+            (fc1): Linear(in_features=768, out_features=3072, bias=True)
+            (fc2): Linear(in_features=3072, out_features=768, bias=True)
+            (final_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          )
+          (5): TransformerSentenceEncoderLayer(
+            (self_attn): MultiheadAttention(
+              (dropout_module): FairseqDropout()
+              (k_proj): Linear(in_features=768, out_features=768, bias=True)
+              (v_proj): Linear(in_features=768, out_features=768, bias=True)
+              (q_proj): Linear(in_features=768, out_features=768, bias=True)
+              (out_proj): Linear(in_features=768, out_features=768, bias=True)
+            )
+            (dropout1): Dropout(p=0.0, inplace=False)
+            (dropout2): Dropout(p=0.1, inplace=False)
+            (dropout3): Dropout(p=0.0, inplace=False)
+            (self_attn_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+            (fc1): Linear(in_features=768, out_features=3072, bias=True)
+            (fc2): Linear(in_features=3072, out_features=768, bias=True)
+            (final_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          )
+          (6): TransformerSentenceEncoderLayer(
+            (self_attn): MultiheadAttention(
+              (dropout_module): FairseqDropout()
+              (k_proj): Linear(in_features=768, out_features=768, bias=True)
+              (v_proj): Linear(in_features=768, out_features=768, bias=True)
+              (q_proj): Linear(in_features=768, out_features=768, bias=True)
+              (out_proj): Linear(in_features=768, out_features=768, bias=True)
+            )
+            (dropout1): Dropout(p=0.0, inplace=False)
+            (dropout2): Dropout(p=0.1, inplace=False)
+            (dropout3): Dropout(p=0.0, inplace=False)
+            (self_attn_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+            (fc1): Linear(in_features=768, out_features=3072, bias=True)
+            (fc2): Linear(in_features=3072, out_features=768, bias=True)
+            (final_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          )
+          (7): TransformerSentenceEncoderLayer(
+            (self_attn): MultiheadAttention(
+              (dropout_module): FairseqDropout()
+              (k_proj): Linear(in_features=768, out_features=768, bias=True)
+              (v_proj): Linear(in_features=768, out_features=768, bias=True)
+              (q_proj): Linear(in_features=768, out_features=768, bias=True)
+              (out_proj): Linear(in_features=768, out_features=768, bias=True)
+            )
+            (dropout1): Dropout(p=0.0, inplace=False)
+            (dropout2): Dropout(p=0.1, inplace=False)
+            (dropout3): Dropout(p=0.0, inplace=False)
+            (self_attn_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+            (fc1): Linear(in_features=768, out_features=3072, bias=True)
+            (fc2): Linear(in_features=3072, out_features=768, bias=True)
+            (final_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          )
+          (8): TransformerSentenceEncoderLayer(
+            (self_attn): MultiheadAttention(
+              (dropout_module): FairseqDropout()
+              (k_proj): Linear(in_features=768, out_features=768, bias=True)
+              (v_proj): Linear(in_features=768, out_features=768, bias=True)
+              (q_proj): Linear(in_features=768, out_features=768, bias=True)
+              (out_proj): Linear(in_features=768, out_features=768, bias=True)
+            )
+            (dropout1): Dropout(p=0.0, inplace=False)
+            (dropout2): Dropout(p=0.1, inplace=False)
+            (dropout3): Dropout(p=0.0, inplace=False)
+            (self_attn_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+            (fc1): Linear(in_features=768, out_features=3072, bias=True)
+            (fc2): Linear(in_features=3072, out_features=768, bias=True)
+            (final_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          )
+          (9): TransformerSentenceEncoderLayer(
+            (self_attn): MultiheadAttention(
+              (dropout_module): FairseqDropout()
+              (k_proj): Linear(in_features=768, out_features=768, bias=True)
+              (v_proj): Linear(in_features=768, out_features=768, bias=True)
+              (q_proj): Linear(in_features=768, out_features=768, bias=True)
+              (out_proj): Linear(in_features=768, out_features=768, bias=True)
+            )
+            (dropout1): Dropout(p=0.0, inplace=False)
+            (dropout2): Dropout(p=0.1, inplace=False)
+            (dropout3): Dropout(p=0.0, inplace=False)
+            (self_attn_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+            (fc1): Linear(in_features=768, out_features=3072, bias=True)
+            (fc2): Linear(in_features=3072, out_features=768, bias=True)
+            (final_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          )
+          (10): TransformerSentenceEncoderLayer(
+            (self_attn): MultiheadAttention(
+              (dropout_module): FairseqDropout()
+              (k_proj): Linear(in_features=768, out_features=768, bias=True)
+              (v_proj): Linear(in_features=768, out_features=768, bias=True)
+              (q_proj): Linear(in_features=768, out_features=768, bias=True)
+              (out_proj): Linear(in_features=768, out_features=768, bias=True)
+            )
+            (dropout1): Dropout(p=0.0, inplace=False)
+            (dropout2): Dropout(p=0.1, inplace=False)
+            (dropout3): Dropout(p=0.0, inplace=False)
+            (self_attn_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+            (fc1): Linear(in_features=768, out_features=3072, bias=True)
+            (fc2): Linear(in_features=3072, out_features=768, bias=True)
+            (final_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          )
+          (11): TransformerSentenceEncoderLayer(
+            (self_attn): MultiheadAttention(
+              (dropout_module): FairseqDropout()
+              (k_proj): Linear(in_features=768, out_features=768, bias=True)
+              (v_proj): Linear(in_features=768, out_features=768, bias=True)
+              (q_proj): Linear(in_features=768, out_features=768, bias=True)
+              (out_proj): Linear(in_features=768, out_features=768, bias=True)
+            )
+            (dropout1): Dropout(p=0.0, inplace=False)
+            (dropout2): Dropout(p=0.1, inplace=False)
+            (dropout3): Dropout(p=0.0, inplace=False)
+            (self_attn_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+            (fc1): Linear(in_features=768, out_features=3072, bias=True)
+            (fc2): Linear(in_features=3072, out_features=768, bias=True)
+            (final_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          )
+        )
+        (layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+      )
+      (layer_norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (final_proj): None
+    )
+    (final_dropout): Dropout(p=0.0, inplace=False)
+    (proj): Linear(in_features=768, out_features=123, bias=True)
+  )
+)
+[2021-04-29 19:44:22,833][fairseq_cli.train][INFO] - task: AudioPretrainingTask
+[2021-04-29 19:44:22,834][fairseq_cli.train][INFO] - model: Wav2VecCtc
+[2021-04-29 19:44:22,834][fairseq_cli.train][INFO] - criterion: CtcCriterion
+[2021-04-29 19:44:22,836][fairseq_cli.train][INFO] - num. shared model params: 94,466,299 (num. trained: 94,466,299)
+[2021-04-29 19:44:22,838][fairseq_cli.train][INFO] - num. expert model params: 0 (num. trained: 0)
+[2021-04-29 19:44:22,841][fairseq.data.audio.raw_audio_dataset][INFO] - loaded 1112, skipped 0 samples
+[2021-04-29 19:44:22,868][root][INFO] - Added key: store_based_barrier_key:2 to store for rank: 0
+[2021-04-29 19:44:22,868][fairseq.trainer][INFO] - detected shared parameter: w2v_encoder.w2v_model.feature_extractor.conv_layers.0.0.bias <- w2v_encoder.w2v_model.feature_extractor.conv_layers.1.0.bias
+[2021-04-29 19:44:22,868][fairseq.trainer][INFO] - detected shared parameter: w2v_encoder.w2v_model.feature_extractor.conv_layers.0.0.bias <- w2v_encoder.w2v_model.feature_extractor.conv_layers.2.0.bias
+[2021-04-29 19:44:22,869][fairseq.trainer][INFO] - detected shared parameter: w2v_encoder.w2v_model.feature_extractor.conv_layers.0.0.bias <- w2v_encoder.w2v_model.feature_extractor.conv_layers.3.0.bias
+[2021-04-29 19:44:22,869][fairseq.trainer][INFO] - detected shared parameter: w2v_encoder.w2v_model.feature_extractor.conv_layers.0.0.bias <- w2v_encoder.w2v_model.feature_extractor.conv_layers.4.0.bias
+[2021-04-29 19:44:22,869][fairseq.trainer][INFO] - detected shared parameter: w2v_encoder.w2v_model.feature_extractor.conv_layers.0.0.bias <- w2v_encoder.w2v_model.feature_extractor.conv_layers.5.0.bias
+[2021-04-29 19:44:22,869][fairseq.trainer][INFO] - detected shared parameter: w2v_encoder.w2v_model.feature_extractor.conv_layers.0.0.bias <- w2v_encoder.w2v_model.feature_extractor.conv_layers.6.0.bias
+[2021-04-29 19:44:23,135][fairseq.utils][INFO] - ***********************CUDA enviroments for all 4 workers***********************
+[2021-04-29 19:44:23,135][fairseq.utils][INFO] - rank   0: capabilities =  7.5  ; total memory = 14.756 GB ; name = Tesla T4                                
+[2021-04-29 19:44:23,135][fairseq.utils][INFO] - rank   1: capabilities =  7.5  ; total memory = 14.756 GB ; name = Tesla T4                                
+[2021-04-29 19:44:23,135][fairseq.utils][INFO] - rank   2: capabilities =  7.5  ; total memory = 14.756 GB ; name = Tesla T4                                
+[2021-04-29 19:44:23,135][fairseq.utils][INFO] - rank   3: capabilities =  7.5  ; total memory = 14.756 GB ; name = Tesla T4                                
+[2021-04-29 19:44:23,135][fairseq.utils][INFO] - ***********************CUDA enviroments for all 4 workers***********************
+[2021-04-29 19:44:23,136][fairseq_cli.train][INFO] - training on 4 devices (GPUs/TPUs)
+[2021-04-29 19:44:23,136][fairseq_cli.train][INFO] - max tokens per device = 1000000 and max sentences per device = None
+[2021-04-29 19:44:23,137][fairseq.trainer][INFO] - Preparing to load checkpoint /home/harveen.chadha/vakyansh-wav2vec2-experimentation/checkpoints/finetuning/checkpoint_last.pt

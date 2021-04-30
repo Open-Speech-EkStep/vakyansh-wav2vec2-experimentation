@@ -9,8 +9,8 @@ finetuned_model_path=$parentdir'/checkpoints/finetuning/checkpoint_best.pt'
 pretrained_model_path=$parentdir'/checkpoints/pretraining/checkpoint_best.pt'
 #pretrained_model_path=$parentdir'/checkpoints/pretraining/wav2vec_small.pt'
 #custom_model_path=$parentdir'/checkpoints/custom_model_english/'
-custom_model_path=$parentdir'/checkpoints/custom_model_hindi/'
-dictionary=$parentdir'/data/inference/hindi/dict.ltr.txt'
+custom_model_path=$parentdir'/checkpoints/custom_model_hindi_new/'
+dictionary=$parentdir'/data/finetuning/dict.ltr.txt'
 #dictionary=$parentdir'/data/inference/english/dict.ltr.txt'
 
 ### Values to change end ###
