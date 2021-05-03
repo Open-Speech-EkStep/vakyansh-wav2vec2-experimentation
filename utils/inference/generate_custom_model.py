@@ -55,14 +55,14 @@ def load_model(model_path, target_dict, pretrained_model):
     #args = w2v.get("args", None) or w2v["cfg"].model
     
     if w2v.get("args", None) is not None:
-        print('Here')
+        #print('Here')
         args = convert_namespace_to_omegaconf(w2v["args"])["model"]
         args['w2v_args']=None
         args['w2v_path'] = pretrained_model
     else:
-        print('here2')
+        #print('here2')
         args = convert_namespace_to_omegaconf(w2v["cfg"]['model'])['model']
-        args['w2v_path'] = pretrained_model
+        #args['w2v_path'] = pretrained_model
         if not args:
             #print('here3')
             args = w2v["cfg"]['model']
@@ -70,7 +70,7 @@ def load_model(model_path, target_dict, pretrained_model):
             args['w2v_path'] = pretrained_model
             args = Namespace(**args)
     
-    print(args)
+    #print(args)
     #args['w2v_path'] = pretrained_model
         
     #print(args)    
