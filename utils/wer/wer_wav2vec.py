@@ -66,7 +66,7 @@ def calculate_cer(row):
 
 def run_pipeline(ground_truth, predicted):
     
-    with open(ground_truth, encoding='utf-8', mode='w+') as file:
+    with open(ground_truth, encoding='utf-8') as file:
         original_csv = file.readlines()
     
     original_csv = [line.strip() for line in original_csv]
