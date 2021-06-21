@@ -8,3 +8,4 @@ editdistance==0.3.1
 omegaconf==2.0.6
 tensorboard==2.4.1
 tensorboardX==2.1
+wandb
