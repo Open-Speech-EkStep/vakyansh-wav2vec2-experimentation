@@ -5,6 +5,7 @@ import Levenshtein as Lev
 from tqdm import tqdm
 import swifter
 import argparse
+from components import compute_wer
 
 
 def wer( s1, s2):
@@ -73,28 +74,24 @@ def run_pipeline(ground_truth, predicted):
     original_csv = pd.DataFrame(original_csv, columns=['text'])
 
     with open(predicted) as file:
-        azure_csv = file.readlines()
+        predicted_csv = file.readlines()
     
-    print(len(original_csv)," ", len(azure_csv))
-    azure_csv = [line.strip() for line in azure_csv]
-    azure_csv = pd.DataFrame(azure_csv, columns=['text'])
+    print(len(original_csv)," ", len(predicted_csv))
+    predicted_csv = [line.strip() for line in predicted_csv]
+    predicted_csv = pd.DataFrame(predicted_csv, columns=['text'])
 
     original_csv['ix'] = original_csv['text'].str.split(' \(None-').str[-1].str[0:-1].astype('int')
-    azure_csv['ix'] = azure_csv['text'].str.split('\(None').str[-1].str[1:-1].astype('int')
+    predicted_csv['ix'] = predicted_csv['text'].str.split('\(None').str[-1].str[1:-1].astype('int')
     original_csv = preprocess(original_csv)
-    azure_csv = preprocess(azure_csv)
+    predicted_csv = preprocess(predicted_csv)
 
 
-    #df_merged = pd.DataFrame(data = [original_csv.cleaned_text.values, azure_csv.cleaned_text.values],index=None)
+    #df_merged = pd.DataFrame(data = [original_csv.cleaned_text.values, predicted_csv.cleaned_text.values],index=None)
     #df_merged = df_merged.transpose()
 
-    df_merged = pd.merge(original_csv,azure_csv, on='ix')
-    #print(df_merged)
+    df_merged = pd.merge(original_csv,predicted_csv, on='ix')
     df_merged = df_merged[['cleaned_text_x', 'cleaned_text_y', 'ix']]
     df_merged.columns = ['original', 'predicted','ix']
-
-    #df_merged['ix'] = df_merged['original'].apply(lambda x: x.split(' (None-')[-1])
-    #df_merged['ix'] = df_merged['ix'].astype('int64')
     
     df_merged['wer'] = df_merged.apply(calculate_wer, axis = 1)
     df_merged['cer'] = df_merged.swifter.apply(calculate_cer, axis = 1)
@@ -111,15 +108,16 @@ def run_pipeline(ground_truth, predicted):
 def merge_with_tsv(df, tsv):
     tsv_file = pd.read_csv(tsv, delimiter='\t',header=None, skiprows=1)
     tsv_file_2 = pd.read_csv(tsv)
-    #print(tsv_file_2)
-    #header = str(tsv_file_2.iloc[0,0]) + '/'#.split(' ')[0]
     header = tsv_file_2.columns[0] + '/'
-    #print(header)
     tsv = tsv_file#.iloc[1:]
-    #print(tsv)
     df['path'] = df['ix'].apply(lambda x: tsv.iloc[x,0])
     df['path'] = header + df['path'].astype('str')
     return df
+
+def calculate_errors(row):
+    ret_object = compute_wer(predictions=[row['predicted']], references=[row['original']])
+    return [ret_object['substitutions'], ret_object['insertions'], ret_object['deletions']]
+
 
 
 if __name__ == "__main__":
@@ -129,12 +127,22 @@ if __name__ == "__main__":
     parser.add_argument('-s', '--save-output', help='save output file', type=bool)
     parser.add_argument('-n', '--name', help='save output file name', type=str)
     parser.add_argument('-t','--tsv', type=str)
+    parser.add_argument('-e', '--sid', type=bool)
+
 
     args_local = parser.parse_args()
-    #print(args_local)
+
     df = run_pipeline(args_local.original, args_local.predicted)
     
     if args_local.tsv:
         df=merge_with_tsv(df, args_local.tsv)
+
+    if args_local.sid:
+        ret_object= df.swifter.apply(calculate_errors, axis=1)
+        df['errors'] = ret_object
+        df_errors = pd.DataFrame(df['errors'].to_list(), columns=['substitutions','insertions', 'deletions'])
+        df = pd.concat([df, df_errors], axis=1)
+
+    
     if args_local.save_output:
         df.to_csv(args_local.name, index=False)
