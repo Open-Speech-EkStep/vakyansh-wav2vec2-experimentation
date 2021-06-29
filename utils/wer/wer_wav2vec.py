@@ -142,6 +142,7 @@ if __name__ == "__main__":
         df['errors'] = ret_object
         df_errors = pd.DataFrame(df['errors'].to_list(), columns=['substitutions','insertions', 'deletions'])
         df = pd.concat([df, df_errors], axis=1)
+        df = df.drop(columns=['errors'])
 
     
     if args_local.save_output:
