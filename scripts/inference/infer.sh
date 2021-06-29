@@ -45,7 +45,7 @@ if [ "${w2l_decoder_viterbi}" = 1 ]; then
   --post-process letter --model-overrides "{'w2v_path':'${pretrained_model_path}'}"
 
   python ../../utils/wer/wer_wav2vec.py -o ${result_path}/ref.word-checkpoint_best.pt-test.txt -p ${result_path}/hypo.word-checkpoint_best.pt-test.txt \
-  -t ${data_path}/${subset}.tsv -s save -n ${result_path}/sentence_wise_wer.csv
+  -t ${data_path}/${subset}.tsv -s save -n ${result_path}/sentence_wise_wer.csv -e true
 
 else
   kenlm_result_path=${result_path}_${lm_name}_${beam}
@@ -57,5 +57,5 @@ else
 
 
   python ../../utils/wer/wer_wav2vec.py -o ${kenlm_result_path}/ref.word-checkpoint_best.pt-test.txt -p ${kenlm_result_path}/hypo.word-checkpoint_best.pt-test.txt \
-  -t ${data_path}/${subset}.tsv -s save -n ${kenlm_result_path}/sentence_wise_wer.csv
+  -t ${data_path}/${subset}.tsv -s save -n ${kenlm_result_path}/sentence_wise_wer.csv -e true
 fi
