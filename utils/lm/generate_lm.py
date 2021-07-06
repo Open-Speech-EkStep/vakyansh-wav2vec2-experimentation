@@ -5,12 +5,10 @@ import gzip
 import io
 import os
 import subprocess
+import itertools
 from collections import Counter
-
 from tqdm import tqdm
 from joblib import Parallel, delayed
-
-
 
 
 def convert_and_filter_topk(args):
@@ -24,11 +22,14 @@ def convert_and_filter_topk(args):
 
 
     print("\nCalculating number of words")
-    words = []
-    words_list = [line_lower.split() for line_lower in tqdm(lines)]
-    for item in words_list:
-        for local_item in item:
-            words.append(local_item)
+    
+    words = list(itertools.chain(*[line.split() for line in tqdm(lines)]))
+    
+#     words = []
+#     words_list = [line_lower.split() for line_lower in tqdm(lines)]
+#     for item in words_list:
+#         for local_item in item:
+#             words.append(local_item)
 
     print("\nCounting Word Frequencies ")
     counter = Counter(words)
