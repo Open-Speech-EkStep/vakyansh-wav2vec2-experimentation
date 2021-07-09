@@ -208,6 +208,8 @@ $ bash infer.sh
 Refer [this](scripts/inference/README.md) for inference parameters.
 
 ## For Single File Inference
+For single file inference, there are different models. Please head over to this (repo)[https://github.com/Open-Speech-EkStep/vakyansh-models#finetuned-models] to download the same
+
 To generate custom model, run: 
 ```
 $ cd scripts/inference
