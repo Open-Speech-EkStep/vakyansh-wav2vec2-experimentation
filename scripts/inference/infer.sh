@@ -6,7 +6,7 @@ parentdir="$(dirname "$parentdir")"
 ### Values to change -start ###
 
 w2l_decoder_viterbi=1 # 1 for viterbi, 0 for kenlm
-inference_data_name=''
+inference_data_name='toy_english'
 beam=128 # 128 or 1024
 subset='test'
 
@@ -14,6 +14,10 @@ subset='test'
 lm_name=''
 lm_model_path=${parentdir}'/lm/'${lm_name}'/lm.binary'
 lexicon_lst_path=${parentdir}'/lm/'${lm_name}'/lexicon.lst'
+
+# SAVE PREDICTED TEXT FILES
+dest_folder='/home/ankurdhuriya/abc'
+save_predicted=1
 
 # FOR pretrained model
 pretrained_model_path='../../checkpoints/pretraining/CLSRIL-23.pt'
@@ -58,4 +62,9 @@ else
 
   python ../../utils/wer/wer_wav2vec.py -o ${kenlm_result_path}/ref.word-checkpoint_best.pt-test.txt -p ${kenlm_result_path}/hypo.word-checkpoint_best.pt-test.txt \
   -t ${data_path}/${subset}.tsv -s save -n ${kenlm_result_path}/sentence_wise_wer.csv -e true
+
+fi
+
+if [ "${save_predicted}" = 1 ]; then
+	python ../../utils/inference/save_predicted_output.py -f ${result_path}/sentence_wise_wer.csv -d ${dest_folder}
 fi
