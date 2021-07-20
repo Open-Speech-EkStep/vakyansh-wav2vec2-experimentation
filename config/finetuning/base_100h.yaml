@@ -4,7 +4,7 @@ common:
   fp16: true
   log_format: json
   log_interval: 1
-  wandb_project: 'nepali-finetuning-multilingual'
+  wandb_project: ''
 
 checkpoint:
   no_epoch_checkpoints: true
@@ -18,7 +18,7 @@ task:
 
 dataset:
   num_workers: 6
-  max_tokens: 1000000
+  max_tokens: 3200000
   skip_invalid_size_inputs_valid_test: true
   valid_subset: valid
 
