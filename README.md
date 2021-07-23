@@ -22,7 +22,7 @@ We are releasing pretrained models in various Indic Languages. Please head over 
 
 Clone this repo and follow one of the two options:
 
-#### Option 1: Manually Install
+### Option 1: Manually Install
 
 ```
 conda create --name <env_name> python=3.7
@@ -66,7 +66,7 @@ python setup.py install
 
 ```
 
-#### Option 2: Install using script
+### Option 2: Install using script
 
 ```
 conda create --name <env_name> python=3.7
