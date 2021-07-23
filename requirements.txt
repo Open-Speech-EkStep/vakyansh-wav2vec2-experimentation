@@ -10,3 +10,4 @@ tensorboard==2.4.1
 tensorboardX==2.1
 wandb
 jiwer
+sox
