@@ -6,7 +6,7 @@ common:
   log_interval: 1
 
 checkpoint:
-  save_interval: 1
+  #save_interval: 1
   #save_interval_updates: 10000
   #keep_interval_updates: 1
   no_epoch_checkpoints: true
@@ -19,11 +19,9 @@ task:
   labels: ltr
 
 dataset:
-  num_workers: 4
-  max_tokens: 1000000
+  num_workers: 6
+  max_tokens: 3200000
   skip_invalid_size_inputs_valid_test: true
-  #validate_after_updates: 10000
-  validate_interval: 1
   valid_subset: valid
 
 distributed_training:
@@ -60,5 +58,4 @@ model:
   layerdrop: 0.05
   activation_dropout: 0.1
   feature_grad_mult: 0.0
-  freeze_finetune_updates: 100
-
+  freeze_finetune_updates: 0
