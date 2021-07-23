@@ -35,7 +35,7 @@ pip install packaging soundfile swifter
 pip install -r requirements.txt
 ```
 
-### Install fairseq
+#### Install fairseq
 ```
 git clone https://github.com/Open-Speech-EkStep/fairseq -b v2-hydra
 cd fairseq
@@ -43,7 +43,7 @@ pip install -e .
 cd ..
 ```
 
-### Install KenLM
+#### Install KenLM
 ```
 git clone https://github.com/kpu/kenlm.git
 cd kenlm
@@ -56,7 +56,7 @@ export KENLM_ROOT=$PWD
 cd ..
 ```
 
-### Install Flashlight
+#### Install Flashlight
 ```
 git clone https://github.com/flashlight/flashlight.git
 cd flashlight/bindings/python
