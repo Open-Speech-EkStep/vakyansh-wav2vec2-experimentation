@@ -15,10 +15,10 @@ from indicnlp.normalize.indic_normalize import IndicNormalizerFactory
 
 lang = 'hi'
 
-#pattern = "[^ ँ-ःअ-ऋए-ऑओ-नप-रलव-हा-ृॅे-ॉो-़्]+"
+pattern = "[^ ँ-ःअ-ऋए-ऑओ-नप-रलव-हा-ृॅे-ॉो-़्]+"
  
-with open('./hindi_pattern.txt', encoding='utf-8') as f:
-    pattern = f.read()
+# with open('./hindi_pattern.txt', encoding='utf-8') as f:
+#     pattern = f.read()
 
 normalizer = IndicNormalizerFactory().get_normalizer(lang)
 
