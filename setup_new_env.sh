@@ -9,7 +9,9 @@ sudo apt-get -y install liblzma-dev libbz2-dev libzstd-dev libsndfile1-dev libop
 sudo apt -y install build-essential cmake libboost-system-dev libboost-thread-dev libboost-program-options-dev libboost-test-dev libeigen3-dev zlib1g-dev 
 
 pip install packaging soundfile swifter
+pip install torch==1.8.0+cu111 torchvision==0.9.0+cu111 torchaudio==0.8.0 -f https://download.pytorch.org/whl/torch_stable.html
 pip install -r requirements.txt
+
 
 
 cd /opt
