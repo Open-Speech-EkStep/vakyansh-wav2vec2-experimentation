@@ -1,10 +1,12 @@
 #!/bin/sh
 
+conda init
+source ~/.bashrc
 conda create --name fairseq python=3.7
 conda activate fairseq
 
-sudo apt-get install liblzma-dev libbz2-dev libzstd-dev libsndfile1-dev libopenblas-dev libfftw3-dev libgflags-dev libgoogle-glog-dev
-sudo apt install build-essential cmake libboost-system-dev libboost-thread-dev libboost-program-options-dev libboost-test-dev libeigen3-dev zlib1g-dev libbz2-dev liblzma-dev
+sudo apt-get -y install liblzma-dev libbz2-dev libzstd-dev libsndfile1-dev libopenblas-dev libfftw3-dev libgflags-dev libgoogle-glog-dev
+sudo apt -y install build-essential cmake libboost-system-dev libboost-thread-dev libboost-program-options-dev libboost-test-dev libeigen3-dev zlib1g-dev 
 
 pip install packaging soundfile swifter
 pip install -r requirements.txt
@@ -20,6 +22,7 @@ pip install -e .
 cd ..
 
 git clone https://github.com/kpu/kenlm.git
+sudo chmod 777 -R kenlm
 cd kenlm
 mkdir -p build && cd build
 cmake .. 
@@ -29,6 +32,7 @@ export KENLM_ROOT=$PWD
 cd ..
 
 git clone https://github.com/flashlight/flashlight.git
+sudo chmod 777 -R flashlight
 cd flashlight/bindings/python
 export USE_MKL=0
 python setup.py install
