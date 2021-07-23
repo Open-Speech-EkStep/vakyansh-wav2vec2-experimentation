@@ -1,3 +1,7 @@
+Objective:
+
+To create a ASR using 40 hours of competition data by IITM
+
 # Step 1: Working on Data
 
 ## Step 1.1: Get the data
@@ -16,25 +20,41 @@ rm hindi_iitm_challenge.zip
 ## Step 1.2: Analyze audio properties
 
 ```
+ls | head -10
 soxi filename.wav
 ```
 
 ## Step 1.3: Analyze transcripts
 
 ```
+ls | head -10
 cat filename.txt
 ```
 
-## Step 1.4 Check total files
+## Step 1.4: Check total files
 ```
 ls | wc -l
 ls *.wav | wc -l # to check wav files
 ls *.txt | wc -l # to check txt files
 ```
 
-## Step 1.5 Check total duration
+## Step 1.5: Check total duration
 ```
 python vakyansh-wav2vec2-experimentation/utils/audio/duration.py data/raw/train
 ```
 
+## Step 1.6: Analyze and clean transcripts for foreign characters
+```
+cd vakyansh-wav2vec2-experimentation/utils/data
+python clean_hindi.py -i ../../../data/raw/train/ -o ../../../data/processed/train/
+```
 
+## Step 1.7: Running the cleaning script
+Discuss the data cleaning script
+
+Tutorial 1: Parallel Processing
+
+
+Tutorial 2: 
+[Decomposition] (https://unicode.org/reports/tr15/)
+[Indic NLP Library](https://github.com/anoopkunchukuttan/indic_nlp_library)
