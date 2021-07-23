@@ -30,4 +30,11 @@ cat filename.txt
 ls | wc -l
 ls *.wav | wc -l # to check wav files
 ls *.txt | wc -l # to check txt files
+```
+
+## Step 1.5 Check total duration
+```
+python vakyansh-wav2vec2-experimentation/utils/audio/duration.py data/raw/train
+```
+
 
