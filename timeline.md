@@ -61,4 +61,6 @@ python vakyansh-wav2vec2-experimentation/notebooks/run_parallel.py
 
 Tutorial 2: 
 [Decomposition] (https://unicode.org/reports/tr15/)
+
+Resources:
 [Indic NLP Library](https://github.com/anoopkunchukuttan/indic_nlp_library)
