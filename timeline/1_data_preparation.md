@@ -71,3 +71,11 @@ Update paths for train_path, valid_path
 ```
 bash vakyansh-wav2vec2-experimentation/scripts/finetuning/prepare_data.sh
 ```
+
+## Step 1.9 Discuss Steps of Data Preparation:
+
+a) Creation of manifest. Creates TSV files with number of frames in an audio
+
+b) Creation of labels. Read the text from text files and create ltr (letter level separated by spaces)  and wrd (lines as read from txt files) files
+
+c) Creation of dict (containing labels with counts) and lexicon (containing unique words with space separated letters) file
