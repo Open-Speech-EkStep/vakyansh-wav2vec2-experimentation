@@ -20,6 +20,10 @@ We are releasing pretrained models in various Indic Languages. Please head over 
 ## Installation and Setup 
 ### Create an Environment
 
+Clone this repo and follow one of the two options:
+
+#### Option 1: Manually Install
+
 ```
 conda create --name <env_name> python=3.7
 conda activate <env_name>
@@ -60,6 +64,17 @@ export USE_MKL=0
 python setup.py install
 # python criterion_example.py  ## to test
 
+```
+
+#### Option 2: Install using script
+
+```
+conda create --name <env_name> python=3.7
+conda activate <env_name>
+```
+
+```
+bash setup_new_env.sh 
 ```
 
 ## Directory Structure
