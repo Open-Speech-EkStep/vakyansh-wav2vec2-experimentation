@@ -179,7 +179,7 @@ $ bash start_pretraining_base.sh
 ```
 Refer [this](scripts/pretraining/README.md) for pretraining parameters.
 
-## For Finetuning (CPU Version)
+## For Finetuning
 Edit the path to data in the scripts/finetuning/prepare_data.sh file. To prepare the data:
 ```
 $ cd scripts/finetuning
