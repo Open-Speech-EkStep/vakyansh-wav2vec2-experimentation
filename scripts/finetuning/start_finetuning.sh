@@ -3,25 +3,31 @@
 
 ### Values to change - start ###
 
-config_name='base_10h.yaml'
-gpus=4
-run_in_nohup=0  #0 for no, 1 for yes
+config_name='base_10h.yaml'         #config name present in config/finetuning model
+gpus=4                              #number of gpu's you have to run the finetuning
+run_in_nohup=0                      #To run the process in background. 0 for no, 1 for yes
 
 ### Values to change - end ###
+
+
+
+
+
+#### Please avoid changing below fields ####
 
 dir=$PWD/
 parentdir="$(dirname "$dir")"
 parentdir="$(dirname "$parentdir")"
 printf "** Directory to code is: $parentdir"
 
+pretrained_model_path=${parentdir}'/checkpoints/pretraining/CLSRIL-23.pt'
 config_path=${parentdir}'/config/finetuning/'
 data_path=${parentdir}'/data/finetuning'
 checkpoints_path=${parentdir}'/checkpoints/finetuning'
 log_path=${parentdir}'/logs/finetuning'
 tensorboard_path=${log_path}'/tensorboard'
-pretrained_model_path=${parentdir}'/checkpoints/pretraining/checkpoint_best.pt'
 update_freq=$((24/${gpus}))
-#wav2vec_repo_path='/opt/fairseq/'
+
 
 printf "\n** $wav2vec_repo_path"
 printf "\n** Config path is: $config_path"
