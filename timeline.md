@@ -53,6 +53,10 @@ python clean_hindi.py -i ../../../data/raw/train/ -o ../../../data/processed/tra
 Discuss the data cleaning script
 
 Tutorial 1: Parallel Processing
+```
+python vakyansh-wav2vec2-experimentation/notebooks/run_single.py
+python vakyansh-wav2vec2-experimentation/notebooks/run_parallel.py
+```
 
 
 Tutorial 2: 
