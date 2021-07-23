@@ -64,3 +64,10 @@ Tutorial 2:
 
 Resources:
 [Indic NLP Library](https://github.com/anoopkunchukuttan/indic_nlp_library)
+
+## Step 1.8 Preparing data for finetuning
+Update paths for train_path, valid_path
+
+```
+bash vakyansh-wav2vec2-experimentation/scripts/finetuning/prepare_data.sh
+```
