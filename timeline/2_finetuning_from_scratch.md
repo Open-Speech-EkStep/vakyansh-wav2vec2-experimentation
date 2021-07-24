@@ -16,25 +16,67 @@ cd vakyansh-wav2vec2-experimentation/config/finetuning
 ls
 ```
 
-Discuss important paramters of config:
-**wandb_project** -> expects name of wandb project. Useful to monitor metrics
+a) Discuss important paramters of config:
 
-**num_workers** -> number of workers in the dataloader to load data
+  &nbsp;&nbsp;**wandb_project** -> expects name of wandb project. Useful to monitor metrics
 
-**max_tokens** -> the maximum tokens you can fit at one time into the GPU. 3200000 / 16000 ~ 200 seconds ~ 3.3 minutes
+  &nbsp;&nbsp;**num_workers** -> number of workers in the dataloader to load data
 
-**max_updates** -> maximum updates to which you want to run training for
+  &nbsp;&nbsp;**max_tokens** -> the maximum tokens you can fit at one time into the GPU. 3200000 / 16000 ~ 200 seconds ~ 3.3 minutes
 
-**lr** -> the learning rate to use during training
+  &nbsp;&nbsp;**max_updates** -> maximum updates to which you want to run training for
 
-**update_freq** -> How frequently the gradient updates happen in distributed environment. Depends on the number of GPU's to simulate and you have currently.
+  &nbsp;&nbsp;**lr** -> the learning rate to use during training
 
-**optimizer** -> optimizer to use for training purpose
+  &nbsp;&nbsp;**update_freq** -> How frequently the gradient updates happen in distributed environment. Depends on the number of GPU's to simulate and you have currently.
 
-**w2v_path** -> path to pretrained model
+  &nbsp;&nbsp;**optimizer** -> optimizer to use for training purpose
 
-**mask_prob** -> probability of masking the latent speech output
+  &nbsp;&nbsp;**w2v_path** -> path to pretrained model
 
-**freeze_finetune_updates** -> the updates for which you want to freeze the entire network apart from the final layer
+  &nbsp;&nbsp;**mask_prob** -> probability of masking the latent speech output
 
-Difference between different configs
+  &nbsp;&nbsp;**freeze_finetune_updates** -> the updates for which you want to freeze the entire network apart from the final layer
+
+
+b) Difference between different configs
+
+## Step 2.3: Define parameters in start_finetuning.sh script
+
+```
+cd vakyansh-wav2vec2-experimentation/scripts/finetuning
+ls
+vi start_finetuning.sh
+```
+a) Define **config_name** as decided in step 2.2
+
+b) Define number of GPU's available using **gpus** variable
+
+c) run_in_nohup: To run the process in background
+
+
+### Step 2.4 Start Finetuning
+
+```
+bash start_finetuning.sh
+```
+
+- run without nohup initially
+- login with wandb
+- press Ctrl + C after epoch has started to stop the training
+- ```sudo pkill -9 python``` to kill all the python processes
+- check ```nvidia-smi``` to confirm no process is runnning on GPU
+
+a) Check logs path
+
+b) Check tensorboard
+
+c) Check W&B
+
+### Step 2.5 Stop training after 2 epochs
+
+Resume from checkpoint_500 
+
+### Step 2.6 Let it run
+
+
