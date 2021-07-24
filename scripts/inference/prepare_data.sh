@@ -9,6 +9,11 @@ prep_scripts="../../utils/prep_scripts"
 destination_path=$parentdir'/data/inference/'${inference_data_name}
 ### Values to change end ###
 
+
+
+
+#### Please avoid changing anything below this line ####
+
 finetuning_dict=$parentdir'/data/finetuning/dict.ltr.txt'
 txt_path=${wav_path}
 analysis_scripts="../../utils/analysis"
