@@ -3,16 +3,25 @@ parentdir="$(dirname "$dir")"
 parentdir="$(dirname "$parentdir")"
 
 ### Values to change,if any - start ###
+
 lm_name=""
+
 #for text file generation
 txt_files_dir="" #path to text file dir
 combined_txt_file_save_path=${parentdir}"/lm/"${lm_name}"/all_text.txt"
+
+### Values to change - end ###
+
+
+
+#### Avoid changing anything below this line ####
+
 
 #For kenlm
 top_k=500000
 input_txt_file_path=${parentdir}"/data/finetuning/train.wrd"
 output_path=${parentdir}"/lm/"${lm_name}
-kenlm_bins=${parentdir}"/../kenlm/build/bin"
+kenlm_bins="/opt/wav2vec/kenlm/build/bin"
 
 #For lexicon 
 vocab_txt_file=${output_path}"/vocab-"${top_k}".txt"
@@ -23,7 +32,7 @@ run_concatenate_text=0 # 0 for skipping, 1 for runnning
 run_generate_lm_vocab=1 # 0 for skipping, 1 for running
 run_make_lexicon_lst=1 # 0 for skipping, 1 for running
 
-### Values to change - end ###
+
 mkdir ${output_path} 
 
 if [ "$run_concatenate_text" == 1 ]; then
