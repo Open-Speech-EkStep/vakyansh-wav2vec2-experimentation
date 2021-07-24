@@ -75,8 +75,19 @@ c) Check W&B
 
 ### Step 2.5 Stop training after 2 epochs
 
-Resume from checkpoint_500 
+Resume from checkpoint_500. Get checkpoint from here:
+```
+cd vakyansh-wav2vec2-experimentation/checkpoints/finetuning
+rm checkpoint*
+wget https://storage.googleapis.com/vakyaansh-open-models/ieee/checkpoints/warm/checkpoint_last.pt
+```
 
-### Step 2.6 Let it run
+### Step 2.6 Let it run till 1000 updates
 
+### Step 2.7 Inference using viterbi
 
+### Step 2.8 Create LM using training data
+
+### Step 2.8 Inference using kenlm
+
+### Step 2.9 Show results section
