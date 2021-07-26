@@ -1,0 +1,7 @@
+- task.data=/home/harveen.chadha/training/vakyansh-wav2vec2-experimentation/data/finetuning
+- model.w2v_path=/home/harveen.chadha/training/vakyansh-wav2vec2-experimentation/checkpoints/pretraining/checkpoint_best.pt
+- distributed_training.distributed_world_size=1
+- +optimization.update_freq=[24]
+- +common.tensorboard_logdir=/home/harveen.chadha/training/vakyansh-wav2vec2-experimentation/logs/finetuning/tensorboard
+- checkpoint.save_dir=/home/harveen.chadha/training/vakyansh-wav2vec2-experimentation/checkpoints/finetuning
+- checkpoint.restore_file=/home/harveen.chadha/training/vakyansh-wav2vec2-experimentation/checkpoints/finetuning/checkpoint_last.pt

@@ -1,0 +1,491 @@
+[2021-04-29 18:53:20,148][fairseq_cli.train][INFO] - {'_name': None, 'common': {'_name': None, 'no_progress_bar': False, 'log_interval': 1, 'log_format': 'json', 'log_file': None, 'tensorboard_logdir': '/home/harveen.chadha/vakyansh-wav2vec2-experimentation/logs/finetuning/tensorboard', 'wandb_project': None, 'azureml_logging': False, 'seed': 1, 'cpu': False, 'tpu': False, 'bf16': False, 'memory_efficient_bf16': False, 'fp16': True, 'memory_efficient_fp16': False, 'fp16_no_flatten_grads': False, 'fp16_init_scale': 128, 'fp16_scale_window': None, 'fp16_scale_tolerance': 0.0, 'min_loss_scale': 0.0001, 'threshold_loss_scale': None, 'user_dir': None, 'empty_cache_freq': 0, 'all_gather_list_size': 16384, 'model_parallel_size': 1, 'quantization_config_path': None, 'profile': False, 'reset_logging': False, 'suppress_crashes': False, 'use_plasma_view': False, 'plasma_path': '/tmp/plasma'}, 'common_eval': {'_name': None, 'path': None, 'post_process': None, 'quiet': False, 'model_overrides': '{}', 'results_path': None}, 'distributed_training': {'_name': None, 'distributed_world_size': 4, 'distributed_rank': 0, 'distributed_backend': 'nccl', 'distributed_init_method': 'tcp://localhost:11873', 'distributed_port': -1, 'device_id': 0, 'distributed_no_spawn': False, 'ddp_backend': 'legacy_ddp', 'bucket_cap_mb': 25, 'fix_batches_to_gpus': False, 'find_unused_parameters': False, 'fast_stat_sync': False, 'heartbeat_timeout': -1, 'broadcast_buffers': False, 'slowmo_momentum': None, 'slowmo_algorithm': 'LocalSGD', 'localsgd_frequency': 3, 'nprocs_per_node': 4, 'pipeline_model_parallel': False, 'pipeline_balance': None, 'pipeline_devices': None, 'pipeline_chunks': 0, 'pipeline_encoder_balance': None, 'pipeline_encoder_devices': None, 'pipeline_decoder_balance': None, 'pipeline_decoder_devices': None, 'pipeline_checkpoint': 'never', 'zero_sharding': 'none', 'fp16': True, 'memory_efficient_fp16': False, 'tpu': False, 'no_reshard_after_forward': False, 'fp32_reduce_scatter': False, 'cpu_offload': False, 'distributed_num_procs': 4}, 'dataset': {'_name': None, 'num_workers': 4, 'skip_invalid_size_inputs_valid_test': True, 'max_tokens': 320000, 'batch_size': None, 'required_batch_size_multiple': 8, 'required_seq_len_multiple': 1, 'dataset_impl': None, 'data_buffer_size': 10, 'train_subset': 'train', 'valid_subset': 'valid', 'validate_interval': 50, 'validate_interval_updates': 0, 'validate_after_updates': 10000, 'fixed_validation_seed': None, 'disable_validation': False, 'max_tokens_valid': 320000, 'batch_size_valid': None, 'max_valid_steps': None, 'curriculum': 0, 'gen_subset': 'test', 'num_shards': 1, 'shard_id': 0}, 'optimization': {'_name': None, 'max_epoch': 0, 'max_update': 20000, 'stop_time_hours': 0.0, 'clip_norm': 0.0, 'sentence_avg': True, 'update_freq': [6], 'lr': [5e-05], 'stop_min_lr': -1.0, 'use_bmuf': False}, 'checkpoint': {'_name': None, 'save_dir': '/home/harveen.chadha/vakyansh-wav2vec2-experimentation/checkpoints/finetuning', 'restore_file': '/home/harveen.chadha/vakyansh-wav2vec2-experimentation/checkpoints/finetuning/checkpoint_last.pt', 'finetune_from_model': None, 'reset_dataloader': False, 'reset_lr_scheduler': False, 'reset_meters': False, 'reset_optimizer': False, 'optimizer_overrides': '{}', 'save_interval': 50, 'save_interval_updates': 10000, 'keep_interval_updates': 1, 'keep_interval_updates_pattern': -1, 'keep_last_epochs': -1, 'keep_best_checkpoints': -1, 'no_save': False, 'no_epoch_checkpoints': True, 'no_last_checkpoints': False, 'no_save_optimizer_state': False, 'best_checkpoint_metric': 'wer', 'maximize_best_checkpoint_metric': False, 'patience': -1, 'checkpoint_suffix': '', 'checkpoint_shard_count': 1, 'load_checkpoint_on_all_dp_ranks': False, 'write_checkpoints_asynchronously': False, 'model_parallel_size': 1}, 'bmuf': {'_name': None, 'block_lr': 1.0, 'block_momentum': 0.875, 'global_sync_iter': 50, 'warmup_iterations': 500, 'use_nbm': False, 'average_sync': False, 'distributed_world_size': 4}, 'generation': {'_name': None, 'beam': 5, 'nbest': 1, 'max_len_a': 0.0, 'max_len_b': 200, 'min_len': 1, 'match_source_len': False, 'unnormalized': False, 'no_early_stop': False, 'no_beamable_mm': False, 'lenpen': 1.0, 'unkpen': 0.0, 'replace_unk': None, 'sacrebleu': False, 'score_reference': False, 'prefix_size': 0, 'no_repeat_ngram_size': 0, 'sampling': False, 'sampling_topk': -1, 'sampling_topp': -1.0, 'constraints': None, 'temperature': 1.0, 'diverse_beam_groups': -1, 'diverse_beam_strength': 0.5, 'diversity_rate': -1.0, 'print_alignment': None, 'print_step': False, 'lm_path': None, 'lm_weight': 0.0, 'iter_decode_eos_penalty': 0.0, 'iter_decode_max_iter': 10, 'iter_decode_force_max_iter': False, 'iter_decode_with_beam': 1, 'iter_decode_with_external_reranker': False, 'retain_iter_history': False, 'retain_dropout': False, 'retain_dropout_modules': None, 'decoding_format': None, 'no_seed_provided': False}, 'eval_lm': {'_name': None, 'output_word_probs': False, 'output_word_stats': False, 'context_window': 0, 'softmax_batch': 9223372036854775807}, 'interactive': {'_name': None, 'buffer_size': 0, 'input': '-'}, 'model': {'_name': 'wav2vec_ctc', 'w2v_path': '/home/harveen.chadha/vakyansh-wav2vec2-experimentation/checkpoints/pretraining/checkpoint_best.pt', 'no_pretrained_weights': False, 'dropout_input': 0.0, 'final_dropout': 0.0, 'dropout': 0.0, 'attention_dropout': 0.0, 'activation_dropout': 0.1, 'apply_mask': True, 'mask_length': 10, 'mask_prob': 0.65, 'mask_selection': 'static', 'mask_other': 0.0, 'no_mask_overlap': False, 'mask_channel_length': 64, 'mask_channel_prob': 0.5, 'mask_channel_selection': 'static', 'mask_channel_other': 0.0, 'no_mask_channel_overlap': False, 'freeze_finetune_updates': 100, 'feature_grad_mult': 0.0, 'layerdrop': 0.05, 'normalize': False, 'data': '/home/harveen.chadha/vakyansh-wav2vec2-experimentation/data/finetuning', 'w2v_args': None, 'mask_min_space': 1, 'mask_channel_min_space': 1, 'conv_feature_layers': '[(512, 10, 5)] + [(512, 3, 2)] * 4 + [(512,2,2)] + [(512,2,2)]', 'encoder_embed_dim': 768}, 'task': {'_name': 'audio_pretraining', 'data': '/home/harveen.chadha/vakyansh-wav2vec2-experimentation/data/finetuning', 'labels': 'ltr', 'sample_rate': 16000, 'normalize': False, 'enable_padding': False, 'max_sample_size': None, 'min_sample_size': None, 'eval_wer': False, 'eval_wer_config': {'_name': None, 'beam': 5, 'nbest': 1, 'max_len_a': 0.0, 'max_len_b': 200, 'min_len': 1, 'match_source_len': False, 'unnormalized': False, 'no_early_stop': False, 'no_beamable_mm': False, 'lenpen': 1.0, 'unkpen': 0.0, 'replace_unk': None, 'sacrebleu': False, 'score_reference': False, 'prefix_size': 0, 'no_repeat_ngram_size': 0, 'sampling': False, 'sampling_topk': -1, 'sampling_topp': -1.0, 'constraints': None, 'temperature': 1.0, 'diverse_beam_groups': -1, 'diverse_beam_strength': 0.5, 'diversity_rate': -1.0, 'print_alignment': None, 'print_step': False, 'lm_path': None, 'lm_weight': 0.0, 'iter_decode_eos_penalty': 0.0, 'iter_decode_max_iter': 10, 'iter_decode_force_max_iter': False, 'iter_decode_with_beam': 1, 'iter_decode_with_external_reranker': False, 'retain_iter_history': False, 'retain_dropout': False, 'retain_dropout_modules': None, 'decoding_format': None, 'no_seed_provided': False}, 'eval_wer_tokenizer': None, 'eval_wer_post_process': 'letter', 'autoregressive': False, 'num_batch_buckets': 0, 'precompute_mask_indices': False, 'mask_length': 10, 'mask_prob': 0.65, 'mask_selection': 'static', 'mask_other': 0.0, 'no_mask_overlap': False, 'mask_min_space': 1, 'mask_channel_length': 64, 'mask_channel_prob': 0.5, 'mask_channel_selection': 'static', 'mask_channel_other': 0.0, 'no_mask_channel_overlap': False, 'mask_channel_min_space': 1, 'conv_feature_layers': '[(512, 10, 5)] + [(512, 3, 2)] * 4 + [(512,2,2)] + [(512,2,2)]', 'encoder_embed_dim': 768, 'tpu': False}, 'criterion': {'_name': 'ctc', 'zero_infinity': True, 'sentence_avg': True, 'post_process': 'letter', 'wer_kenlm_model': None, 'wer_lexicon': None, 'wer_lm_weight': 2.0, 'wer_word_score': -1.0, 'wer_args': None}, 'optimizer': {'_name': 'adam', 'adam_betas': '(0.9,0.98)', 'adam_eps': 1e-08, 'weight_decay': 0.0, 'use_old_adam': False, 'tpu': False, 'lr': [5e-05]}, 'lr_scheduler': {'_name': 'tri_stage', 'warmup_steps': 0, 'hold_steps': 0, 'decay_steps': 0, 'phase_ratio': [0.1, 0.4, 0.5], 'init_lr_scale': 0.01, 'final_lr_scale': 0.05, 'max_update': 20000, 'lr': [5e-05]}, 'scoring': None, 'bpe': None, 'tokenizer': None, 'job_logging_cfg': {'version': 1, 'formatters': {'simple': {'format': '[%(asctime)s][%(name)s][%(levelname)s] - %(message)s'}}, 'handlers': {'console': {'class': 'logging.StreamHandler', 'formatter': 'simple', 'stream': 'ext://sys.stdout'}, 'file': {'class': 'logging.FileHandler', 'formatter': 'simple', 'filename': 'hydra_train.log'}}, 'root': {'level': 'INFO', 'handlers': ['console', 'file']}, 'disable_existing_loggers': False}}
+[2021-04-29 18:53:23,685][fairseq_cli.train][INFO] - Wav2VecCtc(
+  (w2v_encoder): Wav2VecEncoder(
+    (w2v_model): Wav2Vec2Model(
+      (feature_extractor): ConvFeatureExtractionModel(
+        (conv_layers): ModuleList(
+          (0): Sequential(
+            (0): Conv1d(1, 512, kernel_size=(10,), stride=(5,), bias=False)
+            (1): Dropout(p=0.0, inplace=False)
+            (2): Fp32GroupNorm(512, 512, eps=1e-05, affine=True)
+            (3): GELU()
+          )
+          (1): Sequential(
+            (0): Conv1d(512, 512, kernel_size=(3,), stride=(2,), bias=False)
+            (1): Dropout(p=0.0, inplace=False)
+            (2): GELU()
+          )
+          (2): Sequential(
+            (0): Conv1d(512, 512, kernel_size=(3,), stride=(2,), bias=False)
+            (1): Dropout(p=0.0, inplace=False)
+            (2): GELU()
+          )
+          (3): Sequential(
+            (0): Conv1d(512, 512, kernel_size=(3,), stride=(2,), bias=False)
+            (1): Dropout(p=0.0, inplace=False)
+            (2): GELU()
+          )
+          (4): Sequential(
+            (0): Conv1d(512, 512, kernel_size=(3,), stride=(2,), bias=False)
+            (1): Dropout(p=0.0, inplace=False)
+            (2): GELU()
+          )
+          (5): Sequential(
+            (0): Conv1d(512, 512, kernel_size=(2,), stride=(2,), bias=False)
+            (1): Dropout(p=0.0, inplace=False)
+            (2): GELU()
+          )
+          (6): Sequential(
+            (0): Conv1d(512, 512, kernel_size=(2,), stride=(2,), bias=False)
+            (1): Dropout(p=0.0, inplace=False)
+            (2): GELU()
+          )
+        )
+      )
+      (post_extract_proj): Linear(in_features=512, out_features=768, bias=True)
+      (dropout_input): Dropout(p=0.0, inplace=False)
+      (dropout_features): Dropout(p=0.1, inplace=False)
+      (quantizer): None
+      (project_q): None
+      (encoder): TransformerEncoder(
+        (pos_conv): Sequential(
+          (0): Conv1d(768, 768, kernel_size=(128,), stride=(1,), padding=(64,), groups=16)
+          (1): SamePad()
+          (2): GELU()
+        )
+        (layers): ModuleList(
+          (0): TransformerSentenceEncoderLayer(
+            (self_attn): MultiheadAttention(
+              (dropout_module): FairseqDropout()
+              (k_proj): Linear(in_features=768, out_features=768, bias=True)
+              (v_proj): Linear(in_features=768, out_features=768, bias=True)
+              (q_proj): Linear(in_features=768, out_features=768, bias=True)
+              (out_proj): Linear(in_features=768, out_features=768, bias=True)
+            )
+            (dropout1): Dropout(p=0.0, inplace=False)
+            (dropout2): Dropout(p=0.1, inplace=False)
+            (dropout3): Dropout(p=0.0, inplace=False)
+            (self_attn_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+            (fc1): Linear(in_features=768, out_features=3072, bias=True)
+            (fc2): Linear(in_features=3072, out_features=768, bias=True)
+            (final_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          )
+          (1): TransformerSentenceEncoderLayer(
+            (self_attn): MultiheadAttention(
+              (dropout_module): FairseqDropout()
+              (k_proj): Linear(in_features=768, out_features=768, bias=True)
+              (v_proj): Linear(in_features=768, out_features=768, bias=True)
+              (q_proj): Linear(in_features=768, out_features=768, bias=True)
+              (out_proj): Linear(in_features=768, out_features=768, bias=True)
+            )
+            (dropout1): Dropout(p=0.0, inplace=False)
+            (dropout2): Dropout(p=0.1, inplace=False)
+            (dropout3): Dropout(p=0.0, inplace=False)
+            (self_attn_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+            (fc1): Linear(in_features=768, out_features=3072, bias=True)
+            (fc2): Linear(in_features=3072, out_features=768, bias=True)
+            (final_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          )
+          (2): TransformerSentenceEncoderLayer(
+            (self_attn): MultiheadAttention(
+              (dropout_module): FairseqDropout()
+              (k_proj): Linear(in_features=768, out_features=768, bias=True)
+              (v_proj): Linear(in_features=768, out_features=768, bias=True)
+              (q_proj): Linear(in_features=768, out_features=768, bias=True)
+              (out_proj): Linear(in_features=768, out_features=768, bias=True)
+            )
+            (dropout1): Dropout(p=0.0, inplace=False)
+            (dropout2): Dropout(p=0.1, inplace=False)
+            (dropout3): Dropout(p=0.0, inplace=False)
+            (self_attn_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+            (fc1): Linear(in_features=768, out_features=3072, bias=True)
+            (fc2): Linear(in_features=3072, out_features=768, bias=True)
+            (final_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          )
+          (3): TransformerSentenceEncoderLayer(
+            (self_attn): MultiheadAttention(
+              (dropout_module): FairseqDropout()
+              (k_proj): Linear(in_features=768, out_features=768, bias=True)
+              (v_proj): Linear(in_features=768, out_features=768, bias=True)
+              (q_proj): Linear(in_features=768, out_features=768, bias=True)
+              (out_proj): Linear(in_features=768, out_features=768, bias=True)
+            )
+            (dropout1): Dropout(p=0.0, inplace=False)
+            (dropout2): Dropout(p=0.1, inplace=False)
+            (dropout3): Dropout(p=0.0, inplace=False)
+            (self_attn_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+            (fc1): Linear(in_features=768, out_features=3072, bias=True)
+            (fc2): Linear(in_features=3072, out_features=768, bias=True)
+            (final_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          )
+          (4): TransformerSentenceEncoderLayer(
+            (self_attn): MultiheadAttention(
+              (dropout_module): FairseqDropout()
+              (k_proj): Linear(in_features=768, out_features=768, bias=True)
+              (v_proj): Linear(in_features=768, out_features=768, bias=True)
+              (q_proj): Linear(in_features=768, out_features=768, bias=True)
+              (out_proj): Linear(in_features=768, out_features=768, bias=True)
+            )
+            (dropout1): Dropout(p=0.0, inplace=False)
+            (dropout2): Dropout(p=0.1, inplace=False)
+            (dropout3): Dropout(p=0.0, inplace=False)
+            (self_attn_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+            (fc1): Linear(in_features=768, out_features=3072, bias=True)
+            (fc2): Linear(in_features=3072, out_features=768, bias=True)
+            (final_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          )
+          (5): TransformerSentenceEncoderLayer(
+            (self_attn): MultiheadAttention(
+              (dropout_module): FairseqDropout()
+              (k_proj): Linear(in_features=768, out_features=768, bias=True)
+              (v_proj): Linear(in_features=768, out_features=768, bias=True)
+              (q_proj): Linear(in_features=768, out_features=768, bias=True)
+              (out_proj): Linear(in_features=768, out_features=768, bias=True)
+            )
+            (dropout1): Dropout(p=0.0, inplace=False)
+            (dropout2): Dropout(p=0.1, inplace=False)
+            (dropout3): Dropout(p=0.0, inplace=False)
+            (self_attn_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+            (fc1): Linear(in_features=768, out_features=3072, bias=True)
+            (fc2): Linear(in_features=3072, out_features=768, bias=True)
+            (final_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          )
+          (6): TransformerSentenceEncoderLayer(
+            (self_attn): MultiheadAttention(
+              (dropout_module): FairseqDropout()
+              (k_proj): Linear(in_features=768, out_features=768, bias=True)
+              (v_proj): Linear(in_features=768, out_features=768, bias=True)
+              (q_proj): Linear(in_features=768, out_features=768, bias=True)
+              (out_proj): Linear(in_features=768, out_features=768, bias=True)
+            )
+            (dropout1): Dropout(p=0.0, inplace=False)
+            (dropout2): Dropout(p=0.1, inplace=False)
+            (dropout3): Dropout(p=0.0, inplace=False)
+            (self_attn_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+            (fc1): Linear(in_features=768, out_features=3072, bias=True)
+            (fc2): Linear(in_features=3072, out_features=768, bias=True)
+            (final_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          )
+          (7): TransformerSentenceEncoderLayer(
+            (self_attn): MultiheadAttention(
+              (dropout_module): FairseqDropout()
+              (k_proj): Linear(in_features=768, out_features=768, bias=True)
+              (v_proj): Linear(in_features=768, out_features=768, bias=True)
+              (q_proj): Linear(in_features=768, out_features=768, bias=True)
+              (out_proj): Linear(in_features=768, out_features=768, bias=True)
+            )
+            (dropout1): Dropout(p=0.0, inplace=False)
+            (dropout2): Dropout(p=0.1, inplace=False)
+            (dropout3): Dropout(p=0.0, inplace=False)
+            (self_attn_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+            (fc1): Linear(in_features=768, out_features=3072, bias=True)
+            (fc2): Linear(in_features=3072, out_features=768, bias=True)
+            (final_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          )
+          (8): TransformerSentenceEncoderLayer(
+            (self_attn): MultiheadAttention(
+              (dropout_module): FairseqDropout()
+              (k_proj): Linear(in_features=768, out_features=768, bias=True)
+              (v_proj): Linear(in_features=768, out_features=768, bias=True)
+              (q_proj): Linear(in_features=768, out_features=768, bias=True)
+              (out_proj): Linear(in_features=768, out_features=768, bias=True)
+            )
+            (dropout1): Dropout(p=0.0, inplace=False)
+            (dropout2): Dropout(p=0.1, inplace=False)
+            (dropout3): Dropout(p=0.0, inplace=False)
+            (self_attn_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+            (fc1): Linear(in_features=768, out_features=3072, bias=True)
+            (fc2): Linear(in_features=3072, out_features=768, bias=True)
+            (final_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          )
+          (9): TransformerSentenceEncoderLayer(
+            (self_attn): MultiheadAttention(
+              (dropout_module): FairseqDropout()
+              (k_proj): Linear(in_features=768, out_features=768, bias=True)
+              (v_proj): Linear(in_features=768, out_features=768, bias=True)
+              (q_proj): Linear(in_features=768, out_features=768, bias=True)
+              (out_proj): Linear(in_features=768, out_features=768, bias=True)
+            )
+            (dropout1): Dropout(p=0.0, inplace=False)
+            (dropout2): Dropout(p=0.1, inplace=False)
+            (dropout3): Dropout(p=0.0, inplace=False)
+            (self_attn_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+            (fc1): Linear(in_features=768, out_features=3072, bias=True)
+            (fc2): Linear(in_features=3072, out_features=768, bias=True)
+            (final_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          )
+          (10): TransformerSentenceEncoderLayer(
+            (self_attn): MultiheadAttention(
+              (dropout_module): FairseqDropout()
+              (k_proj): Linear(in_features=768, out_features=768, bias=True)
+              (v_proj): Linear(in_features=768, out_features=768, bias=True)
+              (q_proj): Linear(in_features=768, out_features=768, bias=True)
+              (out_proj): Linear(in_features=768, out_features=768, bias=True)
+            )
+            (dropout1): Dropout(p=0.0, inplace=False)
+            (dropout2): Dropout(p=0.1, inplace=False)
+            (dropout3): Dropout(p=0.0, inplace=False)
+            (self_attn_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+            (fc1): Linear(in_features=768, out_features=3072, bias=True)
+            (fc2): Linear(in_features=3072, out_features=768, bias=True)
+            (final_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          )
+          (11): TransformerSentenceEncoderLayer(
+            (self_attn): MultiheadAttention(
+              (dropout_module): FairseqDropout()
+              (k_proj): Linear(in_features=768, out_features=768, bias=True)
+              (v_proj): Linear(in_features=768, out_features=768, bias=True)
+              (q_proj): Linear(in_features=768, out_features=768, bias=True)
+              (out_proj): Linear(in_features=768, out_features=768, bias=True)
+            )
+            (dropout1): Dropout(p=0.0, inplace=False)
+            (dropout2): Dropout(p=0.1, inplace=False)
+            (dropout3): Dropout(p=0.0, inplace=False)
+            (self_attn_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+            (fc1): Linear(in_features=768, out_features=3072, bias=True)
+            (fc2): Linear(in_features=3072, out_features=768, bias=True)
+            (final_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+          )
+        )
+        (layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+      )
+      (layer_norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      (final_proj): None
+    )
+    (final_dropout): Dropout(p=0.0, inplace=False)
+    (proj): Linear(in_features=768, out_features=123, bias=True)
+  )
+)
+[2021-04-29 18:53:23,689][fairseq_cli.train][INFO] - task: AudioPretrainingTask
+[2021-04-29 18:53:23,689][fairseq_cli.train][INFO] - model: Wav2VecCtc
+[2021-04-29 18:53:23,689][fairseq_cli.train][INFO] - criterion: CtcCriterion
+[2021-04-29 18:53:23,691][fairseq_cli.train][INFO] - num. shared model params: 94,466,299 (num. trained: 94,466,299)
+[2021-04-29 18:53:23,692][fairseq_cli.train][INFO] - num. expert model params: 0 (num. trained: 0)
+[2021-04-29 18:53:23,695][fairseq.data.audio.raw_audio_dataset][INFO] - loaded 1112, skipped 0 samples
+[2021-04-29 18:53:23,728][root][INFO] - Added key: store_based_barrier_key:2 to store for rank: 0
+[2021-04-29 18:53:23,729][fairseq.trainer][INFO] - detected shared parameter: w2v_encoder.w2v_model.feature_extractor.conv_layers.0.0.bias <- w2v_encoder.w2v_model.feature_extractor.conv_layers.1.0.bias
+[2021-04-29 18:53:23,729][fairseq.trainer][INFO] - detected shared parameter: w2v_encoder.w2v_model.feature_extractor.conv_layers.0.0.bias <- w2v_encoder.w2v_model.feature_extractor.conv_layers.2.0.bias
+[2021-04-29 18:53:23,729][fairseq.trainer][INFO] - detected shared parameter: w2v_encoder.w2v_model.feature_extractor.conv_layers.0.0.bias <- w2v_encoder.w2v_model.feature_extractor.conv_layers.3.0.bias
+[2021-04-29 18:53:23,729][fairseq.trainer][INFO] - detected shared parameter: w2v_encoder.w2v_model.feature_extractor.conv_layers.0.0.bias <- w2v_encoder.w2v_model.feature_extractor.conv_layers.4.0.bias
+[2021-04-29 18:53:23,729][fairseq.trainer][INFO] - detected shared parameter: w2v_encoder.w2v_model.feature_extractor.conv_layers.0.0.bias <- w2v_encoder.w2v_model.feature_extractor.conv_layers.5.0.bias
+[2021-04-29 18:53:23,729][fairseq.trainer][INFO] - detected shared parameter: w2v_encoder.w2v_model.feature_extractor.conv_layers.0.0.bias <- w2v_encoder.w2v_model.feature_extractor.conv_layers.6.0.bias
+[2021-04-29 18:53:23,833][fairseq.utils][INFO] - ***********************CUDA enviroments for all 4 workers***********************
+[2021-04-29 18:53:23,833][fairseq.utils][INFO] - rank   0: capabilities =  7.5  ; total memory = 14.756 GB ; name = Tesla T4                                
+[2021-04-29 18:53:23,834][fairseq.utils][INFO] - rank   1: capabilities =  7.5  ; total memory = 14.756 GB ; name = Tesla T4                                
+[2021-04-29 18:53:23,834][fairseq.utils][INFO] - rank   2: capabilities =  7.5  ; total memory = 14.756 GB ; name = Tesla T4                                
+[2021-04-29 18:53:23,834][fairseq.utils][INFO] - rank   3: capabilities =  7.5  ; total memory = 14.756 GB ; name = Tesla T4                                
+[2021-04-29 18:53:23,834][fairseq.utils][INFO] - ***********************CUDA enviroments for all 4 workers***********************
+[2021-04-29 18:53:23,834][fairseq_cli.train][INFO] - training on 4 devices (GPUs/TPUs)
+[2021-04-29 18:53:23,834][fairseq_cli.train][INFO] - max tokens per device = 320000 and max sentences per device = None
+[2021-04-29 18:53:23,835][fairseq.trainer][INFO] - Preparing to load checkpoint /home/harveen.chadha/vakyansh-wav2vec2-experimentation/checkpoints/finetuning/checkpoint_last.pt
+[2021-04-29 18:53:23,836][fairseq.trainer][INFO] - No existing checkpoint found /home/harveen.chadha/vakyansh-wav2vec2-experimentation/checkpoints/finetuning/checkpoint_last.pt
+[2021-04-29 18:53:23,836][fairseq.trainer][INFO] - loading train data for epoch 1
+[2021-04-29 18:53:23,846][fairseq.data.audio.raw_audio_dataset][INFO] - loaded 10010, skipped 0 samples
+[2021-04-29 18:53:24,061][fairseq.trainer][INFO] - begin training epoch 1
+[2021-04-29 18:53:24,062][fairseq_cli.train][INFO] - Start iterating over samples
+[2021-04-29 18:53:29,729][fairseq.trainer][INFO] - NOTE: gradient overflow detected, ignoring gradient, setting loss scale to: 64.0
+[2021-04-29 18:53:30,173][fairseq.trainer][INFO] - NOTE: gradient overflow detected, ignoring gradient, setting loss scale to: 32.0
+[2021-04-29 18:53:30,598][fairseq.trainer][INFO] - NOTE: gradient overflow detected, ignoring gradient, setting loss scale to: 16.0
+[2021-04-29 18:53:31,073][train_inner][INFO] - {"epoch": 1, "update": 0.022, "loss": "1932.37", "ntokens": "2872", "nsentences": "56", "nll_loss": "37.679", "wps": "0", "ups": "0", "wpb": "2872", "bsz": "56", "num_updates": "1", "lr": "5.2475e-07", "gnorm": "471.945", "loss_scale": "16", "train_wall": "2", "gb_free": "12.4", "wall": "7"}
+[2021-04-29 18:53:31,515][train_inner][INFO] - {"epoch": 1, "update": 0.028, "loss": "1983.27", "ntokens": "2692", "nsentences": "55", "nll_loss": "40.52", "wps": "6138.3", "ups": "2.28", "wpb": "2692", "bsz": "55", "num_updates": "2", "lr": "5.495e-07", "gnorm": "471.913", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "8"}
+[2021-04-29 18:53:31,959][train_inner][INFO] - {"epoch": 1, "update": 0.033, "loss": "1996.79", "ntokens": "2696", "nsentences": "56", "nll_loss": "41.476", "wps": "6097.5", "ups": "2.26", "wpb": "2696", "bsz": "56", "num_updates": "3", "lr": "5.7425e-07", "gnorm": "459.556", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "8"}
+[2021-04-29 18:53:32,396][train_inner][INFO] - {"epoch": 1, "update": 0.039, "loss": "1867.15", "ntokens": "2760", "nsentences": "59", "nll_loss": "39.914", "wps": "6341.9", "ups": "2.3", "wpb": "2760", "bsz": "59", "num_updates": "4", "lr": "5.99e-07", "gnorm": "420.173", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "9"}
+[2021-04-29 18:53:32,834][train_inner][INFO] - {"epoch": 1, "update": 0.044, "loss": "2193.95", "ntokens": "2667", "nsentences": "47", "nll_loss": "38.664", "wps": "6109.6", "ups": "2.29", "wpb": "2667", "bsz": "47", "num_updates": "5", "lr": "6.2375e-07", "gnorm": "493.351", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "9"}
+[2021-04-29 18:53:33,288][train_inner][INFO] - {"epoch": 1, "update": 0.05, "loss": "1942.46", "ntokens": "2748", "nsentences": "58", "nll_loss": "40.998", "wps": "6081.1", "ups": "2.21", "wpb": "2748", "bsz": "58", "num_updates": "6", "lr": "6.485e-07", "gnorm": "437.513", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "9"}
+[2021-04-29 18:53:33,717][train_inner][INFO] - {"epoch": 1, "update": 0.056, "loss": "2035.38", "ntokens": "2719", "nsentences": "53", "nll_loss": "39.675", "wps": "6363", "ups": "2.34", "wpb": "2719", "bsz": "53", "num_updates": "7", "lr": "6.7325e-07", "gnorm": "449.015", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "10"}
+[2021-04-29 18:53:34,193][train_inner][INFO] - {"epoch": 1, "update": 0.061, "loss": "1876.41", "ntokens": "3025", "nsentences": "57", "nll_loss": "35.357", "wps": "6375.8", "ups": "2.11", "wpb": "3025", "bsz": "57", "num_updates": "8", "lr": "6.98e-07", "gnorm": "436.522", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "10"}
+[2021-04-29 18:53:34,636][train_inner][INFO] - {"epoch": 1, "update": 0.067, "loss": "1975.39", "ntokens": "2521", "nsentences": "53", "nll_loss": "41.529", "wps": "5720", "ups": "2.27", "wpb": "2521", "bsz": "53", "num_updates": "9", "lr": "7.2275e-07", "gnorm": "396.083", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "11"}
+[2021-04-29 18:53:35,077][train_inner][INFO] - {"epoch": 1, "update": 0.072, "loss": "2117.66", "ntokens": "2668", "nsentences": "51", "nll_loss": "40.48", "wps": "6074.4", "ups": "2.28", "wpb": "2668", "bsz": "51", "num_updates": "10", "lr": "7.475e-07", "gnorm": "442.275", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "11"}
+[2021-04-29 18:53:35,555][train_inner][INFO] - {"epoch": 1, "update": 0.078, "loss": "1944.64", "ntokens": "2807", "nsentences": "56", "nll_loss": "38.796", "wps": "5896.1", "ups": "2.1", "wpb": "2807", "bsz": "56", "num_updates": "11", "lr": "7.7225e-07", "gnorm": "432.93", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "12"}
+[2021-04-29 18:53:36,005][train_inner][INFO] - {"epoch": 1, "update": 0.083, "loss": "2017.68", "ntokens": "2565", "nsentences": "54", "nll_loss": "42.477", "wps": "5717.3", "ups": "2.23", "wpb": "2565", "bsz": "54", "num_updates": "12", "lr": "7.97e-07", "gnorm": "456.415", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "12"}
+[2021-04-29 18:53:36,467][train_inner][INFO] - {"epoch": 1, "update": 0.089, "loss": "2045.73", "ntokens": "2784", "nsentences": "53", "nll_loss": "38.945", "wps": "6053.4", "ups": "2.17", "wpb": "2784", "bsz": "53", "num_updates": "13", "lr": "8.2175e-07", "gnorm": "503.83", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "13"}
+[2021-04-29 18:53:36,915][train_inner][INFO] - {"epoch": 1, "update": 0.094, "loss": "2030.7", "ntokens": "2789", "nsentences": "53", "nll_loss": "38.59", "wps": "6276.5", "ups": "2.25", "wpb": "2789", "bsz": "53", "num_updates": "14", "lr": "8.465e-07", "gnorm": "426.761", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "13"}
+[2021-04-29 18:53:37,340][train_inner][INFO] - {"epoch": 1, "update": 0.1, "loss": "2108.44", "ntokens": "2725", "nsentences": "50", "nll_loss": "38.687", "wps": "6434.7", "ups": "2.36", "wpb": "2725", "bsz": "50", "num_updates": "15", "lr": "8.7125e-07", "gnorm": "449.944", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "14"}
+[2021-04-29 18:53:37,792][train_inner][INFO] - {"epoch": 1, "update": 0.106, "loss": "1937.07", "ntokens": "2935", "nsentences": "58", "nll_loss": "38.279", "wps": "6522.9", "ups": "2.22", "wpb": "2935", "bsz": "58", "num_updates": "16", "lr": "8.96e-07", "gnorm": "416.542", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "14"}
+[2021-04-29 18:53:38,241][train_inner][INFO] - {"epoch": 1, "update": 0.111, "loss": "1954.19", "ntokens": "2884", "nsentences": "57", "nll_loss": "38.623", "wps": "6453.2", "ups": "2.24", "wpb": "2884", "bsz": "57", "num_updates": "17", "lr": "9.2075e-07", "gnorm": "446.411", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "14"}
+[2021-04-29 18:53:38,689][train_inner][INFO] - {"epoch": 1, "update": 0.117, "loss": "2065.24", "ntokens": "2868", "nsentences": "54", "nll_loss": "38.885", "wps": "6422", "ups": "2.24", "wpb": "2868", "bsz": "54", "num_updates": "18", "lr": "9.455e-07", "gnorm": "426.184", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "15"}
+[2021-04-29 18:53:39,145][train_inner][INFO] - {"epoch": 1, "update": 0.122, "loss": "1870.7", "ntokens": "2701", "nsentences": "58", "nll_loss": "40.171", "wps": "5946.9", "ups": "2.2", "wpb": "2701", "bsz": "58", "num_updates": "19", "lr": "9.7025e-07", "gnorm": "400.1", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "15"}
+[2021-04-29 18:53:39,578][train_inner][INFO] - {"epoch": 1, "update": 0.128, "loss": "1895.75", "ntokens": "2746", "nsentences": "57", "nll_loss": "39.351", "wps": "6367.5", "ups": "2.32", "wpb": "2746", "bsz": "57", "num_updates": "20", "lr": "9.95e-07", "gnorm": "406.523", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "16"}
+[2021-04-29 18:53:40,014][train_inner][INFO] - {"epoch": 1, "update": 0.133, "loss": "2036.29", "ntokens": "2498", "nsentences": "55", "nll_loss": "44.834", "wps": "5748.5", "ups": "2.3", "wpb": "2498", "bsz": "55", "num_updates": "21", "lr": "1.01975e-06", "gnorm": "439.917", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "16"}
+[2021-04-29 18:53:40,476][train_inner][INFO] - {"epoch": 1, "update": 0.139, "loss": "2113.4", "ntokens": "2701", "nsentences": "52", "nll_loss": "40.687", "wps": "5876.5", "ups": "2.18", "wpb": "2701", "bsz": "52", "num_updates": "22", "lr": "1.0445e-06", "gnorm": "461.556", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "17"}
+[2021-04-29 18:53:40,938][train_inner][INFO] - {"epoch": 1, "update": 0.144, "loss": "1968.91", "ntokens": "2734", "nsentences": "55", "nll_loss": "39.609", "wps": "5937.3", "ups": "2.17", "wpb": "2734", "bsz": "55", "num_updates": "23", "lr": "1.06925e-06", "gnorm": "481.192", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "17"}
+[2021-04-29 18:53:41,365][train_inner][INFO] - {"epoch": 1, "update": 0.15, "loss": "1813.29", "ntokens": "2626", "nsentences": "60", "nll_loss": "41.431", "wps": "6179.6", "ups": "2.35", "wpb": "2626", "bsz": "60", "num_updates": "24", "lr": "1.094e-06", "gnorm": "420.549", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "18"}
+[2021-04-29 18:53:41,812][train_inner][INFO] - {"epoch": 1, "update": 0.156, "loss": "1978.79", "ntokens": "2915", "nsentences": "56", "nll_loss": "38.015", "wps": "6534", "ups": "2.24", "wpb": "2915", "bsz": "56", "num_updates": "25", "lr": "1.11875e-06", "gnorm": "476.086", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "18"}
+[2021-04-29 18:53:42,260][train_inner][INFO] - {"epoch": 1, "update": 0.161, "loss": "1975.97", "ntokens": "2647", "nsentences": "53", "nll_loss": "39.564", "wps": "5948.7", "ups": "2.25", "wpb": "2647", "bsz": "53", "num_updates": "26", "lr": "1.1435e-06", "gnorm": "457.33", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "18"}
+[2021-04-29 18:53:42,721][train_inner][INFO] - {"epoch": 1, "update": 0.167, "loss": "2115.61", "ntokens": "2927", "nsentences": "51", "nll_loss": "36.862", "wps": "6381.9", "ups": "2.18", "wpb": "2927", "bsz": "51", "num_updates": "27", "lr": "1.16825e-06", "gnorm": "483.595", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "19"}
+[2021-04-29 18:53:43,160][train_inner][INFO] - {"epoch": 1, "update": 0.172, "loss": "1956.27", "ntokens": "2579", "nsentences": "54", "nll_loss": "40.961", "wps": "5890.4", "ups": "2.28", "wpb": "2579", "bsz": "54", "num_updates": "28", "lr": "1.193e-06", "gnorm": "460.768", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "19"}
+[2021-04-29 18:53:43,618][train_inner][INFO] - {"epoch": 1, "update": 0.178, "loss": "1997.84", "ntokens": "2613", "nsentences": "55", "nll_loss": "42.052", "wps": "5731.8", "ups": "2.19", "wpb": "2613", "bsz": "55", "num_updates": "29", "lr": "1.21775e-06", "gnorm": "434.119", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "20"}
+[2021-04-29 18:53:44,073][train_inner][INFO] - {"epoch": 1, "update": 0.183, "loss": "1882.58", "ntokens": "2903", "nsentences": "59", "nll_loss": "38.261", "wps": "6412.2", "ups": "2.21", "wpb": "2903", "bsz": "59", "num_updates": "30", "lr": "1.2425e-06", "gnorm": "419.319", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "20"}
+[2021-04-29 18:53:44,522][train_inner][INFO] - {"epoch": 1, "update": 0.189, "loss": "2031.03", "ntokens": "2552", "nsentences": "53", "nll_loss": "42.18", "wps": "5696.8", "ups": "2.23", "wpb": "2552", "bsz": "53", "num_updates": "31", "lr": "1.26725e-06", "gnorm": "461.343", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "21"}
+[2021-04-29 18:53:44,974][train_inner][INFO] - {"epoch": 1, "update": 0.194, "loss": "1927.92", "ntokens": "2577", "nsentences": "55", "nll_loss": "41.147", "wps": "5727", "ups": "2.22", "wpb": "2577", "bsz": "55", "num_updates": "32", "lr": "1.292e-06", "gnorm": "434.903", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "21"}
+[2021-04-29 18:53:45,425][train_inner][INFO] - {"epoch": 1, "update": 0.2, "loss": "1805.99", "ntokens": "2873", "nsentences": "60", "nll_loss": "37.717", "wps": "6394.4", "ups": "2.23", "wpb": "2873", "bsz": "60", "num_updates": "33", "lr": "1.31675e-06", "gnorm": "433.435", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "22"}
+[2021-04-29 18:53:45,870][train_inner][INFO] - {"epoch": 1, "update": 0.206, "loss": "1919.64", "ntokens": "2588", "nsentences": "56", "nll_loss": "41.538", "wps": "5836.9", "ups": "2.26", "wpb": "2588", "bsz": "56", "num_updates": "34", "lr": "1.3415e-06", "gnorm": "432.675", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "22"}
+[2021-04-29 18:53:46,328][train_inner][INFO] - {"epoch": 1, "update": 0.211, "loss": "1695.76", "ntokens": "2816", "nsentences": "63", "nll_loss": "37.938", "wps": "6184.4", "ups": "2.2", "wpb": "2816", "bsz": "63", "num_updates": "35", "lr": "1.36625e-06", "gnorm": "374.449", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "22"}
+[2021-04-29 18:53:46,756][train_inner][INFO] - {"epoch": 1, "update": 0.217, "loss": "1873.38", "ntokens": "2512", "nsentences": "57", "nll_loss": "42.509", "wps": "5897.5", "ups": "2.35", "wpb": "2512", "bsz": "57", "num_updates": "36", "lr": "1.391e-06", "gnorm": "387.362", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "23"}
+[2021-04-29 18:53:47,185][train_inner][INFO] - {"epoch": 1, "update": 0.222, "loss": "2077.82", "ntokens": "2628", "nsentences": "48", "nll_loss": "37.951", "wps": "6141.1", "ups": "2.34", "wpb": "2628", "bsz": "48", "num_updates": "37", "lr": "1.41575e-06", "gnorm": "485.466", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "23"}
+[2021-04-29 18:53:47,610][train_inner][INFO] - {"epoch": 1, "update": 0.228, "loss": "1962.22", "ntokens": "2498", "nsentences": "52", "nll_loss": "40.847", "wps": "5923.7", "ups": "2.37", "wpb": "2498", "bsz": "52", "num_updates": "38", "lr": "1.4405e-06", "gnorm": "438.823", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "24"}
+[2021-04-29 18:53:48,077][train_inner][INFO] - {"epoch": 1, "update": 0.233, "loss": "1791.35", "ntokens": "2754", "nsentences": "63", "nll_loss": "40.979", "wps": "5927.8", "ups": "2.15", "wpb": "2754", "bsz": "63", "num_updates": "39", "lr": "1.46525e-06", "gnorm": "399.635", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "24"}
+[2021-04-29 18:53:48,494][train_inner][INFO] - {"epoch": 1, "update": 0.239, "loss": "1931.16", "ntokens": "2510", "nsentences": "52", "nll_loss": "40.008", "wps": "6042.2", "ups": "2.41", "wpb": "2510", "bsz": "52", "num_updates": "40", "lr": "1.49e-06", "gnorm": "428.654", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "25"}
+[2021-04-29 18:53:48,919][train_inner][INFO] - {"epoch": 1, "update": 0.244, "loss": "1914.41", "ntokens": "2635", "nsentences": "52", "nll_loss": "37.78", "wps": "6229.7", "ups": "2.36", "wpb": "2635", "bsz": "52", "num_updates": "41", "lr": "1.51475e-06", "gnorm": "436.97", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "25"}
+[2021-04-29 18:53:49,368][train_inner][INFO] - {"epoch": 1, "update": 0.25, "loss": "1860.92", "ntokens": "2734", "nsentences": "58", "nll_loss": "39.478", "wps": "6110.4", "ups": "2.23", "wpb": "2734", "bsz": "58", "num_updates": "42", "lr": "1.5395e-06", "gnorm": "411.258", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "26"}
+[2021-04-29 18:53:49,821][train_inner][INFO] - {"epoch": 1, "update": 0.256, "loss": "2142.5", "ntokens": "2484", "nsentences": "51", "nll_loss": "43.988", "wps": "5507.9", "ups": "2.22", "wpb": "2484", "bsz": "51", "num_updates": "43", "lr": "1.56425e-06", "gnorm": "483.89", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "26"}
+[2021-04-29 18:53:50,262][train_inner][INFO] - {"epoch": 1, "update": 0.261, "loss": "2113.93", "ntokens": "2962", "nsentences": "52", "nll_loss": "37.112", "wps": "6745.5", "ups": "2.28", "wpb": "2962", "bsz": "52", "num_updates": "44", "lr": "1.589e-06", "gnorm": "477.169", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "26"}
+[2021-04-29 18:53:50,715][train_inner][INFO] - {"epoch": 1, "update": 0.267, "loss": "1934.29", "ntokens": "2926", "nsentences": "58", "nll_loss": "38.342", "wps": "6487.5", "ups": "2.22", "wpb": "2926", "bsz": "58", "num_updates": "45", "lr": "1.61375e-06", "gnorm": "415.124", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "27"}
+[2021-04-29 18:53:51,168][train_inner][INFO] - {"epoch": 1, "update": 0.272, "loss": "1855.66", "ntokens": "2806", "nsentences": "60", "nll_loss": "39.679", "wps": "6216.1", "ups": "2.21", "wpb": "2806", "bsz": "60", "num_updates": "46", "lr": "1.6385e-06", "gnorm": "384.83", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "27"}
+[2021-04-29 18:53:51,646][train_inner][INFO] - {"epoch": 1, "update": 0.278, "loss": "1899.7", "ntokens": "2751", "nsentences": "57", "nll_loss": "39.361", "wps": "5782.4", "ups": "2.1", "wpb": "2751", "bsz": "57", "num_updates": "47", "lr": "1.66325e-06", "gnorm": "456.676", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "28"}
+[2021-04-29 18:53:52,105][train_inner][INFO] - {"epoch": 1, "update": 0.283, "loss": "1761.06", "ntokens": "2974", "nsentences": "66", "nll_loss": "39.082", "wps": "6513", "ups": "2.19", "wpb": "2974", "bsz": "66", "num_updates": "48", "lr": "1.688e-06", "gnorm": "401.11", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "28"}
+[2021-04-29 18:53:52,555][train_inner][INFO] - {"epoch": 1, "update": 0.289, "loss": "1926.18", "ntokens": "2811", "nsentences": "58", "nll_loss": "39.743", "wps": "6274.7", "ups": "2.23", "wpb": "2811", "bsz": "58", "num_updates": "49", "lr": "1.71275e-06", "gnorm": "433.97", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "29"}
+[2021-04-29 18:53:53,018][train_inner][INFO] - {"epoch": 1, "update": 0.294, "loss": "1782.98", "ntokens": "2879", "nsentences": "64", "nll_loss": "39.636", "wps": "6263.9", "ups": "2.18", "wpb": "2879", "bsz": "64", "num_updates": "50", "lr": "1.7375e-06", "gnorm": "407.852", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "29"}
+[2021-04-29 18:53:53,457][train_inner][INFO] - {"epoch": 1, "update": 0.3, "loss": "2029.27", "ntokens": "2681", "nsentences": "52", "nll_loss": "39.359", "wps": "6137", "ups": "2.29", "wpb": "2681", "bsz": "52", "num_updates": "51", "lr": "1.76225e-06", "gnorm": "441.998", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "30"}
+[2021-04-29 18:53:53,907][train_inner][INFO] - {"epoch": 1, "update": 0.306, "loss": "1831.84", "ntokens": "2692", "nsentences": "59", "nll_loss": "40.148", "wps": "6004.5", "ups": "2.23", "wpb": "2692", "bsz": "59", "num_updates": "52", "lr": "1.787e-06", "gnorm": "417.089", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "30"}
+[2021-04-29 18:53:54,362][train_inner][INFO] - {"epoch": 1, "update": 0.311, "loss": "1826.58", "ntokens": "2663", "nsentences": "58", "nll_loss": "39.783", "wps": "5869.3", "ups": "2.2", "wpb": "2663", "bsz": "58", "num_updates": "53", "lr": "1.81175e-06", "gnorm": "436.569", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "31"}
+[2021-04-29 18:53:54,829][train_inner][INFO] - {"epoch": 1, "update": 0.317, "loss": "1996.32", "ntokens": "2808", "nsentences": "57", "nll_loss": "40.524", "wps": "6035.7", "ups": "2.15", "wpb": "2808", "bsz": "57", "num_updates": "54", "lr": "1.8365e-06", "gnorm": "441.42", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "31"}
+[2021-04-29 18:53:55,280][train_inner][INFO] - {"epoch": 1, "update": 0.322, "loss": "1911.19", "ntokens": "2827", "nsentences": "57", "nll_loss": "38.535", "wps": "6304.3", "ups": "2.23", "wpb": "2827", "bsz": "57", "num_updates": "55", "lr": "1.86125e-06", "gnorm": "463.519", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "31"}
+[2021-04-29 18:53:55,727][train_inner][INFO] - {"epoch": 1, "update": 0.328, "loss": "1941.58", "ntokens": "2664", "nsentences": "57", "nll_loss": "41.543", "wps": "5985.1", "ups": "2.25", "wpb": "2664", "bsz": "57", "num_updates": "56", "lr": "1.886e-06", "gnorm": "446.592", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "32"}
+[2021-04-29 18:53:56,199][train_inner][INFO] - {"epoch": 1, "update": 0.333, "loss": "2179.93", "ntokens": "2971", "nsentences": "51", "nll_loss": "37.421", "wps": "6318.1", "ups": "2.13", "wpb": "2971", "bsz": "51", "num_updates": "57", "lr": "1.91075e-06", "gnorm": "516.671", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "32"}
+[2021-04-29 18:53:56,656][train_inner][INFO] - {"epoch": 1, "update": 0.339, "loss": "1782.76", "ntokens": "2789", "nsentences": "64", "nll_loss": "40.91", "wps": "6119.9", "ups": "2.19", "wpb": "2789", "bsz": "64", "num_updates": "58", "lr": "1.9355e-06", "gnorm": "378.472", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "33"}
+[2021-04-29 18:53:57,112][train_inner][INFO] - {"epoch": 1, "update": 0.344, "loss": "1754.36", "ntokens": "2754", "nsentences": "64", "nll_loss": "40.769", "wps": "6072.6", "ups": "2.2", "wpb": "2754", "bsz": "64", "num_updates": "59", "lr": "1.96025e-06", "gnorm": "399.12", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "33"}
+[2021-04-29 18:53:57,576][train_inner][INFO] - {"epoch": 1, "update": 0.35, "loss": "1990.13", "ntokens": "2693", "nsentences": "56", "nll_loss": "41.384", "wps": "5814.8", "ups": "2.16", "wpb": "2693", "bsz": "56", "num_updates": "60", "lr": "1.985e-06", "gnorm": "458.359", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "34"}
+[2021-04-29 18:53:58,068][train_inner][INFO] - {"epoch": 1, "update": 0.356, "loss": "1904.66", "ntokens": "2818", "nsentences": "57", "nll_loss": "38.526", "wps": "5764.6", "ups": "2.05", "wpb": "2818", "bsz": "57", "num_updates": "61", "lr": "2.00975e-06", "gnorm": "444.868", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "34"}
+[2021-04-29 18:53:58,501][train_inner][INFO] - {"epoch": 1, "update": 0.361, "loss": "2231.19", "ntokens": "2566", "nsentences": "45", "nll_loss": "39.128", "wps": "5961", "ups": "2.32", "wpb": "2566", "bsz": "45", "num_updates": "62", "lr": "2.0345e-06", "gnorm": "483.68", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "35"}
+[2021-04-29 18:53:58,960][train_inner][INFO] - {"epoch": 1, "update": 0.367, "loss": "1987.96", "ntokens": "2695", "nsentences": "55", "nll_loss": "40.571", "wps": "5893.3", "ups": "2.19", "wpb": "2695", "bsz": "55", "num_updates": "63", "lr": "2.05925e-06", "gnorm": "430.013", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "35"}
+[2021-04-29 18:53:59,420][train_inner][INFO] - {"epoch": 1, "update": 0.372, "loss": "1792.57", "ntokens": "2891", "nsentences": "63", "nll_loss": "39.063", "wps": "6312.1", "ups": "2.18", "wpb": "2891", "bsz": "63", "num_updates": "64", "lr": "2.084e-06", "gnorm": "398.124", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "36"}
+[2021-04-29 18:53:59,866][train_inner][INFO] - {"epoch": 1, "update": 0.378, "loss": "1782.76", "ntokens": "2731", "nsentences": "62", "nll_loss": "40.473", "wps": "6154.3", "ups": "2.25", "wpb": "2731", "bsz": "62", "num_updates": "65", "lr": "2.10875e-06", "gnorm": "404.276", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "36"}
+[2021-04-29 18:54:00,323][train_inner][INFO] - {"epoch": 1, "update": 0.383, "loss": "1884.31", "ntokens": "2668", "nsentences": "58", "nll_loss": "40.963", "wps": "5862.3", "ups": "2.2", "wpb": "2668", "bsz": "58", "num_updates": "66", "lr": "2.1335e-06", "gnorm": "424.679", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "36"}
+[2021-04-29 18:54:00,765][train_inner][INFO] - {"epoch": 1, "update": 0.389, "loss": "2027.23", "ntokens": "2675", "nsentences": "53", "nll_loss": "40.166", "wps": "6082", "ups": "2.27", "wpb": "2675", "bsz": "53", "num_updates": "67", "lr": "2.15825e-06", "gnorm": "439.324", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "37"}
+[2021-04-29 18:54:01,207][train_inner][INFO] - {"epoch": 1, "update": 0.394, "loss": "1916.07", "ntokens": "2631", "nsentences": "55", "nll_loss": "40.055", "wps": "5974.4", "ups": "2.27", "wpb": "2631", "bsz": "55", "num_updates": "68", "lr": "2.183e-06", "gnorm": "425.324", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "37"}
+[2021-04-29 18:54:01,658][train_inner][INFO] - {"epoch": 1, "update": 0.4, "loss": "2134.32", "ntokens": "2644", "nsentences": "50", "nll_loss": "40.362", "wps": "5885.1", "ups": "2.23", "wpb": "2644", "bsz": "50", "num_updates": "69", "lr": "2.20775e-06", "gnorm": "484.439", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "38"}
+[2021-04-29 18:54:02,091][train_inner][INFO] - {"epoch": 1, "update": 0.406, "loss": "1976.94", "ntokens": "2575", "nsentences": "53", "nll_loss": "40.691", "wps": "5968.5", "ups": "2.32", "wpb": "2575", "bsz": "53", "num_updates": "70", "lr": "2.2325e-06", "gnorm": "444.178", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "38"}
+[2021-04-29 18:54:02,537][train_inner][INFO] - {"epoch": 1, "update": 0.411, "loss": "1984.86", "ntokens": "2624", "nsentences": "53", "nll_loss": "40.091", "wps": "5910.3", "ups": "2.25", "wpb": "2624", "bsz": "53", "num_updates": "71", "lr": "2.25725e-06", "gnorm": "442.769", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "39"}
+[2021-04-29 18:54:02,993][train_inner][INFO] - {"epoch": 1, "update": 0.417, "loss": "1828.37", "ntokens": "2642", "nsentences": "59", "nll_loss": "40.83", "wps": "5825.8", "ups": "2.2", "wpb": "2642", "bsz": "59", "num_updates": "72", "lr": "2.282e-06", "gnorm": "406.028", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "39"}
+[2021-04-29 18:54:03,435][train_inner][INFO] - {"epoch": 1, "update": 0.422, "loss": "2068.53", "ntokens": "2744", "nsentences": "50", "nll_loss": "37.692", "wps": "6242.3", "ups": "2.27", "wpb": "2744", "bsz": "50", "num_updates": "73", "lr": "2.30675e-06", "gnorm": "424.063", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "40"}
+[2021-04-29 18:54:03,882][train_inner][INFO] - {"epoch": 1, "update": 0.428, "loss": "1696.48", "ntokens": "2705", "nsentences": "63", "nll_loss": "39.511", "wps": "6085", "ups": "2.25", "wpb": "2705", "bsz": "63", "num_updates": "74", "lr": "2.3315e-06", "gnorm": "390.654", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "40"}
+[2021-04-29 18:54:04,344][train_inner][INFO] - {"epoch": 1, "update": 0.433, "loss": "1962.29", "ntokens": "2960", "nsentences": "58", "nll_loss": "38.45", "wps": "6428.6", "ups": "2.17", "wpb": "2960", "bsz": "58", "num_updates": "75", "lr": "2.35625e-06", "gnorm": "439.189", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "41"}
+[2021-04-29 18:54:04,808][train_inner][INFO] - {"epoch": 1, "update": 0.439, "loss": "2291.05", "ntokens": "2634", "nsentences": "47", "nll_loss": "40.881", "wps": "5701.2", "ups": "2.16", "wpb": "2634", "bsz": "47", "num_updates": "76", "lr": "2.381e-06", "gnorm": "503.058", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "41"}
+[2021-04-29 18:54:05,276][train_inner][INFO] - {"epoch": 1, "update": 0.444, "loss": "1700.73", "ntokens": "2901", "nsentences": "66", "nll_loss": "38.693", "wps": "6221.2", "ups": "2.14", "wpb": "2901", "bsz": "66", "num_updates": "77", "lr": "2.40575e-06", "gnorm": "390.655", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "41"}
+[2021-04-29 18:54:05,718][train_inner][INFO] - {"epoch": 1, "update": 0.45, "loss": "2033.35", "ntokens": "2567", "nsentences": "50", "nll_loss": "39.606", "wps": "5826.3", "ups": "2.27", "wpb": "2567", "bsz": "50", "num_updates": "78", "lr": "2.4305e-06", "gnorm": "478.51", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "42"}
+[2021-04-29 18:54:06,158][train_inner][INFO] - {"epoch": 1, "update": 0.456, "loss": "1945.17", "ntokens": "2608", "nsentences": "53", "nll_loss": "39.53", "wps": "5951.9", "ups": "2.28", "wpb": "2608", "bsz": "53", "num_updates": "79", "lr": "2.45525e-06", "gnorm": "450.632", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "42"}
+[2021-04-29 18:54:06,588][train_inner][INFO] - {"epoch": 1, "update": 0.461, "loss": "1950.92", "ntokens": "2629", "nsentences": "55", "nll_loss": "40.814", "wps": "6136.4", "ups": "2.33", "wpb": "2629", "bsz": "55", "num_updates": "80", "lr": "2.48e-06", "gnorm": "446.932", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "43"}
+[2021-04-29 18:54:07,041][train_inner][INFO] - {"epoch": 1, "update": 0.467, "loss": "1901.95", "ntokens": "2846", "nsentences": "59", "nll_loss": "39.429", "wps": "6309.4", "ups": "2.22", "wpb": "2846", "bsz": "59", "num_updates": "81", "lr": "2.50475e-06", "gnorm": "417.582", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "43"}
+[2021-04-29 18:54:07,497][train_inner][INFO] - {"epoch": 1, "update": 0.472, "loss": "1912.97", "ntokens": "2478", "nsentences": "56", "nll_loss": "43.231", "wps": "5463.4", "ups": "2.2", "wpb": "2478", "bsz": "56", "num_updates": "82", "lr": "2.5295e-06", "gnorm": "416.348", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "44"}
+[2021-04-29 18:54:07,920][train_inner][INFO] - {"epoch": 1, "update": 0.478, "loss": "1969.97", "ntokens": "2503", "nsentences": "52", "nll_loss": "40.926", "wps": "5945.6", "ups": "2.38", "wpb": "2503", "bsz": "52", "num_updates": "83", "lr": "2.55425e-06", "gnorm": "422.268", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "44"}
+[2021-04-29 18:54:08,344][train_inner][INFO] - {"epoch": 1, "update": 0.483, "loss": "2176.26", "ntokens": "2713", "nsentences": "46", "nll_loss": "36.899", "wps": "6426.9", "ups": "2.37", "wpb": "2713", "bsz": "46", "num_updates": "84", "lr": "2.579e-06", "gnorm": "494.238", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "45"}
+[2021-04-29 18:54:08,781][train_inner][INFO] - {"epoch": 1, "update": 0.489, "loss": "1948.14", "ntokens": "2651", "nsentences": "55", "nll_loss": "40.418", "wps": "6104.3", "ups": "2.3", "wpb": "2651", "bsz": "55", "num_updates": "85", "lr": "2.60375e-06", "gnorm": "392.463", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "45"}
+[2021-04-29 18:54:09,252][train_inner][INFO] - {"epoch": 1, "update": 0.494, "loss": "1826.65", "ntokens": "2979", "nsentences": "63", "nll_loss": "38.63", "wps": "6355.3", "ups": "2.13", "wpb": "2979", "bsz": "63", "num_updates": "86", "lr": "2.6285e-06", "gnorm": "405.619", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "45"}
+[2021-04-29 18:54:09,711][train_inner][INFO] - {"epoch": 1, "update": 0.5, "loss": "1835.19", "ntokens": "2642", "nsentences": "60", "nll_loss": "41.677", "wps": "5778.5", "ups": "2.19", "wpb": "2642", "bsz": "60", "num_updates": "87", "lr": "2.65325e-06", "gnorm": "439.869", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "46"}
+[2021-04-29 18:54:10,181][train_inner][INFO] - {"epoch": 1, "update": 0.506, "loss": "1912.1", "ntokens": "2684", "nsentences": "56", "nll_loss": "39.895", "wps": "5728.3", "ups": "2.13", "wpb": "2684", "bsz": "56", "num_updates": "88", "lr": "2.678e-06", "gnorm": "428.833", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "46"}
+[2021-04-29 18:54:10,630][train_inner][INFO] - {"epoch": 1, "update": 0.511, "loss": "2123.17", "ntokens": "2745", "nsentences": "49", "nll_loss": "37.9", "wps": "6136.1", "ups": "2.24", "wpb": "2745", "bsz": "49", "num_updates": "89", "lr": "2.70275e-06", "gnorm": "503", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "47"}
+[2021-04-29 18:54:11,077][train_inner][INFO] - {"epoch": 1, "update": 0.517, "loss": "2038.49", "ntokens": "2596", "nsentences": "52", "nll_loss": "40.833", "wps": "5839.5", "ups": "2.25", "wpb": "2596", "bsz": "52", "num_updates": "90", "lr": "2.7275e-06", "gnorm": "402.572", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "47"}
+[2021-04-29 18:54:11,528][train_inner][INFO] - {"epoch": 1, "update": 0.522, "loss": "1929.63", "ntokens": "2689", "nsentences": "57", "nll_loss": "40.903", "wps": "5989.4", "ups": "2.23", "wpb": "2689", "bsz": "57", "num_updates": "91", "lr": "2.75225e-06", "gnorm": "442.766", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "48"}
+[2021-04-29 18:54:11,979][train_inner][INFO] - {"epoch": 1, "update": 0.528, "loss": "1988.78", "ntokens": "2481", "nsentences": "54", "nll_loss": "43.287", "wps": "5515.6", "ups": "2.22", "wpb": "2481", "bsz": "54", "num_updates": "92", "lr": "2.777e-06", "gnorm": "500.476", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "48"}
+[2021-04-29 18:54:12,413][train_inner][INFO] - {"epoch": 1, "update": 0.533, "loss": "2178.3", "ntokens": "2756", "nsentences": "47", "nll_loss": "37.148", "wps": "6378.2", "ups": "2.31", "wpb": "2756", "bsz": "47", "num_updates": "93", "lr": "2.80175e-06", "gnorm": "494.318", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "49"}
+[2021-04-29 18:54:12,875][train_inner][INFO] - {"epoch": 1, "update": 0.539, "loss": "1906.38", "ntokens": "2568", "nsentences": "55", "nll_loss": "40.83", "wps": "5583.9", "ups": "2.17", "wpb": "2568", "bsz": "55", "num_updates": "94", "lr": "2.8265e-06", "gnorm": "436.08", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "49"}
+[2021-04-29 18:54:13,337][train_inner][INFO] - {"epoch": 1, "update": 0.544, "loss": "1859.77", "ntokens": "2694", "nsentences": "59", "nll_loss": "40.73", "wps": "5852.2", "ups": "2.17", "wpb": "2694", "bsz": "59", "num_updates": "95", "lr": "2.85125e-06", "gnorm": "395.159", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "50"}
+[2021-04-29 18:54:13,776][train_inner][INFO] - {"epoch": 1, "update": 0.55, "loss": "2110.01", "ntokens": "2738", "nsentences": "49", "nll_loss": "37.761", "wps": "6264.4", "ups": "2.29", "wpb": "2738", "bsz": "49", "num_updates": "96", "lr": "2.876e-06", "gnorm": "475.667", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "50"}
+[2021-04-29 18:54:14,222][train_inner][INFO] - {"epoch": 1, "update": 0.556, "loss": "1897.13", "ntokens": "2685", "nsentences": "58", "nll_loss": "40.981", "wps": "6040.7", "ups": "2.25", "wpb": "2685", "bsz": "58", "num_updates": "97", "lr": "2.90075e-06", "gnorm": "455.047", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "50"}
+[2021-04-29 18:54:14,656][train_inner][INFO] - {"epoch": 1, "update": 0.561, "loss": "1935.27", "ntokens": "2712", "nsentences": "55", "nll_loss": "39.248", "wps": "6272.8", "ups": "2.31", "wpb": "2712", "bsz": "55", "num_updates": "98", "lr": "2.9255e-06", "gnorm": "481.971", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "51"}
+[2021-04-29 18:54:15,098][train_inner][INFO] - {"epoch": 1, "update": 0.567, "loss": "2172.75", "ntokens": "2622", "nsentences": "49", "nll_loss": "40.604", "wps": "5963", "ups": "2.27", "wpb": "2622", "bsz": "49", "num_updates": "99", "lr": "2.95025e-06", "gnorm": "429.697", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "51"}
+[2021-04-29 18:54:15,552][train_inner][INFO] - {"epoch": 1, "update": 0.572, "loss": "1901.35", "ntokens": "2935", "nsentences": "58", "nll_loss": "37.574", "wps": "6493", "ups": "2.21", "wpb": "2935", "bsz": "58", "num_updates": "100", "lr": "2.975e-06", "gnorm": "411.178", "loss_scale": "16", "train_wall": "0", "gb_free": "12.4", "wall": "52"}
+[2021-04-29 18:54:16,413][train_inner][INFO] - {"epoch": 1, "update": 0.578, "loss": "1897.34", "ntokens": "2729", "nsentences": "56", "nll_loss": "38.934", "wps": "3174.7", "ups": "1.16", "wpb": "2729", "bsz": "56", "num_updates": "101", "lr": "2.99975e-06", "gnorm": "1614.18", "loss_scale": "16", "train_wall": "1", "gb_free": "12.3", "wall": "53"}
+[2021-04-29 18:54:17,280][train_inner][INFO] - {"epoch": 1, "update": 0.583, "loss": "2062.56", "ntokens": "2707", "nsentences": "50", "nll_loss": "38.097", "wps": "3132.6", "ups": "1.16", "wpb": "2707", "bsz": "50", "num_updates": "102", "lr": "3.0245e-06", "gnorm": "1235.49", "loss_scale": "16", "train_wall": "1", "gb_free": "12.3", "wall": "53"}
+[2021-04-29 18:54:18,109][train_inner][INFO] - {"epoch": 1, "update": 0.589, "loss": "2062.8", "ntokens": "2277", "nsentences": "48", "nll_loss": "43.484", "wps": "2751.9", "ups": "1.21", "wpb": "2277", "bsz": "48", "num_updates": "103", "lr": "3.04925e-06", "gnorm": "1607.38", "loss_scale": "16", "train_wall": "1", "gb_free": "12.2", "wall": "54"}
+[2021-04-29 18:54:18,999][fairseq.trainer][INFO] - NOTE: gradient overflow detected, ignoring gradient, setting loss scale to: 8.0
+[2021-04-29 18:54:19,883][train_inner][INFO] - {"epoch": 1, "update": 0.6, "loss": "1901.07", "ntokens": "2722", "nsentences": "58", "nll_loss": "40.508", "wps": "1536.7", "ups": "0.56", "wpb": "2722", "bsz": "58", "num_updates": "104", "lr": "3.074e-06", "gnorm": "1764.47", "loss_scale": "8", "train_wall": "2", "gb_free": "12.2", "wall": "56"}
+[2021-04-29 18:54:20,748][train_inner][INFO] - {"epoch": 1, "update": 0.606, "loss": "1713.73", "ntokens": "2631", "nsentences": "63", "nll_loss": "41.036", "wps": "3047.9", "ups": "1.16", "wpb": "2631", "bsz": "63", "num_updates": "105", "lr": "3.09875e-06", "gnorm": "1651.46", "loss_scale": "8", "train_wall": "1", "gb_free": "12.2", "wall": "57"}
+[2021-04-29 18:54:21,651][train_inner][INFO] - {"epoch": 1, "update": 0.611, "loss": "1834.5", "ntokens": "2793", "nsentences": "56", "nll_loss": "36.782", "wps": "3101.4", "ups": "1.11", "wpb": "2793", "bsz": "56", "num_updates": "106", "lr": "3.1235e-06", "gnorm": "1916.39", "loss_scale": "8", "train_wall": "1", "gb_free": "12.3", "wall": "58"}
+[2021-04-29 18:54:22,536][train_inner][INFO] - {"epoch": 1, "update": 0.617, "loss": "1911.21", "ntokens": "2831", "nsentences": "55", "nll_loss": "37.131", "wps": "3203.4", "ups": "1.13", "wpb": "2831", "bsz": "55", "num_updates": "107", "lr": "3.14825e-06", "gnorm": "2313.02", "loss_scale": "8", "train_wall": "1", "gb_free": "12.2", "wall": "59"}
+[2021-04-29 18:54:23,435][train_inner][INFO] - {"epoch": 1, "update": 0.622, "loss": "1889.87", "ntokens": "2703", "nsentences": "53", "nll_loss": "37.056", "wps": "3012.5", "ups": "1.11", "wpb": "2703", "bsz": "53", "num_updates": "108", "lr": "3.173e-06", "gnorm": "2463.23", "loss_scale": "8", "train_wall": "1", "gb_free": "12.2", "wall": "60"}
+[2021-04-29 18:54:24,297][train_inner][INFO] - {"epoch": 1, "update": 0.628, "loss": "1879.2", "ntokens": "2662", "nsentences": "52", "nll_loss": "36.709", "wps": "3096.8", "ups": "1.16", "wpb": "2662", "bsz": "52", "num_updates": "109", "lr": "3.19775e-06", "gnorm": "2472.22", "loss_scale": "8", "train_wall": "1", "gb_free": "12.2", "wall": "60"}
+[2021-04-29 18:54:25,143][fairseq.trainer][INFO] - NOTE: gradient overflow detected, ignoring gradient, setting loss scale to: 4.0
+[2021-04-29 18:54:26,027][train_inner][INFO] - {"epoch": 1, "update": 0.639, "loss": "1941.59", "ntokens": "2810", "nsentences": "48", "nll_loss": "33.166", "wps": "1625.6", "ups": "0.58", "wpb": "2810", "bsz": "48", "num_updates": "110", "lr": "3.2225e-06", "gnorm": "2925.05", "loss_scale": "4", "train_wall": "2", "gb_free": "12.2", "wall": "62"}
+[2021-04-29 18:54:26,864][train_inner][INFO] - {"epoch": 1, "update": 0.644, "loss": "1587.4", "ntokens": "2637", "nsentences": "57", "nll_loss": "34.312", "wps": "3157.2", "ups": "1.2", "wpb": "2637", "bsz": "57", "num_updates": "111", "lr": "3.24725e-06", "gnorm": "3155.26", "loss_scale": "4", "train_wall": "1", "gb_free": "12.3", "wall": "63"}
+[2021-04-29 18:54:27,739][train_inner][INFO] - {"epoch": 1, "update": 0.65, "loss": "1568.35", "ntokens": "2746", "nsentences": "61", "nll_loss": "34.84", "wps": "3144", "ups": "1.14", "wpb": "2746", "bsz": "61", "num_updates": "112", "lr": "3.272e-06", "gnorm": "2635.87", "loss_scale": "4", "train_wall": "1", "gb_free": "12.3", "wall": "64"}
+[2021-04-29 18:54:28,619][train_inner][INFO] - {"epoch": 1, "update": 0.656, "loss": "1847.15", "ntokens": "2476", "nsentences": "48", "nll_loss": "35.809", "wps": "2820.9", "ups": "1.14", "wpb": "2476", "bsz": "48", "num_updates": "113", "lr": "3.29675e-06", "gnorm": "3196.51", "loss_scale": "4", "train_wall": "1", "gb_free": "12.3", "wall": "65"}
+[2021-04-29 18:54:29,533][train_inner][INFO] - {"epoch": 1, "update": 0.661, "loss": "1594.52", "ntokens": "2781", "nsentences": "55", "nll_loss": "31.535", "wps": "3049.5", "ups": "1.1", "wpb": "2781", "bsz": "55", "num_updates": "114", "lr": "3.3215e-06", "gnorm": "3636.25", "loss_scale": "4", "train_wall": "1", "gb_free": "12.2", "wall": "66"}
+[2021-04-29 18:54:30,402][train_inner][INFO] - {"epoch": 1, "update": 0.667, "loss": "1593.8", "ntokens": "2726", "nsentences": "56", "nll_loss": "32.741", "wps": "3147.5", "ups": "1.15", "wpb": "2726", "bsz": "56", "num_updates": "115", "lr": "3.34625e-06", "gnorm": "3136.69", "loss_scale": "4", "train_wall": "1", "gb_free": "12.1", "wall": "67"}
+[2021-04-29 18:54:31,239][train_inner][INFO] - {"epoch": 1, "update": 0.672, "loss": "1586.15", "ntokens": "2693", "nsentences": "54", "nll_loss": "31.805", "wps": "3224.9", "ups": "1.2", "wpb": "2693", "bsz": "54", "num_updates": "116", "lr": "3.371e-06", "gnorm": "3083.97", "loss_scale": "4", "train_wall": "1", "gb_free": "12.2", "wall": "67"}
+[2021-04-29 18:54:32,103][train_inner][INFO] - {"epoch": 1, "update": 0.678, "loss": "1436.81", "ntokens": "2885", "nsentences": "56", "nll_loss": "27.889", "wps": "3347.7", "ups": "1.16", "wpb": "2885", "bsz": "56", "num_updates": "117", "lr": "3.39575e-06", "gnorm": "4036.96", "loss_scale": "4", "train_wall": "1", "gb_free": "12.3", "wall": "68"}
+[2021-04-29 18:54:32,970][train_inner][INFO] - {"epoch": 1, "update": 0.683, "loss": "1575.38", "ntokens": "2699", "nsentences": "52", "nll_loss": "30.352", "wps": "3120", "ups": "1.16", "wpb": "2699", "bsz": "52", "num_updates": "118", "lr": "3.4205e-06", "gnorm": "3421.52", "loss_scale": "4", "train_wall": "1", "gb_free": "12.1", "wall": "69"}
+[2021-04-29 18:54:33,893][train_inner][INFO] - {"epoch": 1, "update": 0.689, "loss": "1226.15", "ntokens": "2927", "nsentences": "69", "nll_loss": "28.905", "wps": "3177.5", "ups": "1.09", "wpb": "2927", "bsz": "69", "num_updates": "119", "lr": "3.44525e-06", "gnorm": "4239.39", "loss_scale": "4", "train_wall": "1", "gb_free": "12.2", "wall": "70"}
+[2021-04-29 18:54:34,725][train_inner][INFO] - {"epoch": 1, "update": 0.694, "loss": "1362.46", "ntokens": "2676", "nsentences": "54", "nll_loss": "27.494", "wps": "3225.5", "ups": "1.21", "wpb": "2676", "bsz": "54", "num_updates": "120", "lr": "3.47e-06", "gnorm": "4074.28", "loss_scale": "4", "train_wall": "1", "gb_free": "12.3", "wall": "71"}
+[2021-04-29 18:54:35,650][train_inner][INFO] - {"epoch": 1, "update": 0.7, "loss": "1251.72", "ntokens": "2798", "nsentences": "56", "nll_loss": "25.052", "wps": "3035.7", "ups": "1.08", "wpb": "2798", "bsz": "56", "num_updates": "121", "lr": "3.49475e-06", "gnorm": "5232.19", "loss_scale": "4", "train_wall": "1", "gb_free": "12.3", "wall": "72"}
+[2021-04-29 18:54:36,523][train_inner][INFO] - {"epoch": 1, "update": 0.706, "loss": "1146.95", "ntokens": "2669", "nsentences": "57", "nll_loss": "24.495", "wps": "3060.8", "ups": "1.15", "wpb": "2669", "bsz": "57", "num_updates": "122", "lr": "3.5195e-06", "gnorm": "4508.2", "loss_scale": "4", "train_wall": "1", "gb_free": "12.3", "wall": "73"}
+[2021-04-29 18:54:37,402][train_inner][INFO] - {"epoch": 1, "update": 0.711, "loss": "1220.79", "ntokens": "2891", "nsentences": "54", "nll_loss": "22.803", "wps": "3298.3", "ups": "1.14", "wpb": "2891", "bsz": "54", "num_updates": "123", "lr": "3.54425e-06", "gnorm": "3642.82", "loss_scale": "4", "train_wall": "1", "gb_free": "12.2", "wall": "74"}
+[2021-04-29 18:54:38,349][train_inner][INFO] - {"epoch": 1, "update": 0.717, "loss": "1116.84", "ntokens": "2919", "nsentences": "61", "nll_loss": "23.339", "wps": "3088.9", "ups": "1.06", "wpb": "2919", "bsz": "61", "num_updates": "124", "lr": "3.569e-06", "gnorm": "3805.15", "loss_scale": "4", "train_wall": "1", "gb_free": "12.3", "wall": "75"}
+[2021-04-29 18:54:39,239][train_inner][INFO] - {"epoch": 1, "update": 0.722, "loss": "936.227", "ntokens": "2623", "nsentences": "58", "nll_loss": "20.702", "wps": "2954.2", "ups": "1.13", "wpb": "2623", "bsz": "58", "num_updates": "125", "lr": "3.59375e-06", "gnorm": "3678.38", "loss_scale": "4", "train_wall": "1", "gb_free": "12.3", "wall": "75"}
+[2021-04-29 18:54:40,101][fairseq.trainer][INFO] - NOTE: gradient overflow detected, ignoring gradient, setting loss scale to: 2.0
+[2021-04-29 18:54:40,961][train_inner][INFO] - {"epoch": 1, "update": 0.733, "loss": "1160.67", "ntokens": "2723", "nsentences": "50", "nll_loss": "21.312", "wps": "1583.4", "ups": "0.58", "wpb": "2723", "bsz": "50", "num_updates": "126", "lr": "3.6185e-06", "gnorm": "3766.21", "loss_scale": "2", "train_wall": "2", "gb_free": "12.3", "wall": "77"}
+[2021-04-29 18:54:41,883][train_inner][INFO] - {"epoch": 1, "update": 0.739, "loss": "1025.42", "ntokens": "2827", "nsentences": "55", "nll_loss": "19.95", "wps": "3071.2", "ups": "1.09", "wpb": "2827", "bsz": "55", "num_updates": "127", "lr": "3.64325e-06", "gnorm": "3514.64", "loss_scale": "2", "train_wall": "1", "gb_free": "12.3", "wall": "78"}
+[2021-04-29 18:54:42,776][train_inner][INFO] - {"epoch": 1, "update": 0.744, "loss": "901.055", "ntokens": "2575", "nsentences": "50", "nll_loss": "17.496", "wps": "2891.8", "ups": "1.12", "wpb": "2575", "bsz": "50", "num_updates": "128", "lr": "3.668e-06", "gnorm": "5072.89", "loss_scale": "2", "train_wall": "1", "gb_free": "12.2", "wall": "79"}
+[2021-04-29 18:54:43,663][train_inner][INFO] - {"epoch": 1, "update": 0.75, "loss": "679.791", "ntokens": "2744", "nsentences": "66", "nll_loss": "16.351", "wps": "3101.5", "ups": "1.13", "wpb": "2744", "bsz": "66", "num_updates": "129", "lr": "3.69275e-06", "gnorm": "3271.76", "loss_scale": "2", "train_wall": "1", "gb_free": "12.2", "wall": "80"}
+[2021-04-29 18:54:44,529][train_inner][INFO] - {"epoch": 1, "update": 0.756, "loss": "642.173", "ntokens": "2484", "nsentences": "60", "nll_loss": "15.511", "wps": "2874.9", "ups": "1.16", "wpb": "2484", "bsz": "60", "num_updates": "130", "lr": "3.7175e-06", "gnorm": "2807.16", "loss_scale": "2", "train_wall": "1", "gb_free": "12.3", "wall": "81"}
+[2021-04-29 18:54:45,444][train_inner][INFO] - {"epoch": 1, "update": 0.761, "loss": "778.905", "ntokens": "2922", "nsentences": "61", "nll_loss": "16.261", "wps": "3200.2", "ups": "1.1", "wpb": "2922", "bsz": "61", "num_updates": "131", "lr": "3.74225e-06", "gnorm": "5832.48", "loss_scale": "2", "train_wall": "1", "gb_free": "12.3", "wall": "82"}
+[2021-04-29 18:54:46,369][train_inner][INFO] - {"epoch": 1, "update": 0.767, "loss": "737.509", "ntokens": "2853", "nsentences": "52", "nll_loss": "13.442", "wps": "3091.6", "ups": "1.08", "wpb": "2853", "bsz": "52", "num_updates": "132", "lr": "3.767e-06", "gnorm": "3318.82", "loss_scale": "2", "train_wall": "1", "gb_free": "12.2", "wall": "83"}
+[2021-04-29 18:54:47,237][train_inner][INFO] - {"epoch": 1, "update": 0.772, "loss": "644.562", "ntokens": "2611", "nsentences": "55", "nll_loss": "13.578", "wps": "3016.3", "ups": "1.16", "wpb": "2611", "bsz": "55", "num_updates": "133", "lr": "3.79175e-06", "gnorm": "1933.18", "loss_scale": "2", "train_wall": "1", "gb_free": "12.3", "wall": "83"}
+[2021-04-29 18:54:48,141][train_inner][INFO] - {"epoch": 1, "update": 0.778, "loss": "676.762", "ntokens": "2958", "nsentences": "57", "nll_loss": "13.041", "wps": "3276.8", "ups": "1.11", "wpb": "2958", "bsz": "57", "num_updates": "134", "lr": "3.8165e-06", "gnorm": "1797.07", "loss_scale": "2", "train_wall": "1", "gb_free": "12.3", "wall": "84"}
+[2021-04-29 18:54:49,037][train_inner][INFO] - {"epoch": 1, "update": 0.783, "loss": "613.957", "ntokens": "3048", "nsentences": "60", "nll_loss": "12.086", "wps": "3409.8", "ups": "1.12", "wpb": "3048", "bsz": "60", "num_updates": "135", "lr": "3.84125e-06", "gnorm": "2169.3", "loss_scale": "2", "train_wall": "1", "gb_free": "12.2", "wall": "85"}
+[2021-04-29 18:54:49,907][train_inner][INFO] - {"epoch": 1, "update": 0.789, "loss": "642.539", "ntokens": "3021", "nsentences": "58", "nll_loss": "12.336", "wps": "3479.4", "ups": "1.15", "wpb": "3021", "bsz": "58", "num_updates": "136", "lr": "3.866e-06", "gnorm": "3181.1", "loss_scale": "2", "train_wall": "1", "gb_free": "12.3", "wall": "86"}
+[2021-04-29 18:54:50,769][train_inner][INFO] - {"epoch": 1, "update": 0.794, "loss": "451.817", "ntokens": "2689", "nsentences": "52", "nll_loss": "8.737", "wps": "3126.4", "ups": "1.16", "wpb": "2689", "bsz": "52", "num_updates": "137", "lr": "3.89075e-06", "gnorm": "3188.9", "loss_scale": "2", "train_wall": "1", "gb_free": "12.2", "wall": "87"}
+[2021-04-29 18:54:51,645][train_inner][INFO] - {"epoch": 1, "update": 0.8, "loss": "493.004", "ntokens": "2886", "nsentences": "58", "nll_loss": "9.908", "wps": "3305.6", "ups": "1.15", "wpb": "2886", "bsz": "58", "num_updates": "138", "lr": "3.9155e-06", "gnorm": "1801", "loss_scale": "2", "train_wall": "1", "gb_free": "12.2", "wall": "88"}
+[2021-04-29 18:54:52,481][train_inner][INFO] - {"epoch": 1, "update": 0.806, "loss": "612.718", "ntokens": "2620", "nsentences": "51", "nll_loss": "11.927", "wps": "3139.4", "ups": "1.2", "wpb": "2620", "bsz": "51", "num_updates": "139", "lr": "3.94025e-06", "gnorm": "3056.61", "loss_scale": "2", "train_wall": "1", "gb_free": "12.3", "wall": "89"}
+[2021-04-29 18:54:53,340][train_inner][INFO] - {"epoch": 1, "update": 0.811, "loss": "457.773", "ntokens": "2780", "nsentences": "61", "nll_loss": "10.045", "wps": "3242.4", "ups": "1.17", "wpb": "2780", "bsz": "61", "num_updates": "140", "lr": "3.965e-06", "gnorm": "1869.8", "loss_scale": "2", "train_wall": "1", "gb_free": "12.3", "wall": "90"}
+[2021-04-29 18:54:54,220][train_inner][INFO] - {"epoch": 1, "update": 0.817, "loss": "412.411", "ntokens": "2666", "nsentences": "60", "nll_loss": "9.282", "wps": "3038.3", "ups": "1.14", "wpb": "2666", "bsz": "60", "num_updates": "141", "lr": "3.98975e-06", "gnorm": "1114.58", "loss_scale": "2", "train_wall": "1", "gb_free": "12.2", "wall": "90"}
+[2021-04-29 18:54:55,204][train_inner][INFO] - {"epoch": 1, "update": 0.822, "loss": "433.603", "ntokens": "2832", "nsentences": "57", "nll_loss": "8.727", "wps": "2882.3", "ups": "1.02", "wpb": "2832", "bsz": "57", "num_updates": "142", "lr": "4.0145e-06", "gnorm": "1744.31", "loss_scale": "2", "train_wall": "1", "gb_free": "12.3", "wall": "91"}
+[2021-04-29 18:54:56,089][train_inner][INFO] - {"epoch": 1, "update": 0.828, "loss": "392.932", "ntokens": "2647", "nsentences": "60", "nll_loss": "8.907", "wps": "2997.4", "ups": "1.13", "wpb": "2647", "bsz": "60", "num_updates": "143", "lr": "4.03925e-06", "gnorm": "953.964", "loss_scale": "2", "train_wall": "1", "gb_free": "12.3", "wall": "92"}
+[2021-04-29 18:54:56,997][train_inner][INFO] - {"epoch": 1, "update": 0.833, "loss": "403.611", "ntokens": "2921", "nsentences": "57", "nll_loss": "7.876", "wps": "3228.9", "ups": "1.11", "wpb": "2921", "bsz": "57", "num_updates": "144", "lr": "4.064e-06", "gnorm": "518.116", "loss_scale": "2", "train_wall": "1", "gb_free": "12.3", "wall": "93"}
+[2021-04-29 18:54:57,848][train_inner][INFO] - {"epoch": 1, "update": 0.839, "loss": "517.311", "ntokens": "2758", "nsentences": "64", "nll_loss": "12.004", "wps": "3246.7", "ups": "1.18", "wpb": "2758", "bsz": "64", "num_updates": "145", "lr": "4.08875e-06", "gnorm": "1290.46", "loss_scale": "2", "train_wall": "1", "gb_free": "12.3", "wall": "94"}
+[2021-04-29 18:54:58,731][train_inner][INFO] - {"epoch": 1, "update": 0.844, "loss": "431.971", "ntokens": "2985", "nsentences": "54", "nll_loss": "7.815", "wps": "3387.8", "ups": "1.13", "wpb": "2985", "bsz": "54", "num_updates": "146", "lr": "4.1135e-06", "gnorm": "992.748", "loss_scale": "2", "train_wall": "1", "gb_free": "12.2", "wall": "95"}
+[2021-04-29 18:54:59,606][train_inner][INFO] - {"epoch": 1, "update": 0.85, "loss": "410.828", "ntokens": "2856", "nsentences": "48", "nll_loss": "6.905", "wps": "3273.1", "ups": "1.15", "wpb": "2856", "bsz": "48", "num_updates": "147", "lr": "4.13825e-06", "gnorm": "543.514", "loss_scale": "2", "train_wall": "1", "gb_free": "12.3", "wall": "96"}
+[2021-04-29 18:55:00,459][train_inner][INFO] - {"epoch": 1, "update": 0.856, "loss": "314.42", "ntokens": "2481", "nsentences": "57", "nll_loss": "7.224", "wps": "2912", "ups": "1.17", "wpb": "2481", "bsz": "57", "num_updates": "148", "lr": "4.163e-06", "gnorm": "548.491", "loss_scale": "2", "train_wall": "1", "gb_free": "12.3", "wall": "97"}
+[2021-04-29 18:55:01,361][train_inner][INFO] - {"epoch": 1, "update": 0.861, "loss": "422.522", "ntokens": "2627", "nsentences": "50", "nll_loss": "8.042", "wps": "2922.1", "ups": "1.11", "wpb": "2627", "bsz": "50", "num_updates": "149", "lr": "4.18775e-06", "gnorm": "794.545", "loss_scale": "2", "train_wall": "1", "gb_free": "12.2", "wall": "98"}
+[2021-04-29 18:55:02,211][train_inner][INFO] - {"epoch": 1, "update": 0.867, "loss": "533.755", "ntokens": "2788", "nsentences": "57", "nll_loss": "10.912", "wps": "3285.3", "ups": "1.18", "wpb": "2788", "bsz": "57", "num_updates": "150", "lr": "4.2125e-06", "gnorm": "1629.54", "loss_scale": "2", "train_wall": "1", "gb_free": "12.3", "wall": "98"}
+[2021-04-29 18:55:03,155][train_inner][INFO] - {"epoch": 1, "update": 0.872, "loss": "355.214", "ntokens": "2942", "nsentences": "62", "nll_loss": "7.486", "wps": "3124", "ups": "1.06", "wpb": "2942", "bsz": "62", "num_updates": "151", "lr": "4.23725e-06", "gnorm": "651.238", "loss_scale": "2", "train_wall": "1", "gb_free": "12.1", "wall": "99"}
+[2021-04-29 18:55:04,047][train_inner][INFO] - {"epoch": 1, "update": 0.878, "loss": "352.699", "ntokens": "2908", "nsentences": "60", "nll_loss": "7.277", "wps": "3267.1", "ups": "1.12", "wpb": "2908", "bsz": "60", "num_updates": "152", "lr": "4.262e-06", "gnorm": "445.093", "loss_scale": "2", "train_wall": "1", "gb_free": "12.3", "wall": "100"}
+[2021-04-29 18:55:04,876][train_inner][INFO] - {"epoch": 1, "update": 0.883, "loss": "341.166", "ntokens": "2485", "nsentences": "56", "nll_loss": "7.688", "wps": "3003.9", "ups": "1.21", "wpb": "2485", "bsz": "56", "num_updates": "153", "lr": "4.28675e-06", "gnorm": "823.243", "loss_scale": "2", "train_wall": "1", "gb_free": "12.3", "wall": "101"}
+[2021-04-29 18:55:05,758][train_inner][INFO] - {"epoch": 1, "update": 0.889, "loss": "428.484", "ntokens": "2593", "nsentences": "46", "nll_loss": "7.601", "wps": "2946.9", "ups": "1.14", "wpb": "2593", "bsz": "46", "num_updates": "154", "lr": "4.3115e-06", "gnorm": "559.901", "loss_scale": "2", "train_wall": "1", "gb_free": "12.3", "wall": "102"}
+[2021-04-29 18:55:06,617][train_inner][INFO] - {"epoch": 1, "update": 0.894, "loss": "358.447", "ntokens": "2780", "nsentences": "60", "nll_loss": "7.736", "wps": "3244.2", "ups": "1.17", "wpb": "2780", "bsz": "60", "num_updates": "155", "lr": "4.33625e-06", "gnorm": "447.757", "loss_scale": "2", "train_wall": "1", "gb_free": "12.2", "wall": "103"}
+[2021-04-29 18:55:07,504][train_inner][INFO] - {"epoch": 1, "update": 0.9, "loss": "301.988", "ntokens": "2772", "nsentences": "60", "nll_loss": "6.537", "wps": "3134.6", "ups": "1.13", "wpb": "2772", "bsz": "60", "num_updates": "156", "lr": "4.361e-06", "gnorm": "314.41", "loss_scale": "2", "train_wall": "1", "gb_free": "12.3", "wall": "104"}
+[2021-04-29 18:55:08,361][train_inner][INFO] - {"epoch": 1, "update": 0.906, "loss": "383.127", "ntokens": "2905", "nsentences": "55", "nll_loss": "7.254", "wps": "3397.7", "ups": "1.17", "wpb": "2905", "bsz": "55", "num_updates": "157", "lr": "4.38575e-06", "gnorm": "402.555", "loss_scale": "2", "train_wall": "1", "gb_free": "12.2", "wall": "105"}
+[2021-04-29 18:55:09,270][train_inner][INFO] - {"epoch": 1, "update": 0.911, "loss": "416.015", "ntokens": "2991", "nsentences": "57", "nll_loss": "7.928", "wps": "3299.3", "ups": "1.1", "wpb": "2991", "bsz": "57", "num_updates": "158", "lr": "4.4105e-06", "gnorm": "527.248", "loss_scale": "2", "train_wall": "1", "gb_free": "12.2", "wall": "105"}
+[2021-04-29 18:55:10,179][train_inner][INFO] - {"epoch": 1, "update": 0.917, "loss": "343.952", "ntokens": "2785", "nsentences": "59", "nll_loss": "7.287", "wps": "3069.8", "ups": "1.1", "wpb": "2785", "bsz": "59", "num_updates": "159", "lr": "4.43525e-06", "gnorm": "374.866", "loss_scale": "2", "train_wall": "1", "gb_free": "12.2", "wall": "106"}
+[2021-04-29 18:55:11,013][train_inner][INFO] - {"epoch": 1, "update": 0.922, "loss": "376.814", "ntokens": "2705", "nsentences": "56", "nll_loss": "7.801", "wps": "3250.6", "ups": "1.2", "wpb": "2705", "bsz": "56", "num_updates": "160", "lr": "4.46e-06", "gnorm": "820.913", "loss_scale": "2", "train_wall": "1", "gb_free": "12.3", "wall": "107"}
+[2021-04-29 18:55:11,910][train_inner][INFO] - {"epoch": 1, "update": 0.928, "loss": "415.218", "ntokens": "2971", "nsentences": "64", "nll_loss": "8.944", "wps": "3315.7", "ups": "1.12", "wpb": "2971", "bsz": "64", "num_updates": "161", "lr": "4.48475e-06", "gnorm": "1081.1", "loss_scale": "2", "train_wall": "1", "gb_free": "12.3", "wall": "108"}
+[2021-04-29 18:55:12,758][train_inner][INFO] - {"epoch": 1, "update": 0.933, "loss": "398.132", "ntokens": "2827", "nsentences": "56", "nll_loss": "7.887", "wps": "3351.3", "ups": "1.19", "wpb": "2827", "bsz": "56", "num_updates": "162", "lr": "4.5095e-06", "gnorm": "289.837", "loss_scale": "2", "train_wall": "1", "gb_free": "12.2", "wall": "109"}
+[2021-04-29 18:55:13,637][train_inner][INFO] - {"epoch": 1, "update": 0.939, "loss": "355.376", "ntokens": "2730", "nsentences": "55", "nll_loss": "7.16", "wps": "3112.4", "ups": "1.14", "wpb": "2730", "bsz": "55", "num_updates": "163", "lr": "4.53425e-06", "gnorm": "394.173", "loss_scale": "2", "train_wall": "1", "gb_free": "12.2", "wall": "110"}
+[2021-04-29 18:55:14,530][train_inner][INFO] - {"epoch": 1, "update": 0.944, "loss": "446.658", "ntokens": "2820", "nsentences": "44", "nll_loss": "6.969", "wps": "3165.6", "ups": "1.12", "wpb": "2820", "bsz": "44", "num_updates": "164", "lr": "4.559e-06", "gnorm": "368.303", "loss_scale": "2", "train_wall": "1", "gb_free": "12.3", "wall": "111"}
+[2021-04-29 18:55:15,369][train_inner][INFO] - {"epoch": 1, "update": 0.95, "loss": "307.731", "ntokens": "2585", "nsentences": "53", "nll_loss": "6.309", "wps": "3089.3", "ups": "1.19", "wpb": "2585", "bsz": "53", "num_updates": "165", "lr": "4.58375e-06", "gnorm": "232.64", "loss_scale": "2", "train_wall": "1", "gb_free": "12.3", "wall": "112"}
+[2021-04-29 18:55:16,240][train_inner][INFO] - {"epoch": 1, "update": 0.956, "loss": "399.192", "ntokens": "2756", "nsentences": "51", "nll_loss": "7.387", "wps": "3168.6", "ups": "1.15", "wpb": "2756", "bsz": "51", "num_updates": "166", "lr": "4.6085e-06", "gnorm": "661.785", "loss_scale": "2", "train_wall": "1", "gb_free": "12.3", "wall": "112"}
+[2021-04-29 18:55:17,201][train_inner][INFO] - {"epoch": 1, "update": 0.961, "loss": "308.061", "ntokens": "2769", "nsentences": "57", "nll_loss": "6.341", "wps": "2887.7", "ups": "1.04", "wpb": "2769", "bsz": "57", "num_updates": "167", "lr": "4.63325e-06", "gnorm": "224.274", "loss_scale": "2", "train_wall": "1", "gb_free": "12.2", "wall": "113"}
+[2021-04-29 18:55:18,065][train_inner][INFO] - {"epoch": 1, "update": 0.967, "loss": "309.571", "ntokens": "2715", "nsentences": "56", "nll_loss": "6.385", "wps": "3146.2", "ups": "1.16", "wpb": "2715", "bsz": "56", "num_updates": "168", "lr": "4.658e-06", "gnorm": "223.258", "loss_scale": "2", "train_wall": "1", "gb_free": "12.3", "wall": "114"}
+[2021-04-29 18:55:18,888][train_inner][INFO] - {"epoch": 1, "update": 0.972, "loss": "277.617", "ntokens": "2630", "nsentences": "61", "nll_loss": "6.439", "wps": "3207.3", "ups": "1.22", "wpb": "2630", "bsz": "61", "num_updates": "169", "lr": "4.68275e-06", "gnorm": "373.368", "loss_scale": "2", "train_wall": "1", "gb_free": "12.3", "wall": "115"}
+[2021-04-29 18:55:19,761][train_inner][INFO] - {"epoch": 1, "update": 0.978, "loss": "364.555", "ntokens": "2802", "nsentences": "54", "nll_loss": "7.026", "wps": "3213.8", "ups": "1.15", "wpb": "2802", "bsz": "54", "num_updates": "170", "lr": "4.7075e-06", "gnorm": "365.999", "loss_scale": "2", "train_wall": "1", "gb_free": "12.2", "wall": "116"}
+[2021-04-29 18:55:20,643][train_inner][INFO] - {"epoch": 1, "update": 0.983, "loss": "370.384", "ntokens": "2583", "nsentences": "59", "nll_loss": "8.46", "wps": "2934.4", "ups": "1.14", "wpb": "2583", "bsz": "59", "num_updates": "171", "lr": "4.73225e-06", "gnorm": "735.22", "loss_scale": "2", "train_wall": "1", "gb_free": "12.3", "wall": "117"}
+[2021-04-29 18:55:21,526][train_inner][INFO] - {"epoch": 1, "update": 0.989, "loss": "353.463", "ntokens": "2727", "nsentences": "53", "nll_loss": "6.87", "wps": "3096.5", "ups": "1.14", "wpb": "2727", "bsz": "53", "num_updates": "172", "lr": "4.757e-06", "gnorm": "385.556", "loss_scale": "2", "train_wall": "1", "gb_free": "12.3", "wall": "118"}
+[2021-04-29 18:55:22,438][train_inner][INFO] - {"epoch": 1, "update": 0.994, "loss": "263.571", "ntokens": "2840", "nsentences": "67", "nll_loss": "6.218", "wps": "3121.1", "ups": "1.1", "wpb": "2840", "bsz": "67", "num_updates": "173", "lr": "4.78175e-06", "gnorm": "163.704", "loss_scale": "2", "train_wall": "1", "gb_free": "12.2", "wall": "119"}
+[2021-04-29 18:55:22,863][train_inner][INFO] - {"epoch": 1, "update": 1.0, "loss": "275.318", "ntokens": "441", "nsentences": "10", "nll_loss": "6.243", "wps": "1042.8", "ups": "2.36", "wpb": "441", "bsz": "10", "num_updates": "174", "lr": "4.8065e-06", "gnorm": "2143.99", "loss_scale": "2", "train_wall": "0", "gb_free": "12.4", "wall": "119"}
+[2021-04-29 18:55:22,864][fairseq_cli.train][INFO] - end of epoch 1 (average epoch stats below)
+[2021-04-29 18:55:22,880][train][INFO] - {"epoch": 1, "train_loss": "1482.08", "train_ntokens": "2719.12", "train_nsentences": "55.5", "train_nll_loss": "30.251", "train_wps": "4206.4", "train_ups": "1.55", "train_wpb": "2719.1", "train_bsz": "55.5", "train_num_updates": "174", "train_lr": "4.8065e-06", "train_gnorm": "1086.94", "train_loss_scale": "2", "train_train_wall": "113", "train_gb_free": "12.4", "train_wall": "119"}
+[2021-04-29 18:55:22,986][fairseq.trainer][INFO] - begin training epoch 2
+[2021-04-29 18:55:22,987][fairseq_cli.train][INFO] - Start iterating over samples
+[2021-04-29 18:55:28,864][train_inner][INFO] - {"epoch": 2, "update": 1.006, "loss": "352.453", "ntokens": "2783", "nsentences": "59", "nll_loss": "7.472", "wps": "463.8", "ups": "0.17", "wpb": "2783", "bsz": "59", "num_updates": "175", "lr": "4.83125e-06", "gnorm": "772.977", "loss_scale": "2", "train_wall": "1", "gb_free": "12.3", "wall": "125"}
+[2021-04-29 18:55:29,728][train_inner][INFO] - {"epoch": 2, "update": 1.011, "loss": "321.124", "ntokens": "2767", "nsentences": "60", "nll_loss": "6.963", "wps": "3209.7", "ups": "1.16", "wpb": "2767", "bsz": "60", "num_updates": "176", "lr": "4.856e-06", "gnorm": "372.507", "loss_scale": "2", "train_wall": "1", "gb_free": "12.3", "wall": "126"}
+[2021-04-29 18:55:30,531][train_inner][INFO] - {"epoch": 2, "update": 1.017, "loss": "382.379", "ntokens": "2449", "nsentences": "50", "nll_loss": "7.807", "wps": "3059.1", "ups": "1.25", "wpb": "2449", "bsz": "50", "num_updates": "177", "lr": "4.88075e-06", "gnorm": "427.832", "loss_scale": "2", "train_wall": "1", "gb_free": "12.2", "wall": "127"}
+[2021-04-29 18:55:31,366][train_inner][INFO] - {"epoch": 2, "update": 1.022, "loss": "331.898", "ntokens": "2683", "nsentences": "54", "nll_loss": "6.68", "wps": "3217.4", "ups": "1.2", "wpb": "2683", "bsz": "54", "num_updates": "178", "lr": "4.9055e-06", "gnorm": "365.01", "loss_scale": "2", "train_wall": "1", "gb_free": "12.2", "wall": "128"}
+[2021-04-29 18:55:32,244][train_inner][INFO] - {"epoch": 2, "update": 1.028, "loss": "295.272", "ntokens": "2829", "nsentences": "63", "nll_loss": "6.576", "wps": "3230.3", "ups": "1.14", "wpb": "2829", "bsz": "63", "num_updates": "179", "lr": "4.93025e-06", "gnorm": "217.672", "loss_scale": "2", "train_wall": "1", "gb_free": "12.3", "wall": "128"}
+[2021-04-29 18:55:33,118][train_inner][INFO] - {"epoch": 2, "update": 1.033, "loss": "383.545", "ntokens": "2819", "nsentences": "58", "nll_loss": "7.891", "wps": "3239.8", "ups": "1.15", "wpb": "2819", "bsz": "58", "num_updates": "180", "lr": "4.955e-06", "gnorm": "669.77", "loss_scale": "2", "train_wall": "1", "gb_free": "12.3", "wall": "129"}
+[2021-04-29 18:55:34,078][train_inner][INFO] - {"epoch": 2, "update": 1.039, "loss": "294.381", "ntokens": "2797", "nsentences": "61", "nll_loss": "6.42", "wps": "2919.4", "ups": "1.04", "wpb": "2797", "bsz": "61", "num_updates": "181", "lr": "4.97975e-06", "gnorm": "182.999", "loss_scale": "2", "train_wall": "1", "gb_free": "12.1", "wall": "130"}
+[2021-04-29 18:55:35,016][train_inner][INFO] - {"epoch": 2, "update": 1.044, "loss": "363.641", "ntokens": "2752", "nsentences": "55", "nll_loss": "7.268", "wps": "2939.1", "ups": "1.07", "wpb": "2752", "bsz": "55", "num_updates": "182", "lr": "5.0045e-06", "gnorm": "637.097", "loss_scale": "2", "train_wall": "1", "gb_free": "12.2", "wall": "131"}
+[2021-04-29 18:55:35,868][train_inner][INFO] - {"epoch": 2, "update": 1.05, "loss": "286.127", "ntokens": "2667", "nsentences": "61", "nll_loss": "6.544", "wps": "3137.3", "ups": "1.18", "wpb": "2667", "bsz": "61", "num_updates": "183", "lr": "5.02925e-06", "gnorm": "200.088", "loss_scale": "2", "train_wall": "1", "gb_free": "12.2", "wall": "132"}
+[2021-04-29 18:55:36,737][train_inner][INFO] - {"epoch": 2, "update": 1.056, "loss": "349.791", "ntokens": "2702", "nsentences": "52", "nll_loss": "6.732", "wps": "3114.6", "ups": "1.15", "wpb": "2702", "bsz": "52", "num_updates": "184", "lr": "5.054e-06", "gnorm": "535.219", "loss_scale": "2", "train_wall": "1", "gb_free": "12.3", "wall": "133"}
+[2021-04-29 18:55:37,631][train_inner][INFO] - {"epoch": 2, "update": 1.061, "loss": "308.095", "ntokens": "2780", "nsentences": "57", "nll_loss": "6.317", "wps": "3116.7", "ups": "1.12", "wpb": "2780", "bsz": "57", "num_updates": "185", "lr": "5.07875e-06", "gnorm": "257.573", "loss_scale": "2", "train_wall": "1", "gb_free": "12.3", "wall": "134"}
+[2021-04-29 18:55:38,525][train_inner][INFO] - {"epoch": 2, "update": 1.067, "loss": "297.088", "ntokens": "2727", "nsentences": "57", "nll_loss": "6.21", "wps": "3059.6", "ups": "1.12", "wpb": "2727", "bsz": "57", "num_updates": "186", "lr": "5.1035e-06", "gnorm": "188.892", "loss_scale": "2", "train_wall": "1", "gb_free": "12.3", "wall": "135"}
+[2021-04-29 18:55:39,427][train_inner][INFO] - {"epoch": 2, "update": 1.072, "loss": "315.608", "ntokens": "2965", "nsentences": "60", "nll_loss": "6.387", "wps": "3293.4", "ups": "1.11", "wpb": "2965", "bsz": "60", "num_updates": "187", "lr": "5.12825e-06", "gnorm": "344.243", "loss_scale": "2", "train_wall": "1", "gb_free": "12.3", "wall": "136"}
+[2021-04-29 18:55:40,276][train_inner][INFO] - {"epoch": 2, "update": 1.078, "loss": "350.529", "ntokens": "2684", "nsentences": "51", "nll_loss": "6.661", "wps": "3168.4", "ups": "1.18", "wpb": "2684", "bsz": "51", "num_updates": "188", "lr": "5.153e-06", "gnorm": "310.23", "loss_scale": "2", "train_wall": "1", "gb_free": "12.2", "wall": "136"}
+[2021-04-29 18:55:41,113][train_inner][INFO] - {"epoch": 2, "update": 1.083, "loss": "319.012", "ntokens": "2741", "nsentences": "53", "nll_loss": "6.168", "wps": "3282.4", "ups": "1.2", "wpb": "2741", "bsz": "53", "num_updates": "189", "lr": "5.17775e-06", "gnorm": "175.638", "loss_scale": "2", "train_wall": "1", "gb_free": "12.3", "wall": "137"}
+[2021-04-29 18:55:42,017][train_inner][INFO] - {"epoch": 2, "update": 1.089, "loss": "342.471", "ntokens": "2645", "nsentences": "55", "nll_loss": "7.121", "wps": "2932.7", "ups": "1.11", "wpb": "2645", "bsz": "55", "num_updates": "190", "lr": "5.2025e-06", "gnorm": "524.759", "loss_scale": "2", "train_wall": "1", "gb_free": "12.2", "wall": "138"}
+[2021-04-29 18:55:42,935][train_inner][INFO] - {"epoch": 2, "update": 1.094, "loss": "301.99", "ntokens": "2799", "nsentences": "59", "nll_loss": "6.366", "wps": "3053.9", "ups": "1.09", "wpb": "2799", "bsz": "59", "num_updates": "191", "lr": "5.22725e-06", "gnorm": "426.821", "loss_scale": "2", "train_wall": "1", "gb_free": "12.4", "wall": "139"}
+[2021-04-29 18:55:43,766][train_inner][INFO] - {"epoch": 2, "update": 1.1, "loss": "339.389", "ntokens": "2665", "nsentences": "50", "nll_loss": "6.368", "wps": "3216.7", "ups": "1.21", "wpb": "2665", "bsz": "50", "num_updates": "192", "lr": "5.252e-06", "gnorm": "264.611", "loss_scale": "2", "train_wall": "1", "gb_free": "12.3", "wall": "140"}
+[2021-04-29 18:55:44,664][train_inner][INFO] - {"epoch": 2, "update": 1.106, "loss": "422.842", "ntokens": "2708", "nsentences": "53", "nll_loss": "8.276", "wps": "3021.5", "ups": "1.12", "wpb": "2708", "bsz": "53", "num_updates": "193", "lr": "5.27675e-06", "gnorm": "467.539", "loss_scale": "2", "train_wall": "1", "gb_free": "12.3", "wall": "141"}
+[2021-04-29 18:55:45,576][train_inner][INFO] - {"epoch": 2, "update": 1.111, "loss": "312.348", "ntokens": "2628", "nsentences": "54", "nll_loss": "6.418", "wps": "2888.8", "ups": "1.1", "wpb": "2628", "bsz": "54", "num_updates": "194", "lr": "5.3015e-06", "gnorm": "293.055", "loss_scale": "2", "train_wall": "1", "gb_free": "12.3", "wall": "142"}
+[2021-04-29 18:55:46,473][train_inner][INFO] - {"epoch": 2, "update": 1.117, "loss": "319.966", "ntokens": "2742", "nsentences": "60", "nll_loss": "7.001", "wps": "3062.8", "ups": "1.12", "wpb": "2742", "bsz": "60", "num_updates": "195", "lr": "5.32625e-06", "gnorm": "361.649", "loss_scale": "2", "train_wall": "1", "gb_free": "12.3", "wall": "143"}
+[2021-04-29 18:55:47,297][train_inner][INFO] - {"epoch": 2, "update": 1.122, "loss": "277.069", "ntokens": "2525", "nsentences": "59", "nll_loss": "6.474", "wps": "3070", "ups": "1.22", "wpb": "2525", "bsz": "59", "num_updates": "196", "lr": "5.351e-06", "gnorm": "502.964", "loss_scale": "2", "train_wall": "1", "gb_free": "12.2", "wall": "143"}

@@ -9,7 +9,7 @@ from joblib import Parallel, delayed
 
 
 def get_text(line,root):
-    txt_path = line.split("\t")[0].replace("wav","txt").strip() ## implies that the text filename and wav filename should be same
+    txt_path = line.split("\t")[0].replace(".wav",".txt").strip() ## implies that the text filename and wav filename should be same
 
     txt_path = os.path.join( root , txt_path )
 

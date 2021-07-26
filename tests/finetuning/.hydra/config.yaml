@@ -1,0 +1,74 @@
+common:
+  fp16: true
+  log_format: json
+  log_interval: 200
+  tpu: false
+  cpu: false
+  suppress_crashes: false
+  profile: false
+  seed: 2021
+  quantization_config_path: null
+  model_parallel_size: 1
+  tensorboard_logdir: /home/harveen.chadha/training/vakyansh-wav2vec2-experimentation/logs/finetuning/tensorboard
+checkpoint:
+  no_epoch_checkpoints: true
+  best_checkpoint_metric: wer
+  write_checkpoints_asynchronously: false
+  reset_optimizer: false
+  reset_lr_scheduler: false
+  optimizer_overrides: null
+  save_dir: /home/harveen.chadha/training/vakyansh-wav2vec2-experimentation/checkpoints/finetuning
+  restore_file: /home/harveen.chadha/training/vakyansh-wav2vec2-experimentation/checkpoints/finetuning/checkpoint_last.pt
+task:
+  _name: audio_pretraining
+  data: /home/harveen.chadha/training/vakyansh-wav2vec2-experimentation/data/finetuning
+  normalize: false
+  labels: ltr
+dataset:
+  num_workers: 6
+  max_tokens: 3200000
+  skip_invalid_size_inputs_valid_test: true
+  valid_subset: valid
+  batch_size: 8
+distributed_training:
+  ddp_backend: legacy_ddp
+  distributed_world_size: 1
+  distributed_init_method: null
+  tpu: false
+  pipeline_model_parallel: false
+  distributed_port: -1
+  distributed_no_spawn: false
+  distributed_rank: null
+  cpu_offload: false
+criterion:
+  _name: ctc
+  zero_infinity: true
+optimization:
+  max_update: 80000
+  lr:
+  - 3.0e-05
+  sentence_avg: true
+  update_freq:
+  - 24
+optimizer:
+  _name: adam
+  adam_betas: (0.9,0.98)
+  adam_eps: 1.0e-08
+lr_scheduler:
+  _name: tri_stage
+  phase_ratio:
+  - 0.1
+  - 0.4
+  - 0.5
+  final_lr_scale: 0.05
+model:
+  _name: wav2vec_ctc
+  w2v_path: /home/harveen.chadha/training/vakyansh-wav2vec2-experimentation/checkpoints/pretraining/checkpoint_best.pt
+  apply_mask: true
+  mask_prob: 0.65
+  mask_channel_prob: 0.5
+  mask_channel_length: 64
+  layerdrop: 0.1
+  activation_dropout: 0.1
+  feature_grad_mult: 0.0
+  freeze_finetune_updates: 0

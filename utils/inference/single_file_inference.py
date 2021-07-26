@@ -7,53 +7,101 @@ import itertools as it
 from fairseq import utils
 from fairseq.models import BaseFairseqModel
 from fairseq.data import Dictionary
-from fairseq.models.wav2vec.wav2vec2_asr import base_architecture, Wav2VecEncoder
-from wav2letter.common import create_word_dict, load_words
-from wav2letter.decoder import CriterionType,DecoderOptions,KenLM,LM,LMState,SmearingMode,Trie,LexiconDecoder
-from wav2letter.criterion import CpuViterbiPath, get_data_ptr_as_bytes
+from fairseq.models.wav2vec.wav2vec2_asr import Wav2VecEncoder, Wav2Vec2CtcConfig
+from fairseq.dataclass.utils import convert_namespace_to_omegaconf
 
+try:
+    from flashlight.lib.text.dictionary import create_word_dict, load_words
+    from flashlight.lib.sequence.criterion import CpuViterbiPath, get_data_ptr_as_bytes
+    from flashlight.lib.text.decoder import (
+        CriterionType,
+        LexiconDecoderOptions,
+        KenLM,
+        LM,
+        LMState,
+        SmearingMode,
+        Trie,
+        LexiconDecoder,
+    )
+except:
+    warnings.warn(
+        "flashlight python bindings are required to use this functionality. Please install from https://github.com/facebookresearch/flashlight/tree/master/bindings/python"
+    )
+    LM = object
+    LMState = object
+    
+    
 class Wav2VecCtc(BaseFairseqModel):
-    def __init__(self, w2v_encoder, args):
+    def __init__(self, cfg: Wav2Vec2CtcConfig, w2v_encoder: BaseFairseqModel):
         super().__init__()
+        self.cfg = cfg
         self.w2v_encoder = w2v_encoder
-        self.args = args
 
     def upgrade_state_dict_named(self, state_dict, name):
         super().upgrade_state_dict_named(state_dict, name)
         return state_dict
 
     @classmethod
-    def build_model(cls, args, target_dict):
+    def build_model(cls, cfg: Wav2Vec2CtcConfig, target_dictionary): ##change here
         """Build a new model instance."""
-        base_architecture(args)
-        w2v_encoder = Wav2VecEncoder(args, target_dict)
-        return cls(w2v_encoder, args)
+        w2v_encoder = Wav2VecEncoder(cfg, target_dictionary)
+        return cls(cfg, w2v_encoder)
 
     def get_normalized_probs(self, net_output, log_probs):
         """Get normalized probabilities (or log probs) from a net's output."""
+
         logits = net_output["encoder_out"]
         if log_probs:
             return utils.log_softmax(logits.float(), dim=-1)
         else:
             return utils.softmax(logits.float(), dim=-1)
 
+    def get_logits(self, net_output):
+        logits = net_output["encoder_out"]
+        padding = net_output["padding_mask"]
+        if padding is not None and padding.any():
+            padding = padding.T
+            logits[padding][...,0] = 0
+            logits[padding][...,1:] = float('-inf')
+
+        return logits
+
     def forward(self, **kwargs):
         x = self.w2v_encoder(**kwargs)
         return x
 
+
 class W2lDecoder(object):
-    def __init__(self, tgt_dict):
+    def __init__(self, args, tgt_dict):
         self.tgt_dict = tgt_dict
         self.vocab_size = len(tgt_dict)
-        self.nbest = 1
+        #print(args)
+        self.nbest = args['nbest']
 
-        self.criterion_type = CriterionType.CTC
-        self.blank = (
-            tgt_dict.index("<ctc_blank>")
-            if "<ctc_blank>" in tgt_dict.indices
-            else tgt_dict.bos()
-        )
-        self.asg_transitions = None
+        # criterion-specific init
+        if args['criterion'] == "ctc":
+            self.criterion_type = CriterionType.CTC
+            self.blank = (
+                tgt_dict.index("<ctc_blank>")
+                if "<ctc_blank>" in tgt_dict.indices
+                else tgt_dict.bos()
+            )
+            if "<sep>" in tgt_dict.indices:
+                self.silence = tgt_dict.index("<sep>")
+            elif "|" in tgt_dict.indices:
+                self.silence = tgt_dict.index("|")
+            else:
+                self.silence = tgt_dict.eos()
+            self.asg_transitions = None
+        elif args.criterion == "asg_loss":
+            self.criterion_type = CriterionType.ASG
+            self.blank = -1
+            self.silence = -1
+            self.asg_transitions = args.asg_transitions
+            self.max_replabel = args.max_replabel
+            assert len(self.asg_transitions) == self.vocab_size ** 2
+        else:
+            raise RuntimeError(f"unknown criterion: {args.criterion}")
 
     def generate(self, models, sample, **unused):
         """Generate a batch of inferences."""
@@ -67,33 +115,39 @@ class W2lDecoder(object):
 
     def get_emissions(self, models, encoder_input):
         """Run encoder and normalize emissions"""
-        # encoder_out = models[0].encoder(**encoder_input)
-        encoder_out = models[0](**encoder_input)
+        model = models ## change here
+        encoder_out = model(**encoder_input)
         if self.criterion_type == CriterionType.CTC:
-            emissions = models[0].get_normalized_probs(encoder_out, log_probs=True)
-
+            if hasattr(model, "get_logits"):
+                emissions = model.get_logits(encoder_out) # no need to normalize emissions
+            else:
+                emissions = model.get_normalized_probs(encoder_out, log_probs=True)
+        elif self.criterion_type == CriterionType.ASG:
+            emissions = encoder_out["encoder_out"]
         return emissions.transpose(0, 1).float().cpu().contiguous()
 
     def get_tokens(self, idxs):
         """Normalize tokens by handling CTC blank, ASG replabels, etc."""
         idxs = (g[0] for g in it.groupby(idxs))
-        idxs = filter(lambda x: x != self.blank, idxs)
-
+        if self.criterion_type == CriterionType.CTC:
+            idxs = filter(lambda x: x != self.blank, idxs)
+        elif self.criterion_type == CriterionType.ASG:
+            idxs = filter(lambda x: x >= 0, idxs)
+            idxs = unpack_replabels(list(idxs), self.tgt_dict, self.max_replabel)
         return torch.LongTensor(list(idxs))
 
+
 class W2lViterbiDecoder(W2lDecoder):
-    def __init__(self, tgt_dict):
-        super().__init__(tgt_dict)
+    def __init__(self, args, tgt_dict):
+        super().__init__(args, tgt_dict)
 
     def decode(self, emissions):
         B, T, N = emissions.size()
-        hypos = list()
-
+        hypos = []
         if self.asg_transitions is None:
             transitions = torch.FloatTensor(N, N).zero_()
         else:
             transitions = torch.FloatTensor(self.asg_transitions).view(N, N)
-
         viterbi_path = torch.IntTensor(B, T)
         workspace = torch.ByteTensor(CpuViterbiPath.get_workspace_size(B, T, N))
         CpuViterbiPath.compute(
@@ -106,66 +160,84 @@ class W2lViterbiDecoder(W2lDecoder):
             get_data_ptr_as_bytes(workspace),
         )
         return [
-            [{"tokens": self.get_tokens(viterbi_path[b].tolist()), "score": 0}] for b in range(B)
+            [{"tokens": self.get_tokens(viterbi_path[b].tolist()), "score": 0}]
+            for b in range(B)
         ]
- 
+
+
 class W2lKenLMDecoder(W2lDecoder):
-    def __init__(self,args,tgt_dict):
-        super().__init__(tgt_dict)
+    def __init__(self, args, tgt_dict):
+        super().__init__(args, tgt_dict)
 
-        self.silence = (
-            tgt_dict.index("<ctc_blank>")
-            if "<ctc_blank>" in tgt_dict.indices
-            else tgt_dict.bos()
-        )
-        
-        self.lexicon = load_words(args['lexicon'])
-        self.word_dict = create_word_dict(self.lexicon)
-        self.unk_word = self.word_dict.get_index("<unk>")
+        self.unit_lm = getattr(args, "unit_lm", False)
 
-        self.lm = KenLM(args['kenlm_model'], self.word_dict)
-        self.trie = Trie(self.vocab_size, self.silence)
+        if args['lexicon']:
+            self.lexicon = load_words(args['lexicon'])
+            self.word_dict = create_word_dict(self.lexicon)
+            self.unk_word = self.word_dict.get_index("<unk>")
 
-        start_state = self.lm.start(False)
-        for i, (word, spellings) in enumerate(self.lexicon.items()):
-            word_idx = self.word_dict.get_index(word)
-            _, score = self.lm.score(start_state, word_idx)
-            for spelling in spellings:
-                spelling_idxs = [tgt_dict.index(token) for token in spelling]
-                assert (
-                    tgt_dict.unk() not in spelling_idxs
-                ), f"{spelling} {spelling_idxs}"
-                self.trie.insert(spelling_idxs, word_idx, score)
-        self.trie.smear(SmearingMode.MAX)
+            self.lm = KenLM(args['kenlm_model'], self.word_dict)
+            self.trie = Trie(self.vocab_size, self.silence)
 
-        self.decoder_opts = DecoderOptions(
-            args['beam'],
-            int(getattr(args, "beam_size_token", len(tgt_dict))),
-            args['beam_threshold'],
-            args['lm_weight'],
-            args['word_score'],
-            args['unk_weight'],
-            args['sil_weight'],
-            0,
-            False,
-            self.criterion_type,
-        )
+            start_state = self.lm.start(False)
+            for i, (word, spellings) in enumerate(self.lexicon.items()):
+                word_idx = self.word_dict.get_index(word)
+                _, score = self.lm.score(start_state, word_idx)
+                for spelling in spellings:
+                    spelling_idxs = [tgt_dict.index(token) for token in spelling]
+                    assert (
+                        tgt_dict.unk() not in spelling_idxs
+                    ), f"{spelling} {spelling_idxs}"
+                    self.trie.insert(spelling_idxs, word_idx, score)
+            self.trie.smear(SmearingMode.MAX)
 
-        if self.asg_transitions is None:
-            N = 768
-            # self.asg_transitions = torch.FloatTensor(N, N).zero_()
-            self.asg_transitions = []
+            self.decoder_opts = LexiconDecoderOptions(
+                beam_size=args['beam'],
+                beam_size_token=int(getattr(args, "beam_size_token", len(tgt_dict))),
+                beam_threshold=args['beam_threshold'],
+                lm_weight=args['lm_weight'],
+                word_score=args['word_score'],
+                unk_score=args['unk_weight'],
+                sil_score=args['sil_weight'],
+                log_add=False,
+                criterion_type=self.criterion_type,
+            )
 
-        self.decoder = LexiconDecoder(
-            self.decoder_opts,
-            self.trie,
-            self.lm,
-            self.silence,
-            self.blank,
-            self.unk_word,
-            self.asg_transitions,
-            False,
-        )
+            if self.asg_transitions is None:
+                N = 768
+                # self.asg_transitions = torch.FloatTensor(N, N).zero_()
+                self.asg_transitions = []
+
+            self.decoder = LexiconDecoder(
+                self.decoder_opts,
+                self.trie,
+                self.lm,
+                self.silence,
+                self.blank,
+                self.unk_word,
+                self.asg_transitions,
+                self.unit_lm,
+            )
+        else:
+            assert args.unit_lm, "lexicon free decoding can only be done with a unit language model"
+            from flashlight.lib.text.decoder import LexiconFreeDecoder, LexiconFreeDecoderOptions
+
+            d = {w: [[w]] for w in tgt_dict.symbols}
+            self.word_dict = create_word_dict(d)
+            self.lm = KenLM(args.kenlm_model, self.word_dict)
+            self.decoder_opts = LexiconFreeDecoderOptions(
+                beam_size=args.beam,
+                beam_size_token=int(getattr(args, "beam_size_token", len(tgt_dict))),
+                beam_threshold=args.beam_threshold,
+                lm_weight=args.lm_weight,
+                sil_score=args.sil_weight,
+                log_add=False,
+                criterion_type=self.criterion_type,
+            )
+            self.decoder = LexiconFreeDecoder(
+                self.decoder_opts, self.lm, self.silence, self.blank, []
+            )
+
 
     def decode(self, emissions):
         B, T, N = emissions.size()
@@ -187,32 +259,8 @@ class W2lKenLMDecoder(W2lDecoder):
                     for result in nbest_results
                 ]
             )
-            #print(hypos)
         return hypos
-
-def get_results(wav_path,dict_path,generator,use_cuda=False,w2v_path=None,model=None):
-    sample = dict()
-    net_input = dict()
-    feature = get_feature(wav_path)
-    target_dict = Dictionary.load(dict_path)
- 
-    model[0].eval()
-           
-    net_input["source"] = feature.unsqueeze(0)
-
-    padding_mask = torch.BoolTensor(net_input["source"].size(1)).fill_(False).unsqueeze(0)
-
-    net_input["padding_mask"] = padding_mask
-    sample["net_input"] = net_input
-    sample = utils.move_to_cuda(sample) if use_cuda else sample
-
-    with torch.no_grad():
-        hypo = generator.generate(model, sample, prefix_tokens=None)
-    hyp_pieces = target_dict.string(hypo[0][0]["tokens"].int().cpu())
-    text=post_process(hyp_pieces, 'letter')
-
-    return text
-
+    
 def get_feature(filepath):
     def postprocess(feats, sample_rate):
         if feats.dim == 2:
@@ -242,11 +290,39 @@ def post_process(sentence: str, symbol: str):
         sentence = (sentence + " ").replace(symbol, "").rstrip()
     return sentence
 
-def load_gpu_model(model_path):
-    return torch.load(model_path,map_location=torch.device("cuda"))
 
-def load_cpu_model(model_path):
-    return torch.load(model_path,map_location=torch.device("cpu"))
+
+def get_results(wav_path,dict_path,generator,use_cuda=False,w2v_path=None,model=None, half=None):
+    sample = dict()
+    net_input = dict()
+    feature = get_feature(wav_path)
+    target_dict = Dictionary.load(dict_path)
+ 
+    model.eval()
+           
+    if half:
+        net_input["source"] = feature.unsqueeze(0).half()
+    else:
+        net_input["source"] = feature.unsqueeze(0)
+
+    padding_mask = torch.BoolTensor(net_input["source"].size(1)).fill_(False).unsqueeze(0)
+
+    net_input["padding_mask"] = padding_mask
+    sample["net_input"] = net_input
+    sample = utils.move_to_cuda(sample) if use_cuda else sample
+
+    with torch.no_grad():
+        hypo = generator.generate(model, sample, prefix_tokens=None)
+    hyp_pieces = target_dict.string(hypo[0][0]["tokens"].int().cpu())
+    text=post_process(hyp_pieces, 'letter')
+
+    return text
+
+
+def load_model(model_path):
+    return torch.load(model_path)#,map_location=torch.device("cuda"))
+
+
 
 def get_args(lexicon_path, lm_path, BEAM=128, LM_WEIGHT=2, WORD_SCORE=-1):
     args = {}
@@ -263,22 +339,29 @@ def get_args(lexicon_path, lm_path, BEAM=128, LM_WEIGHT=2, WORD_SCORE=-1):
     args['labels']='ltr'
     return args
 
-def parse_transcription(model_path, dict_path, wav_path, cuda, decoder="viterbi", lexicon_path=None, lm_path=None):
+def parse_transcription(model_path, dict_path, wav_path, cuda, decoder="viterbi", lexicon_path=None, lm_path=None, half=None):
     target_dict = Dictionary.load(dict_path)
+    args = get_args(lexicon_path, lm_path)
+    
     if decoder=="viterbi":
-        generator = W2lViterbiDecoder(target_dict)
+        generator = W2lViterbiDecoder(args, target_dict)
     else:
-        args = get_args(lexicon_path, lm_path)
         generator = W2lKenLMDecoder(args, target_dict)
     
     result = ''
 
     if cuda:
-        gpu_model = load_gpu_model(model_path)
-        result = get_results(wav_path=wav_path, dict_path=dict_path, generator=generator, use_cuda=cuda, model=gpu_model)
+        model = load_model(model_path)
+        model.cuda()
     else:
-        cpu_model = load_cpu_model(model_path)
-        result = get_results(wav_path=wav_path, dict_path=dict_path, generator=generator, use_cuda=cuda, model=cpu_model)
+        model = load_model(model_path)
+        
+        
+    if half:
+        model.half()
+        
+    result = get_results(wav_path=wav_path, dict_path=dict_path, generator=generator, use_cuda=cuda, model=model, half=half)
+    
     return result
 
 if __name__ == "__main__":
@@ -290,7 +373,9 @@ if __name__ == "__main__":
     parser.add_argument('-D', '--decoder', type=str, help= "Which decoder to use kenlm or viterbi")
     parser.add_argument('-l', '--lexicon', default=None, type=str, help= "Lexicon path if decoder is kenlm")
     parser.add_argument('-L', '--lm-path', default=None, type=str, help= "Language mode path if decoder is kenlm")
+    parser.add_argument('-H', '--half', default=False, type=bool, help="Half True or False")
+    
     args_local = parser.parse_args()
 
-    result = parse_transcription(args_local.model, args_local.dict, args_local.wav,  args_local.cuda, args_local.decoder, args_local.lexicon, args_local.lm_path)
+    result = parse_transcription(args_local.model, args_local.dict, args_local.wav,  args_local.cuda, args_local.decoder, args_local.lexicon, args_local.lm_path, args_local.half)
     print(result)

@@ -5,40 +5,40 @@ import gzip
 import io
 import os
 import subprocess
+import itertools
 from collections import Counter
-
-import progressbar
+from tqdm import tqdm
+from joblib import Parallel, delayed
 
 
 def convert_and_filter_topk(args):
     """ Convert to lowercase, count word occurrences and save top-k words to a file """
 
-    counter = Counter()
+    
     data_lower = os.path.join(args.output_dir, "lower.txt.gz")
 
-    print("\nConverting to lowercase and counting word occurrences ...")
-    with io.TextIOWrapper(
-        io.BufferedWriter(gzip.open(data_lower, "w+")), encoding="utf-8"
-    ) as file_out:
-
-        # Open the input file either from input.txt or input.txt.gz
-        _, file_extension = os.path.splitext(args.input_txt)
-        if file_extension == ".gz":
-            file_in = io.TextIOWrapper(
-                io.BufferedReader(gzip.open(args.input_txt)), encoding="utf-8"
-            )
-        else:
-            file_in = open(args.input_txt, encoding="utf-8")
-
-        for line in progressbar.progressbar(file_in):
-            #line_lower = line.lower() ## change here
-            line_lower = line
-            counter.update(line_lower.split())
-            file_out.write(line_lower) ## change here
+    with open(args.input_txt, encoding="utf-8") as file_in:
+        lines = file_in.readlines()
 
 
+    print("\nCalculating number of words")
+    
+    words = list(itertools.chain(*[line.split() for line in tqdm(lines)]))
+    
+#     words = []
+#     words_list = [line_lower.split() for line_lower in tqdm(lines)]
+#     for item in words_list:
+#         for local_item in item:
+#             words.append(local_item)
 
-        file_in.close()
+    print("\nCounting Word Frequencies ")
+    counter = Counter(words)
+
+
+    print("\nWriting File")
+    with open(data_lower, mode='w+', encoding="utf-8") as file_out:
+        file_out.writelines(lines)
+
 
     # Save top-k words
     print("\nSaving top {} words ...".format(args.top_k))
