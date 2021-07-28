@@ -79,7 +79,7 @@ Resume from checkpoint_500. Get checkpoint from here:
 ```
 cd vakyansh-wav2vec2-experimentation/checkpoints/finetuning
 rm checkpoint*
-wget https://storage.googleapis.com/vakyaansh-open-models/ieee/checkpoints/warm/checkpoint_last.pt
+wget https://storage.googleapis.com/vakyaansh-open-models/ieee/checkpoints/updates_675/checkpoint_last.pt
 ```
 
 ### Step 2.6 Let it run till 1000 updates
