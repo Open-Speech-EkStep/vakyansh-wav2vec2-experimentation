@@ -86,8 +86,38 @@ wget https://storage.googleapis.com/vakyaansh-open-models/ieee/checkpoints/updat
 
 ### Step 2.7 Inference using viterbi
 
+```
+cd vakyansh-wav2vec2-experimentation/scripts/inference
+vi prepare_data.sh
+```
+Provide path and name for the dataset on which you want to infer.
+Change inference_data_name
+and wav_path
+
+where wav_path is the path of the data on which you want to infer
+
+
+```
+vi infer.sh
+```
+in inference_data_name provide the same name you used to prepare data.
+```
+bash infer.sh
+```
+
+
+
+
 ### Step 2.8 Create LM using training data
 
 ### Step 2.8 Inference using kenlm
+```
+vi infer.sh
+```
+in lm provide the name of the lm in the lm folder
+w2l_decoder parameter to 0
+
+bash infer.sh
+
 
 ### Step 2.9 Show results section
