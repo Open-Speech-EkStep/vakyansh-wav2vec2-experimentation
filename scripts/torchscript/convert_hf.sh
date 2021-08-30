@@ -1,4 +1,4 @@
-input_model_name = ''
+input_model_name = 'test'
 output_dir = '../../checkpoints/ts/'
 
 mkdir -p ${output_dir}
