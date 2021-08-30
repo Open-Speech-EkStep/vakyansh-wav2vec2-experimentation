@@ -69,7 +69,7 @@ def convert_model(hf_model_name, output_dir):
 if __name__ == “__main__”:
     parser = argparse.ArgumentParser()
     parser.add_argument('--hf-model', '-i', type=str, required=True)
-    parser.add_argument('--output', '-o', type=str, required=True)
+    parser.add_argument('--output', '-o', type=str,  required=True)
     args = parser.parse_args()
 
     convert_model(args.hf_model, args.output)
