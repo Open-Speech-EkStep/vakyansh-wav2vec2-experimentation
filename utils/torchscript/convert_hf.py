@@ -6,7 +6,7 @@ from torchaudio.models.wav2vec2.utils.import_huggingface import import_huggingfa
 from transformers import Wav2Vec2ForCTC
 import json
 import argparse
-
+import os
 
 class SpeechRecognizer(torch.nn.Module):
     def __init__(self, model, vocab):
@@ -39,7 +39,7 @@ class SpeechRecognizer(torch.nn.Module):
 
 def read_vocab(hf_model_name):
     vocab = f'https://huggingface.co/{hf_model_name}/raw/main/vocab.json'
-    !wget $vocab
+    os.system('wget ' +vocab)
     with open('vocab.json', encoding='utf-8') as file:
         vocab = json.load(file)
     
@@ -62,11 +62,12 @@ def convert_model(hf_model_name, output_dir):
     scripted_model = torch.jit.script(quantized_model)
     optimized_model = optimize_for_mobile(scripted_model)
     quant_model_name = hf_model_name.split('/')[-1] + '_quant.pt'
+    os.makedirs(output_dir, exist_ok=True)
+    optimized_model.save(output_dir+ '/' + quant_model_name)
+    os.system(f'mv vocab.json {output_dir}/')
 
-    optimized_model.save(output+ '/' + quant_model_name)
 
-
-if __name__ == “__main__”:
+if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--hf-model', '-i', type=str, required=True)
     parser.add_argument('--output', '-o', type=str,  required=True)
