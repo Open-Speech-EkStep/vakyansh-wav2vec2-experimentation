@@ -5,7 +5,7 @@ parentdir="$(dirname "$parentdir")"
 ### Values to change, if any ###
 custom_model_path=$parentdir'/checkpoints/custom_model_english/final_model.pt'
 dictionary=$parentdir'/checkpoints/custom_model_english/dict.ltr.txt'
-wav_file_path="/home/harveen.chadha/files/libri_test_clean/1089/134686/1089-134686-0010.wav" # path to single wav file
+wav_file_path="path to single wav file" # path to single wav file
 decoder="kenlm" # viterbi or kenlm
 cuda=False
 half=True

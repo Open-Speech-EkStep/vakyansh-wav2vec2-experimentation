@@ -5,7 +5,7 @@ parentdir="$(dirname "$parentdir")"
 
 ### Values to change -start ###
 
-train_wav_path="/home/harveen.chadha/files/transcriptions/wav"
+train_wav_path="path to wav files"
 valid_wav_path=""
 make_valid_from_train=1 # 0 if validation data is in a different folder and 1 if validation data is to be extracted from train_wav_path
 valid_percentage=0.1

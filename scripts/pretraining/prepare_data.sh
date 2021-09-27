@@ -3,7 +3,7 @@ parentdir="$(dirname "$dir")"
 parentdir="$(dirname "$parentdir")"
 
 ### Values to change -start ###
-wav_path="/home/harveen.chadha/files/transcriptions/wav"
+wav_path="path to wav files"
 valid_percentage=0.1
 ### Values to change -end ###
 
