@@ -16,8 +16,8 @@ lm_model_path=${parentdir}'/lm/'${lm_name}'/lm.binary'
 lexicon_lst_path=${parentdir}'/lm/'${lm_name}'/lexicon.lst'
 
 # SAVE PREDICTED TEXT FILES
-dest_folder='/home/ankurdhuriya/abc'
-save_predicted=1
+dest_folder='path/foldername'
+save_predicted=0
 
 # FOR pretrained model
 pretrained_model_path='../../checkpoints/pretraining/CLSRIL-23.pt'
