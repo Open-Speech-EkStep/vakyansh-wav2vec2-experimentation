@@ -35,6 +35,10 @@ A folder with the same name will be created in the results directory as well con
 
 **validation_dataset:** Name of the validation folder to be stored in the results 
 
+**save_predicted:** To save the predicted files by the ASR model. Set it as 1 to save the files, else 0 by default 
+
+**dest_folder:** Destination folder to save predicted files. It will save in the same folder structure order as the original inferenece data
+
 ### For single_file_inference
 
 **custom_model_path:** Single custom_model generated using generate_custom_model.sh, this doesn't require pretraining checkpoint

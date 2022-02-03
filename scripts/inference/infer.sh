@@ -16,17 +16,15 @@ lm_model_path=${parentdir}'/lm/'${lm_name}'/lm.binary'
 lexicon_lst_path=${parentdir}'/lm/'${lm_name}'/lexicon.lst'
 
 # SAVE PREDICTED TEXT FILES
-dest_folder='path/foldername'
-save_predicted=0
+dest_folder='foldername'
+save_predicted=0 # 1 to save, 0 default
 
 # FOR pretrained model
 pretrained_model_path='../../checkpoints/pretraining/CLSRIL-23.pt'
 
 
 # WARNING ONLY FOR OLD MODELS
-
 old_model=0
-
 # WARNING END
 
 
@@ -51,6 +49,10 @@ if [ "${w2l_decoder_viterbi}" = 1 ]; then
   python ../../utils/wer/wer_wav2vec.py -o ${result_path}/ref.word-checkpoint_best.pt-test.txt -p ${result_path}/hypo.word-checkpoint_best.pt-test.txt \
   -t ${data_path}/${subset}.tsv -s save -n ${result_path}/sentence_wise_wer.csv -e true
 
+  if [ "${save_predicted}" = 1 ]; then
+    python ../../utils/inference/save_predicted_output.py -f ${result_path}/sentence_wise_wer.csv -d ${dest_folder}
+  fi
+
 else
   kenlm_result_path=${result_path}_${lm_name}_${beam}
   mkdir -p ${kenlm_result_path}
@@ -63,8 +65,10 @@ else
   python ../../utils/wer/wer_wav2vec.py -o ${kenlm_result_path}/ref.word-checkpoint_best.pt-test.txt -p ${kenlm_result_path}/hypo.word-checkpoint_best.pt-test.txt \
   -t ${data_path}/${subset}.tsv -s save -n ${kenlm_result_path}/sentence_wise_wer.csv -e true
 
+  if [ "${save_predicted}" = 1 ]; then
+    python ../../utils/inference/save_predicted_output.py -f ${kenlm_result_path}/sentence_wise_wer.csv -d ${dest_folder}
+  fi
+
 fi
 
-if [ "${save_predicted}" = 1 ]; then
-	python ../../utils/inference/save_predicted_output.py -f ${result_path}/sentence_wise_wer.csv -d ${dest_folder}
-fi
+
