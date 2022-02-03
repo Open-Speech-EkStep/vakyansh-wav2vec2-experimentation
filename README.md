@@ -33,7 +33,7 @@ pip install -r requirements.txt
 
 ### Install fairseq
 ```
-git clone https://github.com/Open-Speech-EkStep/fairseq -b v2-hydra
+git clone https://github.com/Open-Speech-EkStep/fairseq
 cd fairseq
 pip install -e .
 cd ..
