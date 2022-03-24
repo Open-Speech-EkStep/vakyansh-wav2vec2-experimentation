@@ -1,4 +1,4 @@
-# Vakyansh Wav2Vec2 Experimentaion
+# Vakyansh Wav2Vec2 Experimentation
 
 ## Pretrained Models
 We are releasing pretrained models in various Indic Languages. Please head over to [this repo](https://github.com/Open-Speech-EkStep/vakyansh-models).
