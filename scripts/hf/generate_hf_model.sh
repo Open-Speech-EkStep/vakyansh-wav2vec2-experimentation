@@ -4,10 +4,10 @@ parentdir="$(dirname "$dir")"
 parentdir="$(dirname "$parentdir")"
 
 hf_output_dir=${parentdir}/utils/hf/convert_to_hf.py
-checkpoint_path=${parent_dir}/checkpoints/hf
-finetuning_path=${parent_dir}/checkpoints/finetuning/checkpoint_best.pt
-dict_path=${parent_dir}/data/finetuning/dict.ltr.txt
-config_path=${parent_dir}/config/hf/hf_config.json
+checkpoint_path=${parentdir}/checkpoints/hf
+finetuning_path=${parentdir}/checkpoints/finetuning/checkpoint_best.pt
+dict_path=${parentdir}/data/finetuning/dict.ltr.txt
+config_path=${parentdir}/config/hf/hf_config.json
 is_finetuned=1
 
 if [[ $is_finetuned == 1 ]]; then
