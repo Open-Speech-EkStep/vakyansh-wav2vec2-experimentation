@@ -1,3 +1,5 @@
+packaging
+soundfile
 joblib==1.0.0
 tqdm==4.56.0
 numpy==1.20.0
@@ -10,3 +12,4 @@ tensorboard==2.4.1
 tensorboardX==2.1
 wandb
 jiwer
+swifter
