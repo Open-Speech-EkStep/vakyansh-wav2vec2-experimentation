@@ -21,7 +21,7 @@ We are releasing pretrained models in various Indic Languages. Please head over 
 ### Create an Environment
 
 ```
-conda create --name <env_name> python=3.7
+conda create --name <env_name> python=3.8
 conda activate <env_name>
 
 sudo apt-get install liblzma-dev libbz2-dev libzstd-dev libsndfile1-dev libopenblas-dev libfftw3-dev libgflags-dev libgoogle-glog-dev
