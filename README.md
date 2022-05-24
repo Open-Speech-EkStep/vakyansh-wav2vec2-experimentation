@@ -33,7 +33,7 @@ pip install -r requirements.txt
 
 ### Install fairseq
 ```
-#git clone https://github.com/harveenchadha/fairseq
+git clone https://github.com/harveenchadha/fairseq
 cd fairseq
 pip install -e .
 cd ..
